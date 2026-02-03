@@ -1,0 +1,6 @@
+{
+  "migrationsDir": "scripts/migrations",
+  "tableName": "pgmigrations",
+  "schema": "public",
+  "file": "database.ts"
+}
