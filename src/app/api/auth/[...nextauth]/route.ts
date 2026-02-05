@@ -16,13 +16,13 @@ export const authOptions: NextAuthOptions = {
         }
 
         const user = await getUserByEmail(credentials.email);
-        
+
         if (!user || user.status !== 'active') {
           throw new Error('User not found or inactive');
         }
 
         const isValid = await verifyPassword(credentials.password, user.password_hash!);
-        
+
         if (!isValid) {
           throw new Error('Invalid password');
         }
@@ -64,4 +64,6 @@ export const authOptions: NextAuthOptions = {
   secret: process.env.NEXTAUTH_SECRET,
 };
 
-export default NextAuth(authOptions);
+const handler = NextAuth(authOptions);
+
+export { handler as GET, handler as POST };
