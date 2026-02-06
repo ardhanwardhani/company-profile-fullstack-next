@@ -11,7 +11,7 @@ export interface BlogPostWithRelations {
   created_at: Date;
   published_at?: Date;
   category?: { id: string; name: string; slug: string };
-  author?: { id: string; name: string; avatar?: string };
+  author?: { id: string; name: string; bio?: string; avatar?: string };
   tags?: { id: string; name: string; slug: string }[];
 }
 

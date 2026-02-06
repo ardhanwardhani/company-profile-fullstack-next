@@ -71,7 +71,7 @@ export default async function BlogPostPage({ params }: { params: { slug: string 
             </div>
           </header>
 
-          {post.cover_image_id && (
+          {post.featured_image && (
             <div className="aspect-video bg-gray-200 rounded-xl mb-8" />
           )}
 

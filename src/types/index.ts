@@ -19,7 +19,7 @@ export interface BlogPost {
   slug: string;
   excerpt: string;
   content: any;
-  cover_image_id?: string;
+  featured_image?: string;
   category_id: string;
   author_id: string;
   status: 'draft' | 'review' | 'published' | 'archived';

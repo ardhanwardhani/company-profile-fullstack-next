@@ -68,7 +68,7 @@ export default async function BlogPage() {
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
           {posts.map((post: any) => (
             <Link href={`/blog/${post.slug}`} key={post.id} className="card hover:shadow-lg transition-shadow">
-              {post.cover_image_id && (
+              {post.featured_image && (
                 <div className="aspect-video bg-gray-200 rounded-lg mb-4" />
               )}
               <div className="flex items-center gap-2 text-sm text-gray-500 mb-2">
