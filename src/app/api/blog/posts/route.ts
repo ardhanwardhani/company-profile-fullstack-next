@@ -12,6 +12,37 @@ interface GetQuery {
   search?: string;
 }
 
+async function ensureAuthorExists(userId: string): Promise<string> {
+  const checkResult = await pool.query(
+    'SELECT id FROM blog_authors WHERE id = $1',
+    [userId]
+  );
+
+  if (checkResult.rows.length > 0) {
+    return checkResult.rows[0].id;
+  }
+
+  const userResult = await pool.query(
+    'SELECT name, email FROM users WHERE id = $1',
+    [userId]
+  );
+
+  if (userResult.rows.length === 0) {
+    throw new Error('User not found');
+  }
+
+  const user = userResult.rows[0];
+
+  const createResult = await pool.query(
+    `INSERT INTO blog_authors (id, name, bio, role, is_active)
+     VALUES ($1, $2, $3, $4, true)
+     RETURNING id`,
+    [userId, user.name, 'Auto-created author', 'Contributor']
+  );
+
+  return createResult.rows[0].id;
+}
+
 export async function POST(req: NextRequest) {
   try {
     const session = await getServerSession(authOptions);
@@ -34,11 +65,13 @@ export async function POST(req: NextRequest) {
 
     const userId = (session.user as any).id;
 
+    const authorId = await ensureAuthorExists(userId);
+
     const result = await pool.query(
       `INSERT INTO blog_posts (title, slug, content, excerpt, category_id, status, featured_image, author_id, created_at, updated_at)
        VALUES ($1, $2, $3, $4, $5, $6, $7, $8, NOW(), NOW())
        RETURNING *`,
-      [title, slug, content, excerpt || null, category_id || null, status || 'draft', featured_image || null, userId]
+      [title, slug, content, excerpt || null, category_id || null, status || 'draft', featured_image || null, authorId]
     );
 
     const post = result.rows[0];

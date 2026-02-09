@@ -9,6 +9,7 @@ import ImageExtension from '@tiptap/extension-image';
 import LinkExtension from '@tiptap/extension-link';
 import Placeholder from '@tiptap/extension-placeholder';
 import { ArrowLeft, Save } from 'lucide-react';
+import { ConfirmationModal } from '@/components/ui/confirmation-modal';
 
 interface Category {
   id: string;
@@ -34,6 +35,7 @@ export default function EditBlogPostPage({
   const router = useRouter();
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
+  const [showSaveModal, setShowSaveModal] = useState(false);
   const [error, setError] = useState('');
   const [post, setPost] = useState<Post | null>(null);
   const [categories, setCategories] = useState<Category[]>([]);
@@ -166,17 +168,23 @@ export default function EditBlogPostPage({
     }
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
+  const handleSave = async () => {
     setSaving(true);
     setError('');
 
     try {
       const { id } = await params;
+
+      const sanitizedData = {
+        ...formData,
+        category_id: formData.category_id || null,
+        featured_image: formData.featured_image || null,
+      };
+
       const res = await fetch(`/api/blog/posts/${id}`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(formData),
+        body: JSON.stringify(sanitizedData),
       });
 
       if (!res.ok) {
@@ -184,12 +192,18 @@ export default function EditBlogPostPage({
         throw new Error(data.error || 'Failed to update post');
       }
 
+      setShowSaveModal(false);
       router.push(`/dashboard/blog/posts/${id}`);
     } catch (err: any) {
       setError(err.message);
     } finally {
       setSaving(false);
     }
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setShowSaveModal(true);
   };
 
   if (loading) {
@@ -470,8 +484,9 @@ export default function EditBlogPostPage({
             Cancel
           </Link>
           <button
-            type="submit"
+            type="button"
             disabled={saving}
+            onClick={() => setShowSaveModal(true)}
             className="btn btn-primary disabled:opacity-50 flex items-center gap-2"
           >
             <Save size={16} />
@@ -479,6 +494,15 @@ export default function EditBlogPostPage({
           </button>
         </div>
       </form>
+
+      <ConfirmationModal
+        isOpen={showSaveModal}
+        onClose={() => setShowSaveModal(false)}
+        onConfirm={handleSave}
+        title="Save Changes"
+        message="You have unsaved changes. Do you want to save your changes?"
+        isLoading={saving}
+      />
 
       <style jsx global>{`
         .editor-btn {

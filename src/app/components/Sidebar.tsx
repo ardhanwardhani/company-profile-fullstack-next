@@ -19,6 +19,7 @@ import {
   Building2,
   MapPin,
   BookOpen,
+  Settings,
 } from 'lucide-react';
 
 interface SidebarProps {
@@ -125,6 +126,12 @@ const adminNavigation: NavItem[] = [
     name: 'User Management',
     href: '/dashboard/users',
     icon: Users,
+    roles: ['admin'],
+  },
+  {
+    name: 'Settings',
+    href: '/dashboard/settings',
+    icon: Settings,
     roles: ['admin'],
   },
 ];

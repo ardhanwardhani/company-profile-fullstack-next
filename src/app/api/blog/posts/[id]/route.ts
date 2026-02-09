@@ -9,24 +9,30 @@ const UpdatePostSchema = z.object({
   slug: z.string().min(1).max(255).optional(),
   content: z.any().optional(),
   excerpt: z.string().min(1).max(500).optional(),
-  category_id: z.string().optional(),
+  category_id: z
+    .string()
+    .min(0)
+    .max(36)
+    .nullable()
+    .optional()
+    .transform((val: string | null | undefined) => (val === '' ? null : val)),
   status: z.enum(['draft', 'review', 'published', 'archived']).optional(),
-  featured_image: z.string().optional(),
+  featured_image: z
+    .string()
+    .min(0)
+    .max(36)
+    .nullable()
+    .optional()
+    .transform((val: string | null | undefined) => (val === '' || val === null ? null : val)),
 });
 
-export async function GET(
-  req: NextRequest,
-  { params }: { params: Promise<{ id: string }> }
-) {
+export async function GET(req: NextRequest, { params }: { params: Promise<{ id: string }> }) {
   try {
     const { id } = await params;
     const session = await getServerSession(authOptions);
-    
+
     if (!session) {
-      return NextResponse.json(
-        { success: false, error: 'Unauthorized' },
-        { status: 401 }
-      );
+      return NextResponse.json({ success: false, error: 'Unauthorized' }, { status: 401 });
     }
 
     const result = await pool.query(
@@ -37,14 +43,11 @@ export async function GET(
        LEFT JOIN blog_categories bc ON bp.category_id = bc.id
        LEFT JOIN blog_authors ba ON bp.author_id = ba.id
        WHERE bp.id = $1`,
-      [id]
+      [id],
     );
 
     if (result.rows.length === 0) {
-      return NextResponse.json(
-        { success: false, error: 'Post not found' },
-        { status: 404 }
-      );
+      return NextResponse.json({ success: false, error: 'Post not found' }, { status: 404 });
     }
 
     const post = result.rows[0];
@@ -58,37 +61,25 @@ export async function GET(
     });
   } catch (error) {
     console.error('Error fetching blog post:', error);
-    return NextResponse.json(
-      { success: false, error: 'Failed to fetch blog post' },
-      { status: 500 }
-    );
+    return NextResponse.json({ success: false, error: 'Failed to fetch blog post' }, { status: 500 });
   }
 }
 
-export async function PUT(
-  req: NextRequest,
-  { params }: { params: Promise<{ id: string }> }
-) {
+export async function PUT(req: NextRequest, { params }: { params: Promise<{ id: string }> }) {
   try {
     const { id } = await params;
     const session = await getServerSession(authOptions);
     const role = (session?.user as any)?.role;
 
     if (!session || !['admin', 'editor', 'content_manager'].includes(role)) {
-      return NextResponse.json(
-        { success: false, error: 'Insufficient permissions' },
-        { status: 403 }
-      );
+      return NextResponse.json({ success: false, error: 'Insufficient permissions' }, { status: 403 });
     }
 
     const body = await req.json();
     const validation = UpdatePostSchema.safeParse(body);
 
     if (!validation.success) {
-      return NextResponse.json(
-        { success: false, error: 'Invalid input' },
-        { status: 400 }
-      );
+      return NextResponse.json({ success: false, error: 'Invalid input' }, { status: 400 });
     }
 
     const data = validation.data;
@@ -103,19 +94,17 @@ export async function PUT(
       }
     });
 
+    if (data.status === 'published') {
+      updates.push(`published_at = COALESCE(published_at, NOW())`);
+    }
+
     updates.push(`updated_at = NOW()`);
     values.push(id);
 
-    const result = await pool.query(
-      `UPDATE blog_posts SET ${updates.join(', ')} WHERE id = $${paramIndex} RETURNING *`,
-      values
-    );
+    const result = await pool.query(`UPDATE blog_posts SET ${updates.join(', ')} WHERE id = $${paramIndex} RETURNING *`, values);
 
     if (result.rows.length === 0) {
-      return NextResponse.json(
-        { success: false, error: 'Post not found' },
-        { status: 404 }
-      );
+      return NextResponse.json({ success: false, error: 'Post not found' }, { status: 404 });
     }
 
     return NextResponse.json({
@@ -125,35 +114,23 @@ export async function PUT(
     });
   } catch (error) {
     console.error('Error updating blog post:', error);
-    return NextResponse.json(
-      { success: false, error: 'Failed to update blog post' },
-      { status: 500 }
-    );
+    return NextResponse.json({ success: false, error: 'Failed to update blog post' }, { status: 500 });
   }
 }
 
-export async function DELETE(
-  req: NextRequest,
-  { params }: { params: Promise<{ id: string }> }
-) {
+export async function DELETE(req: NextRequest, { params }: { params: Promise<{ id: string }> }) {
   try {
     const { id } = await params;
     const session = await getServerSession(authOptions);
 
     if (!session || (session.user as any)?.role !== 'admin') {
-      return NextResponse.json(
-        { success: false, error: 'Admin access required' },
-        { status: 403 }
-      );
+      return NextResponse.json({ success: false, error: 'Admin access required' }, { status: 403 });
     }
 
     const result = await pool.query('DELETE FROM blog_posts WHERE id = $1 RETURNING id', [id]);
 
     if (result.rows.length === 0) {
-      return NextResponse.json(
-        { success: false, error: 'Post not found' },
-        { status: 404 }
-      );
+      return NextResponse.json({ success: false, error: 'Post not found' }, { status: 404 });
     }
 
     return NextResponse.json({
@@ -162,9 +139,6 @@ export async function DELETE(
     });
   } catch (error) {
     console.error('Error deleting blog post:', error);
-    return NextResponse.json(
-      { success: false, error: 'Failed to delete blog post' },
-      { status: 500 }
-    );
+    return NextResponse.json({ success: false, error: 'Failed to delete blog post' }, { status: 500 });
   }
 }

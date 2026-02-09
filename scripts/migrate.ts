@@ -94,7 +94,7 @@ async function migrate() {
         slug VARCHAR(255) UNIQUE NOT NULL,
         excerpt TEXT NOT NULL,
         content JSONB NOT NULL,
-        cover_image_id UUID,
+        featured_image UUID,
         category_id UUID REFERENCES blog_categories(id),
         author_id UUID REFERENCES blog_authors(id),
         status VARCHAR(20) NOT NULL CHECK (status IN ('draft', 'review', 'published', 'archived')),
