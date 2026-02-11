@@ -1,53 +1,48 @@
-import { NextApiRequest, NextApiResponse } from 'next';
+import { NextRequest, NextResponse } from 'next/server';
 import { verifyToken, TokenPayload } from './auth';
 
 export interface ApiContext {
   user: TokenPayload | null;
 }
 
-export function createContext(req: NextApiRequest): ApiContext {
-  const authHeader = req.headers.authorization;
-  
-  if (!authHeader || !authHeader.startsWith('Bearer ')) {
-    return { user: null };
-  }
-  
-  const token = authHeader.substring(7);
-  const user = verifyToken(token);
-  
-  return { user };
+export interface ApiResponse<T = any> {
+  success: boolean;
+  data?: T;
+  error?: string;
+  message?: string;
+  details?: any;
 }
 
-export type Handler<T = any> = (context: ApiContext, req: NextApiRequest, res: NextApiResponse<T>) => Promise<void>;
+export type Handler<T = any> = (context: ApiContext, req: NextRequest) => Promise<NextResponse<ApiResponse<T>>>;
 
 export function withAuth<T>(handler: Handler<T>): Handler<T> {
-  return async (context, req, res) => {
+  return async (context, req) => {
     if (!context.user) {
-      return res.status(401).json({ error: 'Unauthorized' });
+      return NextResponse.json({ success: false, error: 'Unauthorized' }, { status: 401 });
     }
-    return handler(context, req, res);
+    return handler(context, req);
   };
 }
 
 export function withRole<T>(allowedRoles: string[]): (handler: Handler<T>) => Handler<T> {
-  return (handler) => async (context, req, res) => {
+  return (handler) => async (context, req) => {
     if (!context.user) {
-      return res.status(401).json({ error: 'Unauthorized' });
+      return NextResponse.json({ success: false, error: 'Unauthorized' }, { status: 401 });
     }
-    
+
     if (!allowedRoles.includes(context.user.role)) {
-      return res.status(403).json({ error: 'Forbidden' });
+      return NextResponse.json({ success: false, error: 'Forbidden' }, { status: 403 });
     }
-    
-    return handler(context, req, res);
+
+    return handler(context, req);
   };
 }
 
 export function withMethods<T>(methods: string[]): (handler: Handler<T>) => Handler<T> {
-  return (handler) => async (context, req, res) => {
+  return (handler) => async (context, req) => {
     if (!methods.includes(req.method || '')) {
-      return res.status(405).json({ error: `Method ${req.method} not allowed` });
+      return NextResponse.json({ success: false, error: `Method ${req.method} not allowed` }, { status: 405 });
     }
-    return handler(context, req, res);
+    return handler(context, req);
   };
 }

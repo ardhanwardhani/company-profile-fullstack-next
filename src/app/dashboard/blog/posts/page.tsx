@@ -18,13 +18,10 @@ async function getBlogPosts(params: SearchParams) {
   if (params.category_id) searchParams.set('category_id', params.category_id);
   searchParams.set('limit', '20');
 
-  const res = await fetch(
-    `${process.env.NEXT_PUBLIC_APP_URL}/api/blog/posts?${searchParams.toString()}`,
-    { cache: 'no-store' }
-  );
-  
+  const res = await fetch(`${process.env.NEXT_PUBLIC_APP_URL}/api/blog/posts?${searchParams.toString()}`, { cache: 'no-store' });
+
   if (!res.ok) return { posts: [], total: 0, totalPages: 1 };
-  
+
   return {
     posts: (await res.json()).data || [],
     total: parseInt(res.headers.get('X-Total-Count') || '0'),
@@ -46,11 +43,7 @@ async function getCurrentUser() {
   return session?.user as any;
 }
 
-export default async function BlogPostsPage({
-  searchParams,
-}: {
-  searchParams: Promise<SearchParams>;
-}) {
+export default async function BlogPostsPage({ searchParams }: { searchParams: Promise<SearchParams> }) {
   const resolvedParams = await searchParams;
   const user = await getCurrentUser();
 
@@ -64,10 +57,7 @@ export default async function BlogPostsPage({
     redirect('/dashboard');
   }
 
-  const [{ posts, total, totalPages }, categories] = await Promise.all([
-    getBlogPosts(resolvedParams),
-    getCategories(),
-  ]);
+  const [{ posts, total, totalPages }, categories] = await Promise.all([getBlogPosts(resolvedParams), getCategories()]);
 
   const currentSearch = resolvedParams.search || '';
   const currentStatus = resolvedParams.status || '';
@@ -82,17 +72,14 @@ export default async function BlogPostsPage({
   const canPublish = ['admin', 'content_manager'].includes(userRole);
 
   return (
-    <div className="p-8">
+    <div className="p-4">
       {/* Header */}
       <div className="flex items-center justify-between mb-8">
         <div>
           <h1 className="text-2xl font-bold text-gray-900">Blog Posts</h1>
           <p className="text-sm text-gray-500 mt-1">{total} posts total</p>
         </div>
-        <Link
-          href="/dashboard/blog/posts/new"
-          className="inline-flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors font-medium text-sm"
-        >
+        <Link href="/dashboard/blog/posts/new" className="inline-flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors font-medium text-sm">
           <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
           </svg>
@@ -118,11 +105,7 @@ export default async function BlogPostsPage({
           {/* Status Filter */}
           <div>
             <label className="block text-xs font-medium text-gray-700 mb-1">Status</label>
-            <select
-              name="status"
-              defaultValue={currentStatus}
-              className="px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white min-w-[140px]"
-            >
+            <select name="status" defaultValue={currentStatus} className="px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white min-w-[140px]">
               <option value="">All Status</option>
               <option value="draft">Draft</option>
               <option value="review">Review</option>
@@ -134,11 +117,7 @@ export default async function BlogPostsPage({
           {/* Category Filter */}
           <div>
             <label className="block text-xs font-medium text-gray-700 mb-1">Category</label>
-            <select
-              name="category_id"
-              defaultValue={currentCategory}
-              className="px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white min-w-[160px]"
-            >
+            <select name="category_id" defaultValue={currentCategory} className="px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white min-w-[160px]">
               <option value="">All Categories</option>
               {categories.map((cat: any) => (
                 <option key={cat.id} value={cat.id}>
@@ -149,19 +128,13 @@ export default async function BlogPostsPage({
           </div>
 
           {/* Filter Button */}
-          <button
-            type="submit"
-            className="px-4 py-2 bg-gray-900 text-white rounded-lg hover:bg-gray-800 transition-colors text-sm font-medium"
-          >
+          <button type="submit" className="px-4 py-2 bg-gray-900 text-white rounded-lg hover:bg-gray-800 transition-colors text-sm font-medium">
             Filter
           </button>
 
           {/* Clear Button */}
           {hasFilters && (
-            <Link
-              href="/dashboard/blog/posts"
-              className="px-4 py-2 text-gray-600 hover:text-gray-900 text-sm"
-            >
+            <Link href="/dashboard/blog/posts" className="px-4 py-2 text-gray-600 hover:text-gray-900 text-sm">
               Clear
             </Link>
           )}
@@ -187,10 +160,7 @@ export default async function BlogPostsPage({
                 {posts.map((post: any) => (
                   <tr key={post.id} className="hover:bg-gray-50 transition-colors">
                     <td className="px-4 py-4">
-                      <Link
-                        href={`/dashboard/blog/posts/${post.id}`}
-                        className="font-medium text-gray-900 hover:text-blue-600 transition-colors"
-                      >
+                      <Link href={`/dashboard/blog/posts/${post.id}`} className="font-medium text-gray-900 hover:text-blue-600 transition-colors">
                         {post.title}
                       </Link>
                     </td>
@@ -204,35 +174,16 @@ export default async function BlogPostsPage({
                       <span className="text-sm text-gray-600">{post.author?.name || '-'}</span>
                     </td>
                     <td className="px-4 py-4">
-                      <span className="text-sm text-gray-500">
-                        {post.created_at ? new Date(post.created_at).toLocaleDateString() : '-'}
-                      </span>
+                      <span className="text-sm text-gray-500">{post.created_at ? new Date(post.created_at).toLocaleDateString() : '-'}</span>
                     </td>
                     <td className="px-4 py-4 text-right">
                       <div className="flex items-center justify-end gap-3">
                         {/* Quick Status Actions */}
-                        {canPublish && post.status === 'draft' && (
-                          <PostStatusButton
-                            postId={post.id}
-                            postTitle={post.title}
-                            currentStatus={post.status}
-                            targetStatus="published"
-                          />
-                        )}
-                        {canPublish && post.status === 'published' && (
-                          <PostStatusButton
-                            postId={post.id}
-                            postTitle={post.title}
-                            currentStatus={post.status}
-                            targetStatus="archived"
-                          />
-                        )}
-                        
+                        {canPublish && post.status === 'draft' && <PostStatusButton postId={post.id} postTitle={post.title} currentStatus={post.status} targetStatus="published" />}
+                        {canPublish && post.status === 'published' && <PostStatusButton postId={post.id} postTitle={post.title} currentStatus={post.status} targetStatus="archived" />}
+
                         {/* Edit Link */}
-                        <Link
-                          href={`/dashboard/blog/posts/${post.id}/edit`}
-                          className="text-sm text-gray-600 hover:text-blue-600 transition-colors"
-                        >
+                        <Link href={`/dashboard/blog/posts/${post.id}/edit`} className="text-sm text-gray-600 hover:text-blue-600 transition-colors">
                           Edit
                         </Link>
                       </div>
@@ -281,9 +232,7 @@ export default async function BlogPostsPage({
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
             </svg>
             <p className="text-gray-500 mb-2">No blog posts found</p>
-            <p className="text-sm text-gray-400">
-              {hasFilters ? 'Try adjusting your filters' : 'Create your first post to get started'}
-            </p>
+            <p className="text-sm text-gray-400">{hasFilters ? 'Try adjusting your filters' : 'Create your first post to get started'}</p>
           </div>
         )}
       </div>
@@ -299,9 +248,5 @@ function StatusBadge({ status }: { status: string }) {
     archived: 'bg-red-100 text-red-700',
   };
 
-  return (
-    <span className={`inline-flex px-2 py-1 text-xs font-medium rounded-full ${styles[status] || 'bg-gray-100 text-gray-700'}`}>
-      {status.charAt(0).toUpperCase() + status.slice(1)}
-    </span>
-  );
+  return <span className={`inline-flex px-2 py-1 text-xs font-medium rounded-full ${styles[status] || 'bg-gray-100 text-gray-700'}`}>{status.charAt(0).toUpperCase() + status.slice(1)}</span>;
 }

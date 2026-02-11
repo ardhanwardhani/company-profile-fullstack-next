@@ -14,6 +14,9 @@ export interface JobWithRelations {
   apply_url: string;
   published_at?: Date;
   created_at: Date;
+  seo_title?: string;
+  seo_description?: string;
+  seo_index?: boolean;
   department?: { id: string; name: string };
   location?: { id: string; name: string; is_remote: boolean };
 }
@@ -112,4 +115,25 @@ export async function getLocations() {
     'SELECT * FROM locations WHERE is_active = true ORDER BY name'
   );
   return result.rows;
+}
+
+export async function getJobById(id: string): Promise<JobWithRelations | null> {
+  const result = await pool.query(
+    `SELECT j.*, d.name as department_name, l.name as location_name, l.is_remote
+     FROM jobs j
+     LEFT JOIN departments d ON j.department_id = d.id
+     LEFT JOIN locations l ON j.location_id = l.id
+     WHERE j.id = $1`,
+    [id]
+  );
+
+  if (result.rows.length === 0) return null;
+
+  const row = result.rows[0];
+
+  return {
+    ...row,
+    department: { id: row.department_id, name: row.department_name },
+    location: { id: row.location_id, name: row.location_name, is_remote: row.is_remote },
+  };
 }

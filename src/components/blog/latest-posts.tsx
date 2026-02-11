@@ -5,7 +5,7 @@ import { BlogGrid } from './blog-grid';
 
 async function getRecentPosts() {
   try {
-    const res = await fetch(`${process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000'}/api/blog/posts?limit=4`, {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000'}/api/blog/posts?limit=4&status=published`, {
       next: { revalidate: 3600 },
     });
     if (!res.ok) return [];
