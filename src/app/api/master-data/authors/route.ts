@@ -53,7 +53,7 @@ export async function GET(req: NextRequest) {
           'X-Total-Count': total.toString(),
           'X-Total-Pages': Math.ceil(total / limit).toString(),
         },
-      }
+      },
     );
   } catch (error) {
     console.error('Error fetching authors:', error);
@@ -82,10 +82,7 @@ export async function POST(req: NextRequest) {
 
     const data = validation.data;
 
-    const result = await pool.query(
-      `INSERT INTO blog_authors (name, bio, role, avatar_id, is_active) VALUES ($1, $2, $3, $4, $5) RETURNING *`,
-      [data.name, data.bio, data.role, data.avatar_id, data.is_active]
-    );
+    const result = await pool.query(`INSERT INTO blog_authors (name, bio, role, avatar_id, is_active) VALUES ($1, $2, $3, $4, $5) RETURNING *`, [data.name, data.bio, data.role, data.avatar_id, data.is_active]);
 
     return NextResponse.json({ success: true, data: result.rows[0], message: 'Author created successfully' }, { status: 201 });
   } catch (error) {
