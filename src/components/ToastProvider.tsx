@@ -43,11 +43,11 @@ export function ToastProvider({ children }: { children: ReactNode }) {
     <ToastContext.Provider value={{ showToast }}>
       {children}
       {/* Toast Container */}
-      <div className="fixed bottom-4 right-4 z-50 flex flex-col gap-2">
+      <div className="fixed top-4 left-1/2 -translate-x-1/2 z-50 flex flex-col gap-2">
         {toasts.map((toast) => (
           <div
             key={toast.id}
-            className={`px-4 py-3 rounded-lg shadow-lg text-white font-medium text-sm flex items-center gap-3 min-w-[280px] animate-slide-in ${
+            className={`px-4 py-3 rounded-lg shadow-lg text-white font-medium text-sm flex items-center gap-3 min-w-[280px] animate-slide-down ${
               toast.type === 'success' ? 'bg-green-600' :
               toast.type === 'error' ? 'bg-red-600' :
               toast.type === 'warning' ? 'bg-yellow-600' :
@@ -70,18 +70,18 @@ export function ToastProvider({ children }: { children: ReactNode }) {
         ))}
       </div>
       <style jsx>{`
-        @keyframes slide-in {
+        @keyframes slide-down {
           from {
-            transform: translateX(100%);
+            transform: translateY(-100%);
             opacity: 0;
           }
           to {
-            transform: translateX(0);
+            transform: translateY(0);
             opacity: 1;
           }
         }
-        .animate-slide-in {
-          animation: slide-in 0.3s ease-out;
+        .animate-slide-down {
+          animation: slide-down 0.3s ease-out;
         }
       `}</style>
     </ToastContext.Provider>
