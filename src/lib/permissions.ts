@@ -1,4 +1,4 @@
-import { pool } from './db';
+import pool from './db';
 
 const PERMISSION_ROLES: Record<string, string[]> = {
   'settings.view': ['admin', 'content_manager'],
@@ -28,11 +28,11 @@ export async function getUserRole(userId: string): Promise<string> {
 export async function checkPermission(userId: string, permission: string): Promise<boolean> {
   const role = await getUserRole(userId);
   const allowedRoles = PERMISSION_ROLES[permission];
-  
+
   if (!allowedRoles) {
     return false;
   }
-  
+
   return allowedRoles.includes(role);
 }
 

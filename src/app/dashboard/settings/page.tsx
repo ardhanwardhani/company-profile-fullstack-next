@@ -56,10 +56,11 @@ export default function SettingsPage() {
 
   const fetchSettings = async () => {
     try {
-      const res = await fetch('/api/settings');
+      const res = await fetch(`${process.env.NEXT_PUBLIC_APP_URL}/api/settings`, { cache: 'no-store' });
       if (!res.ok) throw new Error('Failed to fetch settings');
-      const data = await res.json();
-      setSettings(data);
+      const response = await res.json();
+      if (!response.success) throw new Error(response.error || 'Failed to fetch settings');
+      setSettings(response.data);
     } catch {
       showToast('error', 'Failed to load settings');
     } finally {
@@ -71,12 +72,13 @@ export default function SettingsPage() {
     if (!settings) return;
     setSaving(true);
     try {
-      const res = await fetch('/api/settings', {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_APP_URL}/api/settings`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ settings }),
       });
-      if (!res.ok) throw new Error('Failed to save settings');
+      const response = await res.json();
+      if (!response.success) throw new Error(response.error || 'Failed to save settings');
       showToast('success', 'Settings saved successfully');
     } catch {
       showToast('error', 'Failed to save settings');
@@ -86,7 +88,7 @@ export default function SettingsPage() {
   };
 
   const handleChange = (category: keyof SettingsData, key: string, value: string) => {
-    setSettings(prev => {
+    setSettings((prev) => {
       if (!prev) return prev;
       return {
         ...prev,
@@ -124,11 +126,7 @@ export default function SettingsPage() {
           <h1 className="text-2xl font-bold text-gray-900">Settings</h1>
           <p className="text-gray-600">Manage your site configuration</p>
         </div>
-        <button
-          onClick={handleSave}
-          disabled={saving}
-          className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 disabled:opacity-50 font-medium"
-        >
+        <button onClick={handleSave} disabled={saving} className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 disabled:opacity-50 font-medium">
           {saving ? 'Saving...' : 'Save Changes'}
         </button>
       </div>
@@ -140,11 +138,7 @@ export default function SettingsPage() {
               <button
                 key={tab.id}
                 onClick={() => setActiveTab(tab.id)}
-                className={`px-6 py-4 text-sm font-medium border-b-2 transition-colors ${
-                  activeTab === tab.id
-                    ? 'border-blue-600 text-blue-600'
-                    : 'border-transparent text-gray-500 hover:text-gray-700'
-                }`}
+                className={`px-6 py-4 text-sm font-medium border-b-2 transition-colors ${activeTab === tab.id ? 'border-blue-600 text-blue-600' : 'border-transparent text-gray-500 hover:text-gray-700'}`}
               >
                 <span className="mr-2">{tab.icon}</span>
                 {tab.label}
@@ -224,15 +218,9 @@ export default function SettingsPage() {
                   <label className="text-sm font-medium text-gray-700">{label}</label>
                   <button
                     onClick={() => handleChange('features', key, settings.features[key] === 'true' ? 'false' : 'true')}
-                    className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors ${
-                      settings.features[key] === 'true' ? 'bg-blue-600' : 'bg-gray-200'
-                    }`}
+                    className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors ${settings.features[key] === 'true' ? 'bg-blue-600' : 'bg-gray-200'}`}
                   >
-                    <span
-                      className={`inline-block h-4 w-4 transform rounded-full bg-white transition-transform ${
-                        settings.features[key] === 'true' ? 'translate-x-6' : 'translate-x-1'
-                      }`}
-                    />
+                    <span className={`inline-block h-4 w-4 transform rounded-full bg-white transition-transform ${settings.features[key] === 'true' ? 'translate-x-6' : 'translate-x-1'}`} />
                   </button>
                 </div>
               ))}

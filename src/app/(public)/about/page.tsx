@@ -1,6 +1,4 @@
 import Link from 'next/link';
-import { getBlogPosts } from '@/lib/blog';
-import { getJobs } from '@/lib/jobs';
 
 export const revalidate = 3600;
 
