@@ -1,43 +1,63 @@
+'use client';
+
+import { useState, useEffect } from 'react';
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
-import { getBlogPostBySlug, getBlogPosts } from '@/lib/blog';
+import { PublicNavigation } from '@/components/PublicNavigation';
+import { PublicFooter } from '@/components/PublicFooter';
+import { getPublicSettings, defaultSettings, Settings } from '@/lib/settings';
 
-export const revalidate = 3600;
-
-export async function generateStaticParams() {
-  const posts = await getBlogPosts({ status: 'published', limit: 100 });
-  return posts.map((post) => ({
-    slug: post.slug,
-  }));
+interface BlogPostPageProps {
+  params: Promise<{ slug: string }>;
 }
 
-export default async function BlogPostPage({ params }: { params: { slug: string } }) {
-  const post = await getBlogPostBySlug(params.slug);
+export default function BlogPostPage({ params }: BlogPostPageProps) {
+  const [settings, setSettings] = useState<Settings>(defaultSettings);
+  const [post, setPost] = useState<any>(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    params.then(async (params) => {
+      const [settingsData, postData] = await Promise.all([
+        getPublicSettings(),
+        fetch(`${process.env.NEXT_PUBLIC_APP_URL}/api/blog/posts/${params.slug}`).then(r => r.json()),
+      ]);
+      
+      setSettings(settingsData);
+      if (postData.data) {
+        setPost(postData.data);
+      } else {
+        notFound();
+      }
+      setLoading(false);
+    });
+  }, [params]);
+
+  if (loading) {
+    return (
+      <div className="min-h-screen bg-white flex items-center justify-center">
+        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary-600"></div>
+      </div>
+    );
+  }
 
   if (!post) {
     notFound();
   }
 
+  const companyName = settings.general?.company_name || 'A+ Digital';
+  const email = settings.general?.contact_email || '';
+  const address = settings.company?.address || '';
+  const phone = settings.company?.phone || '';
+  const linkedinUrl = settings.company?.linkedin_url || '';
+  const twitterUrl = settings.company?.twitter_url || '';
+  const facebookUrl = settings.company?.facebook_url || '';
+
   return (
     <div className="min-h-screen bg-white">
-      <nav className="bg-white shadow-sm">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between h-16">
-            <div className="flex items-center">
-              <Link href="/" className="text-xl font-bold text-primary-600">
-                Company Profile
-              </Link>
-            </div>
-            <div className="flex items-center space-x-4">
-              <Link href="/" className="text-gray-600 hover:text-gray-900">Home</Link>
-              <Link href="/blog" className="text-primary-600 font-medium">Blog</Link>
-              <Link href="/careers" className="text-gray-600 hover:text-gray-900">Careers</Link>
-            </div>
-          </div>
-        </div>
-      </nav>
+      <PublicNavigation companyName={companyName} activePage="/blog" />
 
-      <main className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+      <main className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-24">
         <Link href="/blog" className="text-primary-600 hover:text-primary-700 mb-8 inline-block">
           ← Back to Blog
         </Link>
@@ -72,7 +92,10 @@ export default async function BlogPostPage({ params }: { params: { slug: string 
           </header>
 
           {post.featured_image && (
-            <div className="aspect-video bg-gray-200 rounded-xl mb-8" />
+            <div 
+              className="aspect-video bg-gray-200 rounded-xl mb-8 bg-cover bg-center" 
+              style={{ backgroundImage: `url(${post.featured_image})` }}
+            />
           )}
 
           <div className="prose prose-lg max-w-none">
@@ -98,11 +121,15 @@ export default async function BlogPostPage({ params }: { params: { slug: string 
         </article>
       </main>
 
-      <footer className="bg-gray-800 text-white py-8 mt-12">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <p>&copy; 2024 Company Profile. All rights reserved.</p>
-        </div>
-      </footer>
+      <PublicFooter 
+        companyName={companyName} 
+        address={address} 
+        phone={phone} 
+        email={email} 
+        linkedinUrl={linkedinUrl} 
+        twitterUrl={twitterUrl} 
+        facebookUrl={facebookUrl} 
+      />
     </div>
   );
 }

@@ -1,53 +1,52 @@
+'use client';
+
+import { useState, useEffect } from 'react';
 import Link from 'next/link';
+import { PublicNavigation } from '@/components/PublicNavigation';
+import { PublicFooter } from '@/components/PublicFooter';
+import { getPublicSettings, defaultSettings, Settings } from '@/lib/settings';
 
-async function getJobs() {
-  const res = await fetch(`${process.env.NEXT_PUBLIC_APP_URL}/api/careers/jobs?status=open`, {
-    next: { revalidate: 3600 },
-  });
-  if (!res.ok) return [];
-  const data = await res.json();
-  return data.data || [];
-}
+export default function CareersPage() {
+  const [settings, setSettings] = useState<Settings>(defaultSettings);
+  const [jobs, setJobs] = useState<any[]>([]);
+  const [lookup, setLookup] = useState<{ departments: any[]; locations: any[] }>({ departments: [], locations: [] });
+  const [loading, setLoading] = useState(true);
 
-async function getLookup() {
-  const res = await fetch(`${process.env.NEXT_PUBLIC_APP_URL}/api/careers/lookup`, {
-    next: { revalidate: 3600 },
-  });
-  if (!res.ok) return { departments: [], locations: [] };
-  const data = await res.json();
-  return data.data || { departments: [], locations: [] };
-}
+  useEffect(() => {
+    Promise.all([
+      getPublicSettings(),
+      fetch(`${process.env.NEXT_PUBLIC_APP_URL}/api/careers/jobs?status=open`).then(r => r.json()),
+      fetch(`${process.env.NEXT_PUBLIC_APP_URL}/api/careers/lookup`).then(r => r.json()),
+    ]).then(([settingsData, jobsData, lookupData]) => {
+      setSettings(settingsData);
+      setJobs(jobsData.data || []);
+      setLookup(lookupData.data || { departments: [], locations: [] });
+      setLoading(false);
+    });
+  }, []);
 
-export const revalidate = 3600;
+  if (loading) {
+    return (
+      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
+        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary-600"></div>
+      </div>
+    );
+  }
 
-export default async function CareersPage() {
-  const [jobs, lookup] = await Promise.all([
-    getJobs(),
-    getLookup(),
-  ]);
+  const companyName = settings.general?.company_name || 'A+ Digital';
+  const email = settings.general?.contact_email || '';
+  const address = settings.company?.address || '';
+  const phone = settings.company?.phone || '';
+  const linkedinUrl = settings.company?.linkedin_url || '';
+  const twitterUrl = settings.company?.twitter_url || '';
+  const facebookUrl = settings.company?.facebook_url || '';
 
   return (
     <div className="min-h-screen bg-gray-50">
-      <nav className="bg-white shadow-sm">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between h-16">
-            <div className="flex items-center">
-              <Link href="/" className="text-xl font-bold text-primary-600">
-                Company Profile
-              </Link>
-            </div>
-            <div className="flex items-center space-x-4">
-              <Link href="/" className="text-gray-600 hover:text-gray-900">Home</Link>
-              <Link href="/about" className="text-gray-600 hover:text-gray-900">About</Link>
-              <Link href="/blog" className="text-gray-600 hover:text-gray-900">Blog</Link>
-              <Link href="/careers" className="text-primary-600 font-medium">Careers</Link>
-            </div>
-          </div>
-        </div>
-      </nav>
+      <PublicNavigation companyName={companyName} activePage="/careers" />
 
       <main>
-        <section className="bg-primary-600 text-white py-16">
+        <section className="bg-primary-600 text-white py-16 mt-20">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
             <h1 className="text-4xl font-bold mb-4">Join Our Team</h1>
             <p className="text-xl opacity-90">
@@ -59,12 +58,12 @@ export default async function CareersPage() {
         <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
           <div className="flex flex-col md:flex-row gap-8">
             <aside className="md:w-64">
-              <div className="card sticky top-4">
+              <div className="bg-white rounded-lg shadow-sm p-6 sticky top-24">
                 <h3 className="font-semibold mb-4">Filter Jobs</h3>
                 
                 <div className="mb-4">
                   <label className="block text-sm text-gray-600 mb-2">Department</label>
-                  <select className="input">
+                  <select className="w-full px-3 py-2 border border-gray-300 rounded-lg">
                     <option value="">All Departments</option>
                     {lookup.departments?.map((dept: any) => (
                       <option key={dept.id} value={dept.id}>{dept.name}</option>
@@ -74,7 +73,7 @@ export default async function CareersPage() {
 
                 <div className="mb-4">
                   <label className="block text-sm text-gray-600 mb-2">Location</label>
-                  <select className="input">
+                  <select className="w-full px-3 py-2 border border-gray-300 rounded-lg">
                     <option value="">All Locations</option>
                     {lookup.locations?.map((loc: any) => (
                       <option key={loc.id} value={loc.id}>
@@ -86,7 +85,7 @@ export default async function CareersPage() {
 
                 <div>
                   <label className="block text-sm text-gray-600 mb-2">Type</label>
-                  <select className="input">
+                  <select className="w-full px-3 py-2 border border-gray-300 rounded-lg">
                     <option value="">All Types</option>
                     <option value="full-time">Full-time</option>
                     <option value="contract">Contract</option>
@@ -101,7 +100,7 @@ export default async function CareersPage() {
 
               <div className="space-y-4">
                 {jobs.map((job: any) => (
-                  <Link href={`/careers/${job.slug}`} key={job.id} className="card hover:shadow-lg transition-shadow block">
+                  <Link href={`/careers/${job.slug}`} key={job.id} className="block bg-white rounded-lg shadow-sm hover:shadow-lg transition-shadow p-6">
                     <div className="flex justify-between items-start">
                       <div>
                         <h3 className="text-xl font-semibold mb-2">{job.title}</h3>
@@ -157,11 +156,15 @@ export default async function CareersPage() {
         </section>
       </main>
 
-      <footer className="bg-gray-800 text-white py-8">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <p>&copy; 2024 Company Profile. All rights reserved.</p>
-        </div>
-      </footer>
+      <PublicFooter 
+        companyName={companyName} 
+        address={address} 
+        phone={phone} 
+        email={email} 
+        linkedinUrl={linkedinUrl} 
+        twitterUrl={twitterUrl} 
+        facebookUrl={facebookUrl} 
+      />
     </div>
   );
 }
