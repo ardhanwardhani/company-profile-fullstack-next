@@ -61,16 +61,19 @@ const services = [
     icon: Briefcase,
     title: 'Company Profile Package',
     description: 'Complete CMS solution with job listings, blog management, and customizable company profiles tailored to your brand.',
+    href: '/services/company-profile',
   },
   {
     icon: Code2,
     title: 'Custom Software Development',
     description: 'Tailored software solutions built from scratch to address your unique business challenges and requirements.',
+    href: '/services/custom-software',
   },
   {
     icon: Palette,
     title: 'Creative Design',
     description: 'Brand identity, UI/UX design, and visual storytelling that elevates your digital presence.',
+    href: '/services/creative-design',
   },
 ];
 
@@ -173,7 +176,10 @@ function Services() {
                 </div>
                 <h3 className="text-2xl font-semibold text-gray-900 mb-4">{service.title}</h3>
                 <p className="text-gray-600 leading-relaxed text-lg">{service.description}</p>
-                <Link href="#" className="inline-flex items-center gap-2 text-primary-700 hover:text-primary-800 mt-6 font-medium transition-colors">
+                <Link 
+                  href={service.href || '#'} 
+                  className="inline-flex items-center gap-2 text-primary-700 hover:text-primary-800 mt-6 font-medium transition-colors"
+                >
                   Learn more <ArrowUpRight className="w-4 h-4" />
                 </Link>
               </div>
