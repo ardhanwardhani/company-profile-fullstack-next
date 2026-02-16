@@ -7,7 +7,7 @@ import { ReactNode } from "react";
 interface ButtonProps {
   children: ReactNode;
   href?: string;
-  variant?: "primary" | "secondary" | "outline" | "danger";
+  variant?: "primary" | "secondary" | "outline" | "danger" | "white";
   className?: string;
   onClick?: () => void;
   disabled?: boolean;
@@ -16,11 +16,12 @@ interface ButtonProps {
 export function Button({ children, href, variant = "primary", className = "", onClick, disabled = false }: ButtonProps) {
   const baseStyles = "inline-flex items-center justify-center px-6 py-3 text-sm font-medium rounded-lg transition-all duration-200";
   
-  const variants: Record<"primary" | "secondary" | "outline" | "danger", string> = {
-    primary: "bg-primary-600 text-white hover:bg-primary-700 shadow-sm",
+  const variants: Record<"primary" | "secondary" | "outline" | "danger" | "white", string> = {
+    primary: "bg-primary-700 text-white hover:bg-primary-800 shadow-sm",
     secondary: "bg-neutral-900 text-white hover:bg-neutral-800",
-    outline: "border-2 border-neutral-300 text-neutral-700 hover:border-primary-600 hover:text-primary-600",
+    outline: "border-2 border-primary-700 text-primary-700 hover:bg-primary-700 hover:text-white",
     danger: "bg-red-600 text-white hover:bg-red-700 shadow-sm",
+    white: "bg-white text-primary-700 hover:bg-gray-100 border-2 border-white",
   };
 
   const motionProps = {
