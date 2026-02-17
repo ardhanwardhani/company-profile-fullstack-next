@@ -6,8 +6,14 @@ import { Providers } from './providers';
 const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
-  title: 'Company Profile',
-  description: 'Building the future of company profiles',
+  title: 'A+ Digital | Custom Software Development & Creative Design',
+  description: 'We help companies and startups build exceptional software, craft compelling brands, and create digital products that drive growth.',
+  keywords: ['software development', 'web design', 'UI/UX', 'company profile', 'digital agency'],
+  openGraph: {
+    title: 'A+ Digital | Custom Software Development & Creative Design',
+    description: 'We help companies and startups build exceptional software, craft compelling brands, and create digital products that drive growth.',
+    type: 'website',
+  },
 };
 
 export default function RootLayout({

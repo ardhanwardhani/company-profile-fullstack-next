@@ -46,22 +46,22 @@ export function PublicFooter({ companyName, address, phone, email, linkedinUrl, 
             <h4 className="font-semibold text-white mb-4">Services</h4>
             <ul className="space-y-3">
               <li>
-                <Link href="#" className="hover:text-primary-400 transition-colors">
+                <Link href="/services/company-profile" className="hover:text-primary-400 transition-colors">
                   Company Profile Package
                 </Link>
               </li>
               <li>
-                <Link href="#" className="hover:text-primary-400 transition-colors">
+                <Link href="/services/custom-software" className="hover:text-primary-400 transition-colors">
                   Custom Software
                 </Link>
               </li>
               <li>
-                <Link href="#" className="hover:text-primary-400 transition-colors">
+                <Link href="/services/creative-design" className="hover:text-primary-400 transition-colors">
                   Creative Design
                 </Link>
               </li>
               <li>
-                <Link href="#" className="hover:text-primary-400 transition-colors">
+                <Link href="/contact" className="hover:text-primary-400 transition-colors">
                   Consulting
                 </Link>
               </li>

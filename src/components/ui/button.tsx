@@ -11,9 +11,10 @@ interface ButtonProps {
   className?: string;
   onClick?: () => void;
   disabled?: boolean;
+  type?: "button" | "submit" | "reset";
 }
 
-export function Button({ children, href, variant = "primary", className = "", onClick, disabled = false }: ButtonProps) {
+export function Button({ children, href, variant = "primary", className = "", onClick, disabled = false, type = "button" }: ButtonProps) {
   const baseStyles = "inline-flex items-center justify-center px-6 py-3 text-sm font-medium rounded-lg transition-all duration-200";
   
   const variants: Record<"primary" | "secondary" | "outline" | "danger" | "white", string> = {
@@ -44,7 +45,7 @@ export function Button({ children, href, variant = "primary", className = "", on
   }
 
   return (
-    <button onClick={onClick} disabled={disabled} className={`${baseStyles} ${variants[variant]} ${disabled ? "opacity-50 cursor-not-allowed" : ""} ${className}`}>
+    <button type={type} onClick={onClick} disabled={disabled} className={`${baseStyles} ${variants[variant]} ${disabled ? "opacity-50 cursor-not-allowed" : ""} ${className}`}>
       {buttonContent}
     </button>
   );

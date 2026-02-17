@@ -13,16 +13,14 @@ export default function CareersPage() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    Promise.all([
-      getPublicSettings(),
-      fetch(`${process.env.NEXT_PUBLIC_APP_URL}/api/careers/jobs?status=open`).then(r => r.json()),
-      fetch(`${process.env.NEXT_PUBLIC_APP_URL}/api/careers/lookup`).then(r => r.json()),
-    ]).then(([settingsData, jobsData, lookupData]) => {
-      setSettings(settingsData);
-      setJobs(jobsData.data || []);
-      setLookup(lookupData.data || { departments: [], locations: [] });
-      setLoading(false);
-    });
+    Promise.all([getPublicSettings(), fetch(`${process.env.NEXT_PUBLIC_APP_URL}/api/careers/jobs?status=open`).then((r) => r.json()), fetch(`${process.env.NEXT_PUBLIC_APP_URL}/api/careers/lookup`).then((r) => r.json())]).then(
+      ([settingsData, jobsData, lookupData]) => {
+        setSettings(settingsData);
+        setJobs(jobsData.data || []);
+        setLookup(lookupData.data || { departments: [], locations: [] });
+        setLoading(false);
+      },
+    );
   }, []);
 
   if (loading) {
@@ -49,9 +47,7 @@ export default function CareersPage() {
         <section className="bg-primary-600 text-white py-16 mt-20">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
             <h1 className="text-4xl font-bold mb-4">Join Our Team</h1>
-            <p className="text-xl opacity-90">
-              We're looking for passionate people to help us build the future.
-            </p>
+            <p className="text-xl opacity-90">We're looking for passionate people to help us build the future.</p>
           </div>
         </section>
 
@@ -60,13 +56,15 @@ export default function CareersPage() {
             <aside className="md:w-64">
               <div className="bg-white rounded-lg shadow-sm p-6 sticky top-24">
                 <h3 className="font-semibold mb-4">Filter Jobs</h3>
-                
+
                 <div className="mb-4">
                   <label className="block text-sm text-gray-600 mb-2">Department</label>
                   <select className="w-full px-3 py-2 border border-gray-300 rounded-lg">
                     <option value="">All Departments</option>
                     {lookup.departments?.map((dept: any) => (
-                      <option key={dept.id} value={dept.id}>{dept.name}</option>
+                      <option key={dept.id} value={dept.id}>
+                        {dept.name}
+                      </option>
                     ))}
                   </select>
                 </div>
@@ -125,9 +123,7 @@ export default function CareersPage() {
                 {jobs.length === 0 && (
                   <div className="text-center py-12">
                     <p className="text-gray-500 mb-4">No open positions at the moment.</p>
-                    <p className="text-gray-600">
-                      Check back later or subscribe to our newsletter for updates.
-                    </p>
+                    <p className="text-gray-600">Check back later or subscribe to our newsletter for updates.</p>
                   </div>
                 )}
               </div>
@@ -156,15 +152,7 @@ export default function CareersPage() {
         </section>
       </main>
 
-      <PublicFooter 
-        companyName={companyName} 
-        address={address} 
-        phone={phone} 
-        email={email} 
-        linkedinUrl={linkedinUrl} 
-        twitterUrl={twitterUrl} 
-        facebookUrl={facebookUrl} 
-      />
+      <PublicFooter companyName={companyName} address={address} phone={phone} email={email} linkedinUrl={linkedinUrl} twitterUrl={twitterUrl} facebookUrl={facebookUrl} />
     </div>
   );
 }
