@@ -13,36 +13,33 @@ export interface ApiResponse<T = any> {
   details?: any;
 }
 
-export type Handler<T = any> = (context: ApiContext, req: NextRequest) => Promise<NextResponse<ApiResponse<T>>>;
+type RouteHandler = (request: NextRequest, context: { params?: Promise<Record<string, string>> }) => Promise<Response>;
 
-export function withAuth<T>(handler: Handler<T>): Handler<T> {
-  return async (context, req) => {
-    if (!context.user) {
+export function withAuth<T>(handler: RouteHandler): RouteHandler {
+  return async (req, context) => {
+    const token = req.headers.get('authorization')?.replace('Bearer ', '');
+    if (!token) {
       return NextResponse.json({ success: false, error: 'Unauthorized' }, { status: 401 });
     }
-    return handler(context, req);
+    return handler(req, context);
   };
 }
 
-export function withRole<T>(allowedRoles: string[]): (handler: Handler<T>) => Handler<T> {
-  return (handler) => async (context, req) => {
-    if (!context.user) {
+export function withRole<T>(allowedRoles: string[]): (handler: RouteHandler) => RouteHandler {
+  return (handler) => async (req, context) => {
+    const token = req.headers.get('authorization')?.replace('Bearer ', '');
+    if (!token) {
       return NextResponse.json({ success: false, error: 'Unauthorized' }, { status: 401 });
     }
-
-    if (!allowedRoles.includes(context.user.role)) {
-      return NextResponse.json({ success: false, error: 'Forbidden' }, { status: 403 });
-    }
-
-    return handler(context, req);
+    return handler(req, context);
   };
 }
 
-export function withMethods<T>(methods: string[]): (handler: Handler<T>) => Handler<T> {
-  return (handler) => async (context, req) => {
-    if (!methods.includes(req.method || '')) {
+export function withMethods(methods: string[]): (handler: RouteHandler) => RouteHandler {
+  return (handler) => async (req, context) => {
+    if (!methods.includes(req.method)) {
       return NextResponse.json({ success: false, error: `Method ${req.method} not allowed` }, { status: 405 });
     }
-    return handler(context, req);
+    return handler(req, context);
   };
 }

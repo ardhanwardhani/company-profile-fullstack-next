@@ -11,7 +11,7 @@ export async function GET() {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }
 
-    const hasAccess = await checkPermission(session.user.id, 'analytics.view');
+    const hasAccess = await checkPermission((session.user as any).id, 'analytics.view');
     if (!hasAccess) {
       return NextResponse.json({ error: 'Forbidden' }, { status: 403 });
     }

@@ -2,6 +2,7 @@ import { getServerSession } from 'next-auth';
 import { authOptions } from '@/app/api/auth/[...nextauth]/route';
 import { getDepartmentById } from '@/lib/departments';
 import { redirect } from 'next/navigation';
+import Link from 'next/link';
 import { Edit, Calendar } from 'lucide-react';
 import DeleteDepartmentButton from './DeleteDepartmentButton';
 import BackButton from '@/components/BackButton';

@@ -1,4 +1,4 @@
-import { Pool, QueryResult } from 'pg';
+import { Pool, QueryResult, QueryResultRow } from 'pg';
 
 const pool = new Pool({
   connectionString: process.env.DATABASE_URL || 'postgresql://user:password@localhost:5432/company_profile',
@@ -12,7 +12,7 @@ pool.on('error', (err) => {
 
 export default pool;
 
-export async function query<T = any>(text: string, params?: any[]): Promise<QueryResult<T>> {
+export async function query<T extends QueryResultRow = any>(text: string, params?: any[]): Promise<QueryResult<T>> {
   const start = Date.now();
   const result = await pool.query<T>(text, params);
   const duration = Date.now() - start;
