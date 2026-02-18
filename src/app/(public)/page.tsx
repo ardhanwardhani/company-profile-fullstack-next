@@ -55,7 +55,7 @@ const defaultSettings: Settings = {
 
 async function getSettings(): Promise<Settings> {
   try {
-    const res = await fetch(`${process.env.NEXT_PUBLIC_APP_URL}/api/public/settings`, { cache: 'no-store' });
+    const res = await fetch('/api/public/settings', { cache: 'no-store' });
     if (!res.ok) return defaultSettings;
     const data = await res.json();
     return data.data || defaultSettings;

@@ -13,7 +13,7 @@ export default function CareersPage() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    Promise.all([getPublicSettings(), fetch(`${process.env.NEXT_PUBLIC_APP_URL}/api/careers/jobs?status=open`).then((r) => r.json()), fetch(`${process.env.NEXT_PUBLIC_APP_URL}/api/careers/lookup`).then((r) => r.json())]).then(
+    Promise.all([getPublicSettings(), fetch('/api/careers/jobs?status=open').then((r) => r.json()), fetch('/api/careers/lookup').then((r) => r.json())]).then(
       ([settingsData, jobsData, lookupData]) => {
         setSettings(settingsData);
         setJobs(jobsData.data || []);

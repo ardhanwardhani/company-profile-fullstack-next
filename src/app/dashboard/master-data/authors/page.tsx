@@ -14,7 +14,7 @@ async function getAuthors(params: SearchParams) {
   searchParams.set('page', params.page || '1');
   searchParams.set('limit', '20');
 
-  const res = await fetch(`${process.env.NEXT_PUBLIC_APP_URL}/api/master-data/authors?${searchParams.toString()}`, { cache: 'no-store' });
+  const res = await fetch(`/api/master-data/authors?${searchParams.toString()}`, { cache: 'no-store' });
 
   if (!res.ok) return { authors: [], total: 0, totalPages: 1 };
 

@@ -14,7 +14,7 @@ async function getLocations(params: SearchParams) {
   searchParams.set('page', params.page || '1');
   searchParams.set('limit', '20');
 
-  const res = await fetch(`${process.env.NEXT_PUBLIC_APP_URL}/api/master-data/locations?${searchParams.toString()}`, { cache: 'no-store' });
+  const res = await fetch(`/api/master-data/locations?${searchParams.toString()}`, { cache: 'no-store' });
 
   if (!res.ok) return { locations: [], total: 0, totalPages: 1 };
 

@@ -16,8 +16,8 @@ export default function BlogPage() {
   useEffect(() => {
     Promise.all([
       getPublicSettings(),
-      fetch(`${process.env.NEXT_PUBLIC_APP_URL}/api/blog/posts?status=published&limit=100`).then(r => r.json()),
-      fetch(`${process.env.NEXT_PUBLIC_APP_URL}/api/blog/categories`).then(r => r.json()),
+      fetch('/api/blog/posts?status=published&limit=100').then(r => r.json()),
+      fetch('/api/blog/categories').then(r => r.json()),
     ]).then(([settingsData, postsData, categoriesData]) => {
       setSettings(settingsData);
       setPosts(postsData.data || []);

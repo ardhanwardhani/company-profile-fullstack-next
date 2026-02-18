@@ -56,7 +56,7 @@ export default function SettingsPage() {
 
   const fetchSettings = async () => {
     try {
-      const res = await fetch(`${process.env.NEXT_PUBLIC_APP_URL}/api/settings`, { cache: 'no-store' });
+      const res = await fetch('/api/settings', { cache: 'no-store' });
       if (!res.ok) throw new Error('Failed to fetch settings');
       const response = await res.json();
       if (!response.success) throw new Error(response.error || 'Failed to fetch settings');
@@ -72,7 +72,7 @@ export default function SettingsPage() {
     if (!settings) return;
     setSaving(true);
     try {
-      const res = await fetch(`${process.env.NEXT_PUBLIC_APP_URL}/api/settings`, {
+      const res = await fetch('/api/settings', {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ settings }),

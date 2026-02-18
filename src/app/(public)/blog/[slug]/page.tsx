@@ -20,13 +20,13 @@ export default function BlogPostPage({ params }: BlogPostPageProps) {
     params.then(async (params) => {
       const [settingsData, postData] = await Promise.all([
         getPublicSettings(),
-        fetch(`${process.env.NEXT_PUBLIC_APP_URL}/api/public/blog/${params.slug}`).then(r => r.json()),
+        fetch(`/api/public/blog/${params.slug}`).then(r => r.json()),
       ]);
       
       setSettings(settingsData);
       if (postData.success && postData.data) {
         setPost(postData.data);
-        fetch(`${process.env.NEXT_PUBLIC_APP_URL}/api/analytics/blog/${postData.data.id}/view`, {
+        fetch(`/api/analytics/blog/${postData.data.id}/view`, {
           method: 'POST',
         }).catch(console.error);
       } else {

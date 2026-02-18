@@ -5,7 +5,7 @@ import DeleteUserButton from '../DeleteUserButton';
 import AvatarUploadClient from '../AvatarUploadClient';
 
 async function getUser(id: string) {
-  const res = await fetch(`${process.env.NEXT_PUBLIC_APP_URL}/api/users/${id}`, { cache: 'no-store' });
+  const res = await fetch(`/api/users/${id}`, { cache: 'no-store' });
 
   if (!res.ok) return null;
 

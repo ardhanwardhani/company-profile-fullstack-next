@@ -24,7 +24,7 @@ async function getJobs(params: SearchParams) {
   searchParams.set('limit', '20');
 
   try {
-    const res = await fetch(`${process.env.NEXT_PUBLIC_APP_URL}/api/careers/jobs?${searchParams.toString()}`, {
+    const res = await fetch(`/api/careers/jobs?${searchParams.toString()}`, {
       cache: 'no-store',
       headers: { 'Content-Type': 'application/json' },
     });
@@ -55,7 +55,7 @@ async function getJobs(params: SearchParams) {
 
 async function getDepartments() {
   try {
-    const res = await fetch(`${process.env.NEXT_PUBLIC_APP_URL}/api/master-data/departments`, { cache: 'no-store' });
+    const res = await fetch('/api/master-data/departments', { cache: 'no-store' });
     if (!res.ok) return [];
     return (await res.json()).data || [];
   } catch (error) {
@@ -66,7 +66,7 @@ async function getDepartments() {
 
 async function getLocations() {
   try {
-    const res = await fetch(`${process.env.NEXT_PUBLIC_APP_URL}/api/master-data/locations`, { cache: 'no-store' });
+    const res = await fetch('/api/master-data/locations', { cache: 'no-store' });
     if (!res.ok) return [];
     return (await res.json()).data || [];
   } catch (error) {

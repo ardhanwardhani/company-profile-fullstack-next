@@ -14,7 +14,7 @@ async function getTags(params: SearchParams) {
   searchParams.set('page', params.page || '1');
   searchParams.set('limit', '20');
 
-  const res = await fetch(`${process.env.NEXT_PUBLIC_APP_URL}/api/master-data/tags?${searchParams.toString()}`, { cache: 'no-store' });
+  const res = await fetch(`/api/master-data/tags?${searchParams.toString()}`, { cache: 'no-store' });
 
   if (!res.ok) return { tags: [], total: 0, totalPages: 1 };
 

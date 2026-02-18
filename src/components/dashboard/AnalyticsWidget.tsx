@@ -48,7 +48,7 @@ export default function AnalyticsWidget() {
 
   const fetchAnalytics = async () => {
     try {
-      const res = await fetch(`${process.env.NEXT_PUBLIC_APP_URL}/api/analytics/dashboard`);
+      const res = await fetch('/api/analytics/dashboard');
       if (!res.ok) throw new Error('Failed to fetch');
       const result = await res.json();
       setData(result);

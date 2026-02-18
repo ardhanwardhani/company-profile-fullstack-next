@@ -18,7 +18,7 @@ async function getBlogPosts(params: SearchParams) {
   if (params.category_id) searchParams.set('category_id', params.category_id);
   searchParams.set('limit', '20');
 
-  const res = await fetch(`${process.env.NEXT_PUBLIC_APP_URL}/api/blog/posts?${searchParams.toString()}`, { cache: 'no-store' });
+  const res = await fetch(`/api/blog/posts?${searchParams.toString()}`, { cache: 'no-store' });
 
   if (!res.ok) return { posts: [], total: 0, totalPages: 1 };
 
@@ -30,7 +30,7 @@ async function getBlogPosts(params: SearchParams) {
 }
 
 async function getCategories() {
-  const res = await fetch(`${process.env.NEXT_PUBLIC_APP_URL}/api/master-data/categories`, {
+  const res = await fetch('/api/master-data/categories', {
     cache: 'no-store',
   });
   if (!res.ok) return [];
