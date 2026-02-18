@@ -20,12 +20,15 @@ export default function BlogPostPage({ params }: BlogPostPageProps) {
     params.then(async (params) => {
       const [settingsData, postData] = await Promise.all([
         getPublicSettings(),
-        fetch(`${process.env.NEXT_PUBLIC_APP_URL}/api/blog/posts/${params.slug}`).then(r => r.json()),
+        fetch(`${process.env.NEXT_PUBLIC_APP_URL}/api/public/blog/${params.slug}`).then(r => r.json()),
       ]);
       
       setSettings(settingsData);
-      if (postData.data) {
+      if (postData.success && postData.data) {
         setPost(postData.data);
+        fetch(`${process.env.NEXT_PUBLIC_APP_URL}/api/analytics/blog/${postData.data.id}/view`, {
+          method: 'POST',
+        }).catch(console.error);
       } else {
         notFound();
       }
@@ -99,10 +102,14 @@ export default function BlogPostPage({ params }: BlogPostPageProps) {
           )}
 
           <div className="prose prose-lg max-w-none">
-            {typeof post.content === 'string' ? (
-              <p>{post.content}</p>
+            {post.content ? (
+              typeof post.content === 'string' ? (
+                <p>{post.content}</p>
+              ) : (
+                <div dangerouslySetInnerHTML={{ __html: JSON.stringify(post.content) }} />
+              )
             ) : (
-              <p>{JSON.stringify(post.content)}</p>
+              <p>No content available</p>
             )}
           </div>
 

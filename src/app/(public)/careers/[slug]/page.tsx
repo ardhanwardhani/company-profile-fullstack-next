@@ -20,12 +20,15 @@ export default function JobPage({ params }: JobPageProps) {
     params.then(async (params) => {
       const [settingsData, jobData] = await Promise.all([
         getPublicSettings(),
-        fetch(`${process.env.NEXT_PUBLIC_APP_URL}/api/careers/jobs/${params.slug}`).then(r => r.json()),
+        fetch(`${process.env.NEXT_PUBLIC_APP_URL}/api/public/jobs/${params.slug}`).then(r => r.json()),
       ]);
       
       setSettings(settingsData);
-      if (jobData.data) {
+      if (jobData.success && jobData.data) {
         setJob(jobData.data);
+        fetch(`${process.env.NEXT_PUBLIC_APP_URL}/api/analytics/jobs/${jobData.data.id}/view`, {
+          method: 'POST',
+        }).catch(console.error);
       } else {
         notFound();
       }

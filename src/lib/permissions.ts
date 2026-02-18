@@ -15,6 +15,7 @@ const PERMISSION_ROLES: Record<string, string[]> = {
   'jobs.open': ['admin', 'hr', 'content_manager'],
   'jobs.close': ['admin', 'hr', 'content_manager'],
   'jobs.archive': ['admin', 'content_manager'],
+  'jobs.view_applications': ['admin', 'hr', 'content_manager'],
   'users.view': ['admin', 'content_manager'],
   'users.edit': ['admin'],
   'users.delete': ['admin'],

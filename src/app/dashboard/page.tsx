@@ -18,34 +18,6 @@ export default async function DashboardPage() {
         <AnalyticsWidget />
       </div>
 
-      <div className="grid md:grid-cols-3 gap-6 mb-8">
-        <div className="card">
-          <h3 className="text-lg font-semibold mb-2 text-gray-900">Your Role</h3>
-          <p className="text-gray-600 capitalize">{role.replace('_', ' ')}</p>
-        </div>
-
-        <div className="card">
-          <h3 className="text-lg font-semibold mb-2 text-gray-900">Quick Actions</h3>
-          <div className="flex flex-wrap gap-2">
-            {(role === 'admin' || role === 'editor' || role === 'content_manager') && (
-              <Link href="/dashboard/blog/posts/new" className="btn btn-primary text-sm">
-                New Post
-              </Link>
-            )}
-            {(role === 'admin' || role === 'hr') && (
-              <Link href="/dashboard/careers/jobs/new" className="btn btn-secondary text-sm">
-                New Job
-              </Link>
-            )}
-          </div>
-        </div>
-
-        <div className="card">
-          <h3 className="text-lg font-semibold mb-2 text-gray-900">Getting Started</h3>
-          <p className="text-gray-600 text-sm">Use the sidebar to navigate to Blog Posts, Job Listings, or other sections.</p>
-        </div>
-      </div>
-
       <div className="card">
         <h3 className="text-lg font-semibold mb-4 text-gray-900">Available Modules</h3>
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
