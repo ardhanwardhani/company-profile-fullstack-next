@@ -46,11 +46,11 @@ export default function NewBlogPostPage() {
     immediatelyRender: false,
     editorProps: {
       attributes: {
-        className: 'prose prose-sm sm:prose lg:prose-lg xl:prose-2xl mx-auto focus:outline-none min-h-[300px] p-4',
+        className: 'prose prose-sm sm:prose lg:prose-lg xl:prose-2xl mx-auto focus:outline-none min-h-[500px] p-4',
       },
     },
     onUpdate: ({ editor }) => {
-      setFormData(prev => ({ ...prev, content: editor.getHTML() }));
+      setFormData((prev) => ({ ...prev, content: editor.getHTML() }));
     },
   });
 
@@ -78,7 +78,7 @@ export default function NewBlogPostPage() {
 
   const handleTitleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const title = e.target.value;
-    setFormData(prev => ({
+    setFormData((prev) => ({
       ...prev,
       title,
       slug: prev.slug === '' || prev.slug === generateSlug(prev.title) ? generateSlug(title) : prev.slug,
@@ -99,7 +99,7 @@ export default function NewBlogPostPage() {
       });
       if (res.ok) {
         const data = await res.json();
-        setFormData(prev => ({ ...prev, featured_image: data.url }));
+        setFormData((prev) => ({ ...prev, featured_image: data.url }));
       } else {
         setError('Failed to upload image');
       }
@@ -159,69 +159,37 @@ export default function NewBlogPostPage() {
         </div>
       </div>
 
-      {error && (
-        <div className="bg-red-50 text-red-600 p-4 rounded-lg mb-6">
-          {error}
-        </div>
-      )}
+      {error && <div className="bg-red-50 text-red-600 p-4 rounded-lg mb-6">{error}</div>}
 
       <form onSubmit={handleSubmit} className="space-y-6">
         <div className="card">
           <div className="space-y-4">
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">
-                Title *
-              </label>
-              <input
-                type="text"
-                value={formData.title}
-                onChange={handleTitleChange}
-                className="input"
-                placeholder="Enter post title"
-                required
-              />
+              <label className="block text-sm font-medium text-gray-700 mb-1">Title *</label>
+              <input type="text" value={formData.title} onChange={handleTitleChange} className="input" placeholder="Enter post title" required />
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">
-                Slug *
-              </label>
-              <input
-                type="text"
-                value={formData.slug}
-                onChange={(e) => setFormData(prev => ({ ...prev, slug: e.target.value }))}
-                className="input"
-                placeholder="post-url-slug"
-                required
-              />
+              <label className="block text-sm font-medium text-gray-700 mb-1">Slug *</label>
+              <input type="text" value={formData.slug} onChange={(e) => setFormData((prev) => ({ ...prev, slug: e.target.value }))} className="input" placeholder="post-url-slug" required />
             </div>
 
             <div className="grid grid-cols-2 gap-4">
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">
-                  Category
-                </label>
-                <select
-                  value={formData.category_id}
-                  onChange={(e) => setFormData(prev => ({ ...prev, category_id: e.target.value }))}
-                  className="input"
-                >
+                <label className="block text-sm font-medium text-gray-700 mb-1">Category</label>
+                <select value={formData.category_id} onChange={(e) => setFormData((prev) => ({ ...prev, category_id: e.target.value }))} className="input">
                   <option value="">Select category</option>
                   {categories.map((cat) => (
-                    <option key={cat.id} value={cat.id}>{cat.name}</option>
+                    <option key={cat.id} value={cat.id}>
+                      {cat.name}
+                    </option>
                   ))}
                 </select>
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">
-                  Status
-                </label>
-                <select
-                  value={formData.status}
-                  onChange={(e) => setFormData(prev => ({ ...prev, status: e.target.value }))}
-                  className="input"
-                >
+                <label className="block text-sm font-medium text-gray-700 mb-1">Status</label>
+                <select value={formData.status} onChange={(e) => setFormData((prev) => ({ ...prev, status: e.target.value }))} className="input">
                   <option value="draft">Draft</option>
                   <option value="review">Review</option>
                   <option value="published">Published</option>
@@ -231,15 +199,8 @@ export default function NewBlogPostPage() {
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">
-                Featured Image
-              </label>
-              <input
-                type="file"
-                accept="image/*"
-                onChange={handleImageUpload}
-                className="input"
-              />
+              <label className="block text-sm font-medium text-gray-700 mb-1">Featured Image</label>
+              <input type="file" accept="image/*" onChange={handleImageUpload} className="input" />
               {formData.featured_image && (
                 <div className="mt-2">
                   <img src={formData.featured_image} alt="Featured" className="h-32 object-cover rounded" />
@@ -248,148 +209,64 @@ export default function NewBlogPostPage() {
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">
-                Excerpt
-              </label>
-              <textarea
-                value={formData.excerpt}
-                onChange={(e) => setFormData(prev => ({ ...prev, excerpt: e.target.value }))}
-                className="input min-h-[80px]"
-                placeholder="Brief description of the post"
-              />
+              <label className="block text-sm font-medium text-gray-700 mb-1">Excerpt</label>
+              <textarea value={formData.excerpt} onChange={(e) => setFormData((prev) => ({ ...prev, excerpt: e.target.value }))} className="input min-h-[80px]" placeholder="Brief description of the post" />
             </div>
           </div>
         </div>
 
         <div className="card">
-          <label className="block text-sm font-medium text-gray-700 mb-2">
-            Content *
-          </label>
-          
-          <div className="border border-gray-200 rounded-lg overflow-hidden">
+          <label className="block text-sm font-medium text-gray-700 mb-2">Content *</label>
+
+          <div className="border border-gray-200 rounded-lg overflow-hidden h-[500px]">
             <div className="bg-gray-50 border-b border-gray-200 p-2 flex gap-1 flex-wrap">
-              <button
-                type="button"
-                onClick={() => editor?.chain().focus().toggleBold().run()}
-                className="p-2 hover:bg-gray-200 rounded editor-btn"
-                title="Bold"
-              >
+              <button type="button" onClick={() => editor?.chain().focus().toggleBold().run()} className="p-2 hover:bg-gray-200 rounded editor-btn" title="Bold">
                 <strong>B</strong>
               </button>
-              <button
-                type="button"
-                onClick={() => editor?.chain().focus().toggleItalic().run()}
-                className="p-2 hover:bg-gray-200 rounded editor-btn"
-                title="Italic"
-              >
+              <button type="button" onClick={() => editor?.chain().focus().toggleItalic().run()} className="p-2 hover:bg-gray-200 rounded editor-btn" title="Italic">
                 <em>I</em>
               </button>
-              <button
-                type="button"
-                onClick={() => editor?.chain().focus().toggleStrike().run()}
-                className="p-2 hover:bg-gray-200 rounded editor-btn"
-                title="Strike"
-              >
+              <button type="button" onClick={() => editor?.chain().focus().toggleStrike().run()} className="p-2 hover:bg-gray-200 rounded editor-btn" title="Strike">
                 <s>S</s>
               </button>
-              <button
-                type="button"
-                onClick={() => editor?.chain().focus().toggleCode().run()}
-                className="p-2 hover:bg-gray-200 rounded editor-btn"
-                title="Code"
-              >
+              <button type="button" onClick={() => editor?.chain().focus().toggleCode().run()} className="p-2 hover:bg-gray-200 rounded editor-btn" title="Code">
                 &lt;/&gt;
               </button>
-              <button
-                type="button"
-                onClick={() => editor?.chain().focus().toggleHeading({ level: 1 }).run()}
-                className="p-2 hover:bg-gray-200 rounded editor-btn"
-                title="Heading 1"
-              >
+              <button type="button" onClick={() => editor?.chain().focus().toggleHeading({ level: 1 }).run()} className="p-2 hover:bg-gray-200 rounded editor-btn" title="Heading 1">
                 H1
               </button>
-              <button
-                type="button"
-                onClick={() => editor?.chain().focus().toggleHeading({ level: 2 }).run()}
-                className="p-2 hover:bg-gray-200 rounded editor-btn"
-                title="Heading 2"
-              >
+              <button type="button" onClick={() => editor?.chain().focus().toggleHeading({ level: 2 }).run()} className="p-2 hover:bg-gray-200 rounded editor-btn" title="Heading 2">
                 H2
               </button>
-              <button
-                type="button"
-                onClick={() => editor?.chain().focus().toggleHeading({ level: 3 }).run()}
-                className="p-2 hover:bg-gray-200 rounded editor-btn"
-                title="Heading 3"
-              >
+              <button type="button" onClick={() => editor?.chain().focus().toggleHeading({ level: 3 }).run()} className="p-2 hover:bg-gray-200 rounded editor-btn" title="Heading 3">
                 H3
               </button>
-              <button
-                type="button"
-                onClick={() => editor?.chain().focus().toggleBulletList().run()}
-                className="p-2 hover:bg-gray-200 rounded editor-btn"
-                title="Bullet List"
-              >
+              <button type="button" onClick={() => editor?.chain().focus().toggleBulletList().run()} className="p-2 hover:bg-gray-200 rounded editor-btn" title="Bullet List">
                 •
               </button>
-              <button
-                type="button"
-                onClick={() => editor?.chain().focus().toggleOrderedList().run()}
-                className="p-2 hover:bg-gray-200 rounded editor-btn"
-                title="Numbered List"
-              >
+              <button type="button" onClick={() => editor?.chain().focus().toggleOrderedList().run()} className="p-2 hover:bg-gray-200 rounded editor-btn" title="Numbered List">
                 1.
               </button>
-              <button
-                type="button"
-                onClick={() => editor?.chain().focus().toggleBlockquote().run()}
-                className="p-2 hover:bg-gray-200 rounded editor-btn"
-                title="Quote"
-              >
+              <button type="button" onClick={() => editor?.chain().focus().toggleBlockquote().run()} className="p-2 hover:bg-gray-200 rounded editor-btn" title="Quote">
                 &quot;
               </button>
-              <button
-                type="button"
-                onClick={addLink}
-                className="p-2 hover:bg-gray-200 rounded editor-btn"
-                title="Add Link"
-              >
+              <button type="button" onClick={addLink} className="p-2 hover:bg-gray-200 rounded editor-btn" title="Add Link">
                 🔗
               </button>
-              <button
-                type="button"
-                onClick={addImage}
-                className="p-2 hover:bg-gray-200 rounded editor-btn"
-                title="Add Image"
-              >
+              <button type="button" onClick={addImage} className="p-2 hover:bg-gray-200 rounded editor-btn" title="Add Image">
                 🖼
               </button>
-              <button
-                type="button"
-                onClick={() => editor?.chain().focus().setHorizontalRule().run()}
-                className="p-2 hover:bg-gray-200 rounded editor-btn"
-                title="Horizontal Rule"
-              >
+              <button type="button" onClick={() => editor?.chain().focus().setHorizontalRule().run()} className="p-2 hover:bg-gray-200 rounded editor-btn" title="Horizontal Rule">
                 ―
               </button>
-              <button
-                type="button"
-                onClick={() => editor?.chain().focus().undo().run()}
-                className="p-2 hover:bg-gray-200 rounded editor-btn"
-                title="Undo"
-              >
+              <button type="button" onClick={() => editor?.chain().focus().undo().run()} className="p-2 hover:bg-gray-200 rounded editor-btn" title="Undo">
                 ↩
               </button>
-              <button
-                type="button"
-                onClick={() => editor?.chain().focus().redo().run()}
-                className="p-2 hover:bg-gray-200 rounded editor-btn"
-                title="Redo"
-              >
+              <button type="button" onClick={() => editor?.chain().focus().redo().run()} className="p-2 hover:bg-gray-200 rounded editor-btn" title="Redo">
                 ↪
               </button>
             </div>
-            
+
             <EditorContent editor={editor} />
           </div>
         </div>
@@ -398,11 +275,7 @@ export default function NewBlogPostPage() {
           <Link href="/dashboard/blog/posts" className="btn btn-secondary">
             Cancel
           </Link>
-          <button
-            type="submit"
-            disabled={loading}
-            className="btn btn-primary disabled:opacity-50"
-          >
+          <button type="submit" disabled={loading} className="btn btn-primary disabled:opacity-50">
             {loading ? 'Creating...' : 'Create Post'}
           </button>
         </div>

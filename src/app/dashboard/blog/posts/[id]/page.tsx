@@ -120,10 +120,12 @@ export default async function BlogPostDetailPage({
           </div>
         )}
 
-        <div
-          className="prose prose-lg max-w-none"
-          dangerouslySetInnerHTML={{ __html: post.content }}
-        />
+        {post.content && (
+          <div
+            className="prose prose-lg max-w-none"
+            dangerouslySetInnerHTML={{ __html: post.content }}
+          />
+        )}
 
         {post.tags && post.tags.length > 0 && (
           <footer className="mt-8 pt-6 border-t border-gray-200">

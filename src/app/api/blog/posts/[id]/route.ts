@@ -90,7 +90,7 @@ export async function PUT(req: NextRequest, { params }: { params: Promise<{ id: 
     Object.entries(data).forEach(([key, value]) => {
       if (value !== undefined) {
         updates.push(`${key} = $${paramIndex++}`);
-        values.push(key === 'content' ? JSON.stringify(value) : value);
+        values.push(value);
       }
     });
 

@@ -101,17 +101,7 @@ export default function BlogPostPage({ params }: BlogPostPageProps) {
             />
           )}
 
-          <div className="prose prose-lg max-w-none">
-            {post.content ? (
-              typeof post.content === 'string' ? (
-                <p>{post.content}</p>
-              ) : (
-                <div dangerouslySetInnerHTML={{ __html: JSON.stringify(post.content) }} />
-              )
-            ) : (
-              <p>No content available</p>
-            )}
-          </div>
+          <div className="prose prose-lg max-w-none" dangerouslySetInnerHTML={{ __html: post.content || '' }} />
 
           {post.tags && post.tags.length > 0 && (
             <div className="mt-8 pt-8 border-t">
