@@ -2,10 +2,11 @@ import { ArrowRight } from 'lucide-react';
 import Link from 'next/link';
 import { SectionWrapper } from '@/components/ui/section-wrapper';
 import { BlogGrid } from './blog-grid';
+import { getApiUrl } from '@/lib/fetch-utils';
 
 async function getRecentPosts() {
   try {
-    const res = await fetch('/api/blog/posts?limit=4&status=published', {
+    const res = await fetch(getApiUrl('/api/blog/posts?limit=4&status=published'), {
       next: { revalidate: 3600 },
     });
     if (!res.ok) return [];

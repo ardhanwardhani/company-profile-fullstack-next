@@ -3,6 +3,7 @@ import { authOptions } from '@/app/api/auth/[...nextauth]/route';
 import Link from 'next/link';
 import { redirect } from 'next/navigation';
 import PostStatusButton from '@/components/blog/PostStatusButton';
+import { getApiUrl } from '@/lib/fetch-utils';
 
 interface SearchParams {
   search?: string;
@@ -18,7 +19,7 @@ async function getBlogPosts(params: SearchParams) {
   if (params.category_id) searchParams.set('category_id', params.category_id);
   searchParams.set('limit', '20');
 
-  const res = await fetch(`/api/blog/posts?${searchParams.toString()}`, { cache: 'no-store' });
+  const res = await fetch(getApiUrl(`/api/blog/posts?${searchParams.toString()}`), { cache: 'no-store' });
 
   if (!res.ok) return { posts: [], total: 0, totalPages: 1 };
 
@@ -30,7 +31,7 @@ async function getBlogPosts(params: SearchParams) {
 }
 
 async function getCategories() {
-  const res = await fetch('/api/master-data/categories', {
+  const res = await fetch(getApiUrl('/api/master-data/categories'), {
     cache: 'no-store',
   });
   if (!res.ok) return [];
