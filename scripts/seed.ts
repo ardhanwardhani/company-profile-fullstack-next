@@ -1,4 +1,4 @@
-import pool from '../database';
+import pool from '../src/lib/db';
 import bcrypt from 'bcrypt';
 
 async function seed() {

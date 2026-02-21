@@ -16,11 +16,11 @@ export async function query<T extends QueryResultRow = any>(text: string, params
   const start = Date.now();
   const result = await pool.query<T>(text, params);
   const duration = Date.now() - start;
-  
+
   if (process.env.NODE_ENV === 'development') {
     console.log('Executed query', { text: text.substring(0, 100), duration, rows: result.rowCount });
   }
-  
+
   return result;
 }
 
