@@ -20,6 +20,7 @@ import {
   MapPin,
   BookOpen,
   Settings,
+  FolderOpen,
 } from 'lucide-react';
 
 interface SidebarProps {
@@ -69,6 +70,12 @@ const topNavItems: NavItem[] = [
     href: '/dashboard/careers/jobs',
     icon: Briefcase,
     roles: ['admin', 'hr'],
+  },
+  {
+    name: 'Projects',
+    href: '/dashboard/projects',
+    icon: FolderOpen,
+    roles: ['admin', 'editor', 'content_manager'],
   },
 ];
 
