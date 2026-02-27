@@ -3,6 +3,7 @@ import { authOptions } from '@/app/api/auth/[...nextauth]/route';
 import Link from 'next/link';
 import { redirect } from 'next/navigation';
 import { getApiUrl } from '@/lib/fetch-utils';
+import { ROLE_GROUPS } from '@/lib/roles';
 import ProjectStatusButton from './ProjectStatusButton';
 
 interface SearchParams {
@@ -45,7 +46,7 @@ export default async function ProjectsPage({ searchParams }: { searchParams: Pro
 
   const userRole = user?.role;
 
-  if (!['admin', 'editor', 'content_manager'].includes(userRole)) {
+  if (!ROLE_GROUPS.CAN_MANAGE_PROJECTS.includes(userRole)) {
     redirect('/dashboard');
   }
 
@@ -60,7 +61,7 @@ export default async function ProjectsPage({ searchParams }: { searchParams: Pro
   const hasPrev = page > 1;
   const hasNext = page < totalPages;
 
-  const canPublish = ['admin', 'content_manager'].includes(userRole);
+  const canPublish = ROLE_GROUPS.CAN_PUBLISH_PROJECTS.includes(userRole);
 
   return (
     <div className="p-4">

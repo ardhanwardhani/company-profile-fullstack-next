@@ -22,6 +22,7 @@ import {
   Settings,
   FolderOpen,
 } from 'lucide-react';
+import { ROLES, ROLE_GROUPS } from '@/lib/roles';
 
 interface SidebarProps {
   userRole: string;
@@ -57,31 +58,31 @@ const topNavItems: NavItem[] = [
     name: 'Overview',
     href: '/dashboard',
     icon: LayoutDashboard,
-    roles: ['admin', 'editor', 'content_manager', 'hr'],
+    roles: [...ROLE_GROUPS.CAN_ACCESS_DASHBOARD],
   },
   {
     name: 'Blog Posts',
     href: '/dashboard/blog/posts',
     icon: FileText,
-    roles: ['admin', 'editor', 'content_manager'],
+    roles: [...ROLE_GROUPS.CAN_MANAGE_BLOG],
   },
   {
     name: 'Job Listings',
     href: '/dashboard/careers/jobs',
     icon: Briefcase,
-    roles: ['admin', 'hr'],
+    roles: [...ROLE_GROUPS.CAN_MANAGE_JOBS],
   },
   {
     name: 'Projects',
     href: '/dashboard/projects',
     icon: FolderOpen,
-    roles: ['admin', 'editor', 'content_manager'],
+    roles: [...ROLE_GROUPS.CAN_MANAGE_PROJECTS],
   },
 ];
 
 const masterDataSections: NavSection = {
   name: 'Master Data',
-  roles: ['admin', 'editor', 'content_manager', 'hr'],
+  roles: [...ROLE_GROUPS.CAN_ACCESS_DASHBOARD],
   subsections: [
     {
       name: 'Blog',
@@ -91,19 +92,19 @@ const masterDataSections: NavSection = {
           name: 'Categories',
           href: '/dashboard/master-data/categories',
           icon: Folder,
-          roles: ['admin', 'editor', 'content_manager'],
+          roles: [...ROLE_GROUPS.CAN_MANAGE_MASTER_DATA_CATEGORIES],
         },
         {
           name: 'Tags',
           href: '/dashboard/master-data/tags',
           icon: Tags,
-          roles: ['admin', 'editor', 'content_manager'],
+          roles: [...ROLE_GROUPS.CAN_MANAGE_MASTER_DATA_TAGS],
         },
         {
           name: 'Authors',
           href: '/dashboard/master-data/authors',
           icon: Users,
-          roles: ['admin', 'editor', 'content_manager'],
+          roles: [...ROLE_GROUPS.CAN_MANAGE_MASTER_DATA_AUTHORS],
         },
       ],
     },
@@ -115,13 +116,13 @@ const masterDataSections: NavSection = {
           name: 'Departments',
           href: '/dashboard/master-data/departments',
           icon: Building2,
-          roles: ['admin', 'hr'],
+          roles: [...ROLE_GROUPS.CAN_MANAGE_MASTER_DATA_DEPARTMENTS],
         },
         {
           name: 'Locations',
           href: '/dashboard/master-data/locations',
           icon: MapPin,
-          roles: ['admin', 'hr'],
+          roles: [...ROLE_GROUPS.CAN_MANAGE_MASTER_DATA_LOCATIONS],
         },
       ],
     },
@@ -133,13 +134,13 @@ const adminNavigation: NavItem[] = [
     name: 'User Management',
     href: '/dashboard/users',
     icon: Users,
-    roles: ['admin'],
+    roles: [ROLES.ADMIN],
   },
   {
     name: 'Settings',
     href: '/dashboard/settings',
     icon: Settings,
-    roles: ['admin'],
+    roles: [ROLES.ADMIN],
   },
 ];
 

@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import pool from '@/lib/db';
 import { getServerSession } from 'next-auth';
 import { authOptions } from '../../../../auth/[...nextauth]/route';
+import { ROLE_GROUPS } from '@/lib/roles';
 
 export async function PATCH(
   req: NextRequest,
@@ -33,7 +34,7 @@ export async function PATCH(
     // Check user permissions based on status transition
     // Only admin and content_manager can publish/archive
     if ((status === 'published' || status === 'archived') && 
-        !['admin', 'content_manager'].includes(userRole)) {
+        !ROLE_GROUPS.CAN_PUBLISH_BLOG.includes(userRole)) {
       return NextResponse.json(
         { success: false, error: 'You do not have permission to perform this action' },
         { status: 403 }
@@ -63,7 +64,7 @@ export async function PATCH(
 
     if (currentStatus === 'draft' && status === 'review') {
       // Any editor+ can submit for review
-      if (!['admin', 'editor', 'content_manager'].includes(userRole)) {
+      if (!ROLE_GROUPS.CAN_MANAGE_BLOG.includes(userRole)) {
         return NextResponse.json(
           { success: false, error: 'You do not have permission to perform this action' },
           { status: 403 }

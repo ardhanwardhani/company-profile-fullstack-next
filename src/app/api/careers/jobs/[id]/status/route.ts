@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import pool from '@/lib/db';
 import { getServerSession } from 'next-auth';
 import { authOptions } from '../../../../auth/[...nextauth]/route';
+import { ROLE_GROUPS } from '@/lib/roles';
 
 export async function PATCH(
   req: NextRequest,
@@ -29,7 +30,7 @@ export async function PATCH(
       );
     }
 
-    if (!['admin', 'hr_manager'].includes(userRole)) {
+    if (!ROLE_GROUPS.CAN_PUBLISH_JOBS.includes(userRole)) {
       return NextResponse.json(
         { success: false, error: 'You do not have permission to perform this action' },
         { status: 403 }

@@ -1,6 +1,7 @@
 import { getServerSession } from 'next-auth';
 import { authOptions } from '@/app/api/auth/[...nextauth]/route';
 import { getProjectById } from '@/lib/projects';
+import { ROLE_GROUPS } from '@/lib/roles';
 import Link from 'next/link';
 import { redirect } from 'next/navigation';
 import { ArrowLeft, Edit, Calendar, ExternalLink, Folder, Tag, User } from 'lucide-react';
@@ -18,7 +19,7 @@ export default async function ProjectDetailPage({
 
   const role = (session.user as any)?.role;
   
-  if (!['admin', 'editor', 'content_manager'].includes(role)) {
+  if (!ROLE_GROUPS.CAN_MANAGE_PROJECTS.includes(role)) {
     redirect('/dashboard');
   }
 

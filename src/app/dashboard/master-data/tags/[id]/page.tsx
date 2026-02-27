@@ -1,6 +1,7 @@
 import { getServerSession } from 'next-auth';
 import { authOptions } from '@/app/api/auth/[...nextauth]/route';
 import { getTagById } from '@/lib/tags';
+import { ROLE_GROUPS } from '@/lib/roles';
 import { redirect } from 'next/navigation';
 import Link from 'next/link';
 import { Edit, Calendar } from 'lucide-react';
@@ -20,7 +21,7 @@ export default async function TagDetailPage({
 
   const role = (session.user as any)?.role;
 
-  if (!['admin', 'hr_manager', 'hr_staff'].includes(role)) {
+  if (!ROLE_GROUPS.CAN_MANAGE_MASTER_DATA_TAGS.includes(role)) {
     redirect('/dashboard');
   }
 

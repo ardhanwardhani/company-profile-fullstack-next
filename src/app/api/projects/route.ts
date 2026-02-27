@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { getServerSession } from 'next-auth';
 import { authOptions } from '../auth/[...nextauth]/route';
 import { getProjects, getProjectCount, createProject } from '@/lib/projects';
+import { ROLE_GROUPS, ROLES } from '@/lib/roles';
 import { z } from 'zod';
 
 const createProjectSchema = z.object({
@@ -62,7 +63,7 @@ export async function POST(req: NextRequest) {
     }
 
     const role = (session.user as any)?.role;
-    if (!['admin', 'editor', 'content_manager'].includes(role)) {
+    if (!ROLE_GROUPS.CAN_MANAGE_PROJECTS.includes(role)) {
       return NextResponse.json({ success: false, error: 'Forbidden' }, { status: 403 });
     }
 

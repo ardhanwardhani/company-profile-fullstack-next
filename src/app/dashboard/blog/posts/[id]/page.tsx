@@ -1,6 +1,7 @@
 import { getServerSession } from 'next-auth';
 import { authOptions } from '@/app/api/auth/[...nextauth]/route';
 import { getBlogPostById } from '@/lib/blog';
+import { ROLE_GROUPS } from '@/lib/roles';
 import Link from 'next/link';
 import { redirect } from 'next/navigation';
 import { ArrowLeft, Edit, Calendar, User, Folder, Tag } from 'lucide-react';
@@ -19,7 +20,7 @@ export default async function BlogPostDetailPage({
 
   const role = (session.user as any)?.role;
   
-  if (!['admin', 'editor', 'content_manager'].includes(role)) {
+  if (!ROLE_GROUPS.CAN_MANAGE_BLOG.includes(role)) {
     redirect('/dashboard');
   }
 

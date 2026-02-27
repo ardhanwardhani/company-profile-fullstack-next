@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import pool from '@/lib/db';
 import { getServerSession } from 'next-auth';
 import { authOptions } from '../../../../auth/[...nextauth]/route';
+import { ROLE_GROUPS } from '@/lib/roles';
 
 export async function PATCH(req: NextRequest, { params }: { params: Promise<{ id: string }> }) {
   try {
@@ -11,7 +12,7 @@ export async function PATCH(req: NextRequest, { params }: { params: Promise<{ id
     }
 
     const role = (session.user as any)?.role;
-    if (!['admin', 'hr_manager'].includes(role)) {
+    if (!ROLE_GROUPS.CAN_MANAGE_MASTER_DATA_CATEGORIES.includes(role)) {
       return NextResponse.json({ success: false, error: 'Insufficient permissions' }, { status: 403 });
     }
 

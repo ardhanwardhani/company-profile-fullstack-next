@@ -1,7 +1,10 @@
 import { NextRequest, NextResponse } from 'next/server';
 import pool from '@/lib/db';
+import { getServerSession } from 'next-auth';
+import { authOptions } from '../../auth/[...nextauth]/route';
 import { ApiResponse } from '@/lib/api';
 import { Job } from '@/types';
+import { ROLE_GROUPS } from '@/lib/roles';
 import { z } from 'zod';
 
 const CreateJobSchema = z.object({
@@ -118,6 +121,17 @@ export async function GET(req: NextRequest) {
 
 export async function POST(req: NextRequest) {
   try {
+    const session = await getServerSession(authOptions);
+    const role = (session?.user as any)?.role;
+    
+    if (!session || !session.user) {
+      return NextResponse.json({ success: false, error: 'Unauthorized' }, { status: 401 });
+    }
+
+    if (!ROLE_GROUPS.CAN_MANAGE_JOBS.includes(role)) {
+      return NextResponse.json({ success: false, error: 'Forbidden' }, { status: 403 });
+    }
+
     const body = await req.json();
     const validation = CreateJobSchema.safeParse(body);
 

@@ -1,6 +1,7 @@
 import { getServerSession } from 'next-auth';
 import { authOptions } from '@/app/api/auth/[...nextauth]/route';
 import { getJobById } from '@/lib/jobs';
+import { ROLE_GROUPS, ROLES } from '@/lib/roles';
 import Link from 'next/link';
 import { redirect } from 'next/navigation';
 import { ArrowLeft, Edit, Calendar, MapPin, Building2, Clock, Briefcase, ExternalLink } from 'lucide-react';
@@ -19,7 +20,7 @@ export default async function JobDetailPage({
 
   const role = (session.user as any)?.role;
   
-  if (!['admin', 'hr_manager', 'hr_staff'].includes(role)) {
+  if (!ROLE_GROUPS.CAN_MANAGE_JOBS.includes(role)) {
     redirect('/dashboard');
   }
 
@@ -37,8 +38,8 @@ export default async function JobDetailPage({
     );
   }
 
-  const isAdmin = role === 'admin';
-  const canManageStatus = ['admin', 'hr_manager'].includes(role);
+  const isAdmin = role === ROLES.ADMIN;
+  const canManageStatus = ROLE_GROUPS.CAN_PUBLISH_JOBS.includes(role);
 
   const renderRichContent = (content: any) => {
     if (!content) return null;

@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { redirect } from 'next/navigation';
 import JobStatusButton from './JobStatusButton';
 import { getApiUrl } from '@/lib/fetch-utils';
+import { ROLE_GROUPS } from '@/lib/roles';
 
 interface SearchParams {
   search?: string;
@@ -102,7 +103,7 @@ export default async function JobsPage({ searchParams }: { searchParams: Promise
     redirect('/login');
   }
 
-  if (!['admin', 'hr_manager'].includes(user.role)) {
+  if (!ROLE_GROUPS.CAN_MANAGE_JOBS.includes(user.role)) {
     redirect('/dashboard');
   }
 
@@ -251,7 +252,7 @@ export default async function JobsPage({ searchParams }: { searchParams: Promise
                         {user.role === 'admin' && job.status === 'draft' && (
                           <JobStatusButton jobId={job.id} jobTitle={job.title} currentStatus={job.status} targetStatus="open" />
                         )}
-                        {(user.role === 'admin' || user.role === 'hr_manager') && job.status === 'open' && (
+                        {(ROLE_GROUPS.CAN_PUBLISH_JOBS.includes(user.role)) && job.status === 'open' && (
                           <JobStatusButton jobId={job.id} jobTitle={job.title} currentStatus={job.status} targetStatus="archived" />
                         )}
                         <Link href={`/dashboard/careers/jobs/${job.id}/edit`} className="text-sm text-gray-600 hover:text-blue-600 transition-colors">

@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { redirect } from 'next/navigation';
 import PostStatusButton from '@/components/blog/PostStatusButton';
 import { getApiUrl } from '@/lib/fetch-utils';
+import { ROLE_GROUPS } from '@/lib/roles';
 
 interface SearchParams {
   search?: string;
@@ -54,7 +55,7 @@ export default async function BlogPostsPage({ searchParams }: { searchParams: Pr
 
   const userRole = user?.role;
 
-  if (!['admin', 'editor', 'content_manager'].includes(userRole)) {
+  if (!ROLE_GROUPS.CAN_MANAGE_BLOG.includes(userRole)) {
     redirect('/dashboard');
   }
 
@@ -70,7 +71,7 @@ export default async function BlogPostsPage({ searchParams }: { searchParams: Pr
   const hasNext = page < totalPages;
 
   // Check if user can publish/archive
-  const canPublish = ['admin', 'content_manager'].includes(userRole);
+  const canPublish = ROLE_GROUPS.CAN_PUBLISH_BLOG.includes(userRole);
 
   return (
     <div className="p-4">

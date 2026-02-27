@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { getServerSession } from 'next-auth';
 import { authOptions } from '../../auth/[...nextauth]/route';
 import { getProjectById, updateProject, deleteProject } from '@/lib/projects';
+import { ROLE_GROUPS, ROLES } from '@/lib/roles';
 import { z } from 'zod';
 
 const updateProjectSchema = z.object({
@@ -52,7 +53,7 @@ export async function PUT(
     }
 
     const role = (session.user as any)?.role;
-    if (!['admin', 'editor', 'content_manager'].includes(role)) {
+    if (!ROLE_GROUPS.CAN_MANAGE_PROJECTS.includes(role)) {
       return NextResponse.json({ success: false, error: 'Forbidden' }, { status: 403 });
     }
 
@@ -91,7 +92,7 @@ export async function DELETE(
     }
 
     const role = (session.user as any)?.role;
-    if (role !== 'admin') {
+    if (role !== ROLES.ADMIN) {
       return NextResponse.json({ success: false, error: 'Forbidden - Admin only' }, { status: 403 });
     }
 

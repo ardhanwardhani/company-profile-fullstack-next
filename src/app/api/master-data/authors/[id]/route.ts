@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import pool from '@/lib/db';
 import { getServerSession } from 'next-auth';
 import { authOptions } from '../../../auth/[...nextauth]/route';
+import { ROLE_GROUPS } from '@/lib/roles';
 import { z } from 'zod';
 
 const UpdateAuthorSchema = z.object({
@@ -36,7 +37,7 @@ export async function PUT(req: NextRequest, { params }: { params: Promise<{ id: 
     }
 
     const role = (session.user as any)?.role;
-    if (!['admin', 'hr_manager'].includes(role)) {
+    if (!ROLE_GROUPS.CAN_MANAGE_MASTER_DATA_AUTHORS.includes(role)) {
       return NextResponse.json({ success: false, error: 'Insufficient permissions' }, { status: 403 });
     }
 

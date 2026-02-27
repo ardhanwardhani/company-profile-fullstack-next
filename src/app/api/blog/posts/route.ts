@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import pool from '@/lib/db';
 import { getServerSession } from 'next-auth';
 import { authOptions } from '../../auth/[...nextauth]/route';
+import { ROLE_GROUPS } from '@/lib/roles';
 
 interface GetQuery {
   page?: number;
@@ -46,10 +47,19 @@ async function ensureAuthorExists(userId: string): Promise<string> {
 export async function POST(req: NextRequest) {
   try {
     const session = await getServerSession(authOptions);
+    const role = (session?.user as any)?.role;
+    
     if (!session || !session.user) {
       return NextResponse.json(
         { success: false, error: 'Unauthorized' },
         { status: 401 }
+      );
+    }
+
+    if (!ROLE_GROUPS.CAN_MANAGE_BLOG.includes(role)) {
+      return NextResponse.json(
+        { success: false, error: 'Forbidden' },
+        { status: 403 }
       );
     }
 

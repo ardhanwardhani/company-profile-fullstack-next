@@ -1,7 +1,8 @@
-import { getServerSession } from 'next-auth';
+import { getServerSession } from 'next/auth';
 import { authOptions } from '@/app/api/auth/[...nextauth]/route';
 import Link from 'next/link';
 import AnalyticsWidget from '@/components/dashboard/AnalyticsWidget';
+import { ROLE_GROUPS, ROLES } from '@/lib/roles';
 
 export default async function DashboardPage() {
   const session = await getServerSession(authOptions);
@@ -21,25 +22,25 @@ export default async function DashboardPage() {
       <div className="card">
         <h3 className="text-lg font-semibold mb-4 text-gray-900">Available Modules</h3>
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
-          {(role === 'admin' || role === 'editor' || role === 'content_manager') && (
+          {ROLE_GROUPS.CAN_MANAGE_BLOG.includes(role) && (
             <Link href="/dashboard/blog/posts" className="p-4 rounded-lg border border-gray-200 hover:border-gray-300 hover:bg-gray-50 transition-colors">
               <p className="font-medium text-gray-900">Blog Management</p>
               <p className="text-sm text-gray-500 mt-1">Posts, Categories, Tags, Authors</p>
             </Link>
           )}
-          {(role === 'admin' || role === 'hr') && (
+          {(role === ROLES.ADMIN || role === ROLES.HR || role === ROLES.HR_MANAGER) && (
             <Link href="/dashboard/careers/jobs" className="p-4 rounded-lg border border-gray-200 hover:border-gray-300 hover:bg-gray-50 transition-colors">
               <p className="font-medium text-gray-900">Careers Management</p>
               <p className="text-sm text-gray-500 mt-1">Jobs, Departments, Locations</p>
             </Link>
           )}
-          {role === 'admin' && (
+          {role === ROLES.ADMIN && (
             <Link href="/dashboard/users" className="p-4 rounded-lg border border-gray-200 hover:border-gray-300 hover:bg-gray-50 transition-colors">
               <p className="font-medium text-gray-900">User Management</p>
               <p className="text-sm text-gray-500 mt-1">Manage user accounts and roles</p>
             </Link>
           )}
-          {role === 'admin' && (
+          {role === ROLES.ADMIN && (
             <Link href="/dashboard/settings" className="p-4 rounded-lg border border-gray-200 hover:border-gray-300 hover:bg-gray-50 transition-colors">
               <p className="font-medium text-gray-900">Settings</p>
               <p className="text-sm text-gray-500 mt-1">Configure site settings and options</p>

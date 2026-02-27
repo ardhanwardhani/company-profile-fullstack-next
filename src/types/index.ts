@@ -11,7 +11,7 @@ export interface User {
   updated_at?: Date;
 }
 
-export type UserRole = 'admin' | 'editor' | 'hr' | 'content_manager';
+export type UserRole = 'admin' | 'editor' | 'hr' | 'hr_manager' | 'hr_staff' | 'content_manager';
 
 export interface BlogPost {
   id: string;

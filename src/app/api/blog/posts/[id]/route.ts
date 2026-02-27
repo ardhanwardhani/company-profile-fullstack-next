@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import pool from '@/lib/db';
 import { getServerSession } from 'next-auth';
 import { authOptions } from '../../../auth/[...nextauth]/route';
+import { ROLE_GROUPS, ROLES } from '@/lib/roles';
 import { z } from 'zod';
 
 const UpdatePostSchema = z.object({
@@ -71,7 +72,7 @@ export async function PUT(req: NextRequest, { params }: { params: Promise<{ id: 
     const session = await getServerSession(authOptions);
     const role = (session?.user as any)?.role;
 
-    if (!session || !['admin', 'editor', 'content_manager'].includes(role)) {
+    if (!session || !ROLE_GROUPS.CAN_MANAGE_BLOG.includes(role)) {
       return NextResponse.json({ success: false, error: 'Insufficient permissions' }, { status: 403 });
     }
 
@@ -123,7 +124,7 @@ export async function DELETE(req: NextRequest, { params }: { params: Promise<{ i
     const { id } = await params;
     const session = await getServerSession(authOptions);
 
-    if (!session || (session.user as any)?.role !== 'admin') {
+    if (!session || (session.user as any)?.role !== ROLES.ADMIN) {
       return NextResponse.json({ success: false, error: 'Admin access required' }, { status: 403 });
     }
 

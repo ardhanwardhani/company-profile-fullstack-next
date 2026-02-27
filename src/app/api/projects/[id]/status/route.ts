@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { getServerSession } from 'next-auth';
 import { authOptions } from '../../../auth/[...nextauth]/route';
 import { getProjectById, updateProject } from '@/lib/projects';
+import { ROLE_GROUPS } from '@/lib/roles';
 import { z } from 'zod';
 
 const statusSchema = z.object({
@@ -19,7 +20,7 @@ export async function PATCH(
     }
 
     const role = (session.user as any)?.role;
-    if (!['admin', 'content_manager'].includes(role)) {
+    if (!ROLE_GROUPS.CAN_PUBLISH_PROJECTS.includes(role)) {
       return NextResponse.json({ success: false, error: 'Forbidden' }, { status: 403 });
     }
 
