@@ -15,7 +15,7 @@ interface RichTextEditorProps {
 export default function RichTextEditor({ content, onChange, placeholder }: RichTextEditorProps) {
   const editor = useEditor({
     extensions: [
-      StarterKit,
+      StarterKit.configure({ link: false }),
       ImageExtension,
       LinkExtension.configure({ openOnClick: false }),
       Placeholder.configure({ placeholder: placeholder || 'Write content here...' }),

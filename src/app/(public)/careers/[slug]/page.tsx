@@ -95,51 +95,35 @@ export default function JobPage({ params }: JobPageProps) {
           <div className="md:col-span-2 space-y-8">
             <section>
               <h2 className="text-xl font-semibold mb-4">About the Role</h2>
-              <div className="prose">
-                {typeof job.description === 'string' ? (
-                  <p>{job.description}</p>
-                ) : (
-                  <p>Role description</p>
-                )}
-              </div>
+              <div
+                className="prose"
+                dangerouslySetInnerHTML={{ __html: job.description || '<p>Role description</p>' }}
+              />
             </section>
 
             <section>
               <h2 className="text-xl font-semibold mb-4">Responsibilities</h2>
-              <div className="prose">
-                {typeof job.responsibilities === 'string' ? (
-                  <p>{job.responsibilities}</p>
-                ) : (
-                  <ul className="list-disc pl-5 space-y-2">
-                    <li>Responsibility details will appear here</li>
-                  </ul>
-                )}
-              </div>
+              <div
+                className="prose"
+                dangerouslySetInnerHTML={{ __html: job.responsibilities || '<p>Responsibility details will appear here</p>' }}
+              />
             </section>
 
             <section>
               <h2 className="text-xl font-semibold mb-4">Requirements</h2>
-              <div className="prose">
-                {typeof job.requirements === 'string' ? (
-                  <p>{job.requirements}</p>
-                ) : (
-                  <ul className="list-disc pl-5 space-y-2">
-                    <li>Requirements will appear here</li>
-                  </ul>
-                )}
-              </div>
+              <div
+                className="prose"
+                dangerouslySetInnerHTML={{ __html: job.requirements || '<p>Requirements will appear here</p>' }}
+              />
             </section>
 
             {job.benefits && (
               <section>
                 <h2 className="text-xl font-semibold mb-4">Benefits</h2>
-                <div className="prose">
-                  {typeof job.benefits === 'string' ? (
-                    <p>{job.benefits}</p>
-                  ) : (
-                    <p>Benefits information</p>
-                  )}
-                </div>
+                <div
+                  className="prose"
+                  dangerouslySetInnerHTML={{ __html: job.benefits }}
+                />
               </section>
             )}
           </div>

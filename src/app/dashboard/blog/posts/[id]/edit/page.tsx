@@ -51,7 +51,7 @@ export default function EditBlogPostPage({
 
   const editor = useEditor({
     extensions: [
-      StarterKit,
+      StarterKit.configure({ link: false }),
       ImageExtension,
       LinkExtension.configure({
         openOnClick: false,

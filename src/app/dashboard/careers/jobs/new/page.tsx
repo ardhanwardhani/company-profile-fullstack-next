@@ -45,7 +45,7 @@ export default function NewJobPage() {
 
   const descriptionEditor = useEditor({
     extensions: [
-      StarterKit,
+      StarterKit.configure({ link: false }),
       ImageExtension,
       LinkExtension.configure({ openOnClick: false }),
       Placeholder.configure({ placeholder: 'Write job description here...' }),
@@ -64,7 +64,7 @@ export default function NewJobPage() {
 
   const responsibilitiesEditor = useEditor({
     extensions: [
-      StarterKit,
+      StarterKit.configure({ link: false }),
       ImageExtension,
       LinkExtension.configure({ openOnClick: false }),
       Placeholder.configure({ placeholder: 'List responsibilities...' }),
@@ -83,7 +83,7 @@ export default function NewJobPage() {
 
   const requirementsEditor = useEditor({
     extensions: [
-      StarterKit,
+      StarterKit.configure({ link: false }),
       ImageExtension,
       LinkExtension.configure({ openOnClick: false }),
       Placeholder.configure({ placeholder: 'List requirements...' }),
@@ -102,7 +102,7 @@ export default function NewJobPage() {
 
   const benefitsEditor = useEditor({
     extensions: [
-      StarterKit,
+      StarterKit.configure({ link: false }),
       ImageExtension,
       LinkExtension.configure({ openOnClick: false }),
       Placeholder.configure({ placeholder: 'List benefits...' }),

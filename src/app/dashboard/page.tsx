@@ -1,4 +1,4 @@
-import { getServerSession } from 'next/auth';
+import { getServerSession } from 'next-auth';
 import { authOptions } from '@/app/api/auth/[...nextauth]/route';
 import Link from 'next/link';
 import AnalyticsWidget from '@/components/dashboard/AnalyticsWidget';

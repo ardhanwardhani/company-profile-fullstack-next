@@ -84,9 +84,7 @@ export async function PUT(req: NextRequest, { params }: { params: Promise<{ id: 
     Object.entries(data).forEach(([key, value]) => {
       if (value !== undefined) {
         updates.push(`${key} = $${paramIndex++}`);
-        if (['description', 'responsibilities', 'requirements', 'benefits'].includes(key)) {
-          values.push(JSON.stringify(value));
-        } else if (value === null) {
+        if (value === null) {
           values.push(null);
         } else {
           values.push(value);
