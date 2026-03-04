@@ -1,5 +1,5 @@
 import { getServerSession } from 'next-auth';
-import { authOptions } from '@/app/api/auth/[...nextauth]/route';
+import { authOptions } from '@/lib/auth-options';
 import { getProjectById } from '@/lib/projects';
 import { ROLE_GROUPS } from '@/lib/roles';
 import Link from 'next/link';

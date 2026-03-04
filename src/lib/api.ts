@@ -13,7 +13,7 @@ export interface ApiResponse<T = any> {
   details?: any;
 }
 
-type RouteHandler = (request: NextRequest, context: { params?: Promise<Record<string, string>> }) => Promise<Response>;
+type RouteHandler = (request: NextRequest, context: any) => Promise<Response>;
 
 export function withAuth<T>(handler: RouteHandler): RouteHandler {
   return async (req, context) => {
