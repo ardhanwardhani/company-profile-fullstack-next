@@ -173,15 +173,14 @@ export async function GET(req: NextRequest) {
       },
     }));
 
-    const response = {
+    return NextResponse.json({
       success: true,
       data: posts,
-    };
-
-    return NextResponse.json(response, {
-      headers: {
-        'X-Total-Count': total.toString(),
-        'X-Total-Pages': Math.ceil(total / limit).toString(),
+      pagination: {
+        page,
+        limit,
+        total,
+        totalPages: Math.ceil(total / limit),
       },
     });
   } catch (error) {

@@ -38,7 +38,7 @@ export default function BlogPostPage({ params }: BlogPostPageProps) {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-white flex items-center justify-center">
+      <div className="min-h-screen bg-white dark:bg-dark-900 flex items-center justify-center">
         <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary-600"></div>
       </div>
     );
@@ -57,7 +57,7 @@ export default function BlogPostPage({ params }: BlogPostPageProps) {
   const facebookUrl = settings.company?.facebook_url || '';
 
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen bg-white dark:bg-dark-900">
       <PublicNavigation companyName={companyName} activePage="/blog" />
 
       <main className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-24">
@@ -67,14 +67,14 @@ export default function BlogPostPage({ params }: BlogPostPageProps) {
 
         <article>
           <header className="mb-8">
-            <div className="flex items-center gap-4 text-sm text-gray-500 mb-4">
+            <div className="flex items-center gap-4 text-sm text-gray-500 dark:text-gray-400 mb-4">
               <Link href={`/blog?category=${post.category?.slug}`} className="text-primary-600 hover:underline">
                 {post.category?.name}
               </Link>
               <span>•</span>
               <span>{new Date(post.created_at).toLocaleDateString()}</span>
             </div>
-            <h1 className="text-4xl font-bold mb-4">{post.title}</h1>
+            <h1 className="text-4xl font-bold mb-4 dark:text-gray-100">{post.title}</h1>
             <div className="flex items-center">
               {post.author?.avatar ? (
                 <img src={post.author.avatar} alt={post.author.name} className="w-12 h-12 rounded-full" />
@@ -86,9 +86,9 @@ export default function BlogPostPage({ params }: BlogPostPageProps) {
                 </div>
               )}
               <div className="ml-3">
-                <p className="font-medium">{post.author?.name}</p>
+                <p className="font-medium dark:text-gray-100">{post.author?.name}</p>
                 {post.author?.bio && (
-                  <p className="text-sm text-gray-500">{post.author.bio}</p>
+                  <p className="text-sm text-gray-500 dark:text-gray-400">{post.author.bio}</p>
                 )}
               </div>
             </div>
@@ -96,19 +96,19 @@ export default function BlogPostPage({ params }: BlogPostPageProps) {
 
           {post.featured_image && (
             <div 
-              className="aspect-video bg-gray-200 rounded-xl mb-8 bg-cover bg-center" 
+              className="aspect-video bg-gray-200 dark:bg-dark-800 rounded-xl mb-8 bg-cover bg-center" 
               style={{ backgroundImage: `url(${post.featured_image})` }}
             />
           )}
 
-          <div className="prose prose-lg max-w-none" dangerouslySetInnerHTML={{ __html: post.content || '' }} />
+          <div className="prose prose-lg dark:prose-invert max-w-none" dangerouslySetInnerHTML={{ __html: post.content || '' }} />
 
           {post.tags && post.tags.length > 0 && (
-            <div className="mt-8 pt-8 border-t">
-              <h3 className="text-sm font-medium text-gray-500 mb-3">Tags</h3>
+            <div className="mt-8 pt-8 border-t dark:border-dark-700">
+              <h3 className="text-sm font-medium text-gray-500 dark:text-gray-400 mb-3">Tags</h3>
               <div className="flex flex-wrap gap-2">
                 {post.tags.map((tag: any) => (
-                  <Link key={tag.id} href={`/blog?tag=${tag.slug}`} className="px-3 py-1 bg-gray-100 text-gray-700 rounded-full text-sm hover:bg-gray-200">
+                  <Link key={tag.id} href={`/blog?tag=${tag.slug}`} className="px-3 py-1 bg-gray-100 dark:bg-dark-800 text-gray-700 dark:text-gray-300 rounded-full text-sm hover:bg-gray-200 dark:hover:bg-dark-700">
                     {tag.name}
                   </Link>
                 ))}

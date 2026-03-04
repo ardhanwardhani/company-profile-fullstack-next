@@ -24,10 +24,11 @@ async function getProjects(params: SearchParams) {
 
   if (!res.ok) return { projects: [], total: 0, totalPages: 1 };
 
+  const json = await res.json();
   return {
-    projects: (await res.json()).data || [],
-    total: parseInt(res.headers.get('X-Total-Count') || '0'),
-    totalPages: parseInt(res.headers.get('X-Total-Pages') || '1'),
+    projects: json.data || [],
+    total: json.pagination?.total || 0,
+    totalPages: json.pagination?.totalPages || 1,
   };
 }
 
@@ -67,8 +68,8 @@ export default async function ProjectsPage({ searchParams }: { searchParams: Pro
     <div className="p-4">
       <div className="flex items-center justify-between mb-8">
         <div>
-          <h1 className="text-2xl font-bold text-gray-900">Projects</h1>
-          <p className="text-sm text-gray-500 mt-1">{total} projects total</p>
+          <h1 className="text-2xl font-bold text-gray-900 dark:text-gray-100">Projects</h1>
+          <p className="text-sm text-gray-500 mt-1 dark:text-gray-400">{total} projects total</p>
         </div>
         <Link href="/dashboard/projects/new" className="inline-flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors font-medium text-sm">
           <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">

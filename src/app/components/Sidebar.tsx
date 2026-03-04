@@ -175,21 +175,21 @@ export default function Sidebar({ userRole, userName, collapsed = false, onColla
 
   const SidebarContent = () => (
     <>
-      <div className="flex items-center justify-between p-4 border-b border-gray-200">
+      <div className="flex items-center justify-between p-4 border-b border-gray-200 dark:border-dark-700">
         {!collapsed && (
-          <Link href="/dashboard" className="text-lg font-semibold text-gray-900">
+          <Link href="/dashboard" className="text-lg font-semibold text-gray-900 dark:text-gray-100">
             Dashboard
           </Link>
         )}
         <button
           onClick={() => onCollapse?.(!collapsed)}
-          className="hidden lg:flex items-center justify-center w-8 h-8 rounded-lg hover:bg-gray-100 text-gray-500"
+          className="hidden lg:flex items-center justify-center w-8 h-8 rounded-lg hover:bg-gray-100 text-gray-500 dark:hover:bg-dark-700 dark:text-gray-400"
         >
           {collapsed ? <ChevronRight size={18} /> : <ChevronLeft size={18} />}
         </button>
         <button
           onClick={() => setMobileOpen(false)}
-          className="lg:hidden flex items-center justify-center w-8 h-8 rounded-lg hover:bg-gray-100 text-gray-500"
+          className="lg:hidden flex items-center justify-center w-8 h-8 rounded-lg hover:bg-gray-100 text-gray-500 dark:hover:bg-dark-700 dark:text-gray-400"
         >
           <X size={18} />
         </button>
@@ -207,8 +207,8 @@ export default function Sidebar({ userRole, userName, collapsed = false, onColla
                 onClick={() => setMobileOpen(false)}
                 className={`flex items-center gap-3 px-3 py-2.5 rounded-lg transition-colors ${
                   active
-                    ? 'bg-gray-900 text-white'
-                    : 'text-gray-600 hover:bg-gray-100 hover:text-gray-900'
+                    ? 'bg-gray-900 text-white dark:bg-primary-600'
+                    : 'text-gray-600 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-400 dark:hover:bg-dark-700 dark:hover:text-gray-100'
                 }`}
               >
                 <Icon size={18} />
@@ -223,7 +223,7 @@ export default function Sidebar({ userRole, userName, collapsed = false, onColla
             {!collapsed && (
               <button
                 onClick={() => setMasterDataExpanded(!masterDataExpanded)}
-                className="flex items-center justify-between w-full px-3 py-2 text-xs font-semibold text-gray-400 uppercase tracking-wider hover:text-gray-600"
+                className="flex items-center justify-between w-full px-3 py-2 text-xs font-semibold text-gray-400 uppercase tracking-wider hover:text-gray-600 dark:text-gray-500 dark:hover:text-gray-300"
               >
                 <span>{masterDataSections.name}</span>
                 {masterDataExpanded ? (
@@ -238,8 +238,8 @@ export default function Sidebar({ userRole, userName, collapsed = false, onColla
                 <div key={subsection.name}>
                   {!collapsed && (
                     <div className="flex items-center gap-2 px-3 py-1.5">
-                      <subsection.icon size={14} className="text-gray-400" />
-                      <span className="text-xs font-medium text-gray-500">{subsection.name}</span>
+                      <subsection.icon size={14} className="text-gray-400 dark:text-gray-500" />
+                      <span className="text-xs font-medium text-gray-500 dark:text-gray-400">{subsection.name}</span>
                     </div>
                   )}
                   <div className="space-y-0.5">
@@ -256,8 +256,8 @@ export default function Sidebar({ userRole, userName, collapsed = false, onColla
                               : ''
                           } ${
                             active
-                              ? 'bg-gray-900 text-white'
-                              : 'text-gray-600 hover:bg-gray-100 hover:text-gray-900'
+                              ? 'bg-gray-900 text-white dark:bg-primary-600'
+                              : 'text-gray-600 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-400 dark:hover:bg-dark-700 dark:hover:text-gray-100'
                           }`}
                         >
                           {collapsed ? (
@@ -280,9 +280,9 @@ export default function Sidebar({ userRole, userName, collapsed = false, onColla
 
         {filteredAdminNavigation.length > 0 && (
           <>
-            <div className="pt-4 border-t border-gray-200">
+            <div className="pt-4 border-t border-gray-200 dark:border-dark-700">
               {!collapsed && (
-                <p className="px-3 mb-2 text-xs font-semibold text-gray-400 uppercase tracking-wider">
+                <p className="px-3 mb-2 text-xs font-semibold text-gray-400 uppercase tracking-wider dark:text-gray-500">
                   Administration
                 </p>
               )}
@@ -297,8 +297,8 @@ export default function Sidebar({ userRole, userName, collapsed = false, onColla
                       onClick={() => setMobileOpen(false)}
                       className={`flex items-center gap-3 px-3 py-2.5 rounded-lg transition-colors ${
                         active
-                          ? 'bg-gray-900 text-white'
-                          : 'text-gray-600 hover:bg-gray-100 hover:text-gray-900'
+                          ? 'bg-gray-900 text-white dark:bg-primary-600'
+                          : 'text-gray-600 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-400 dark:hover:bg-dark-700 dark:hover:text-gray-100'
                       }`}
                     >
                       <Icon size={18} />
@@ -313,16 +313,16 @@ export default function Sidebar({ userRole, userName, collapsed = false, onColla
       </nav>
 
       {!collapsed && (
-        <div className="p-4 border-t border-gray-200">
+        <div className="p-4 border-t border-gray-200 dark:border-dark-700">
           <div className="flex items-center gap-3 px-3 py-2">
-            <div className="w-8 h-8 rounded-full bg-gray-200 flex items-center justify-center">
-              <span className="text-sm font-medium text-gray-600">
+            <div className="w-8 h-8 rounded-full bg-gray-200 dark:bg-dark-700 flex items-center justify-center">
+              <span className="text-sm font-medium text-gray-600 dark:text-gray-300">
                 {userName?.charAt(0)?.toUpperCase() || 'U'}
               </span>
             </div>
             <div className="flex-1 min-w-0">
-              <p className="text-sm font-medium text-gray-900 truncate">{userName}</p>
-              <p className="text-xs text-gray-500 capitalize">{userRole?.replace('_', ' ')}</p>
+              <p className="text-sm font-medium text-gray-900 dark:text-gray-100 truncate">{userName}</p>
+              <p className="text-xs text-gray-500 dark:text-gray-400 capitalize">{userRole?.replace('_', ' ')}</p>
             </div>
           </div>
         </div>
@@ -347,7 +347,7 @@ export default function Sidebar({ userRole, userName, collapsed = false, onColla
         <div
           className={`${
             collapsed ? 'w-16' : 'w-64'
-          } h-full bg-white border-r border-gray-200 flex flex-col`}
+          } h-full bg-white border-r border-gray-200 dark:bg-dark-900 dark:border-dark-700 flex flex-col`}
         >
           <SidebarContent />
         </div>

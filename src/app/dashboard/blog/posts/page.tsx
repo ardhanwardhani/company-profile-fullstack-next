@@ -24,10 +24,11 @@ async function getBlogPosts(params: SearchParams) {
 
   if (!res.ok) return { posts: [], total: 0, totalPages: 1 };
 
+  const json = await res.json();
   return {
-    posts: (await res.json()).data || [],
-    total: parseInt(res.headers.get('X-Total-Count') || '0'),
-    totalPages: parseInt(res.headers.get('X-Total-Pages') || '1'),
+    posts: json.data || [],
+    total: json.pagination?.total || 0,
+    totalPages: json.pagination?.totalPages || 1,
   };
 }
 
@@ -78,8 +79,8 @@ export default async function BlogPostsPage({ searchParams }: { searchParams: Pr
       {/* Header */}
       <div className="flex items-center justify-between mb-8">
         <div>
-          <h1 className="text-2xl font-bold text-gray-900">Blog Posts</h1>
-          <p className="text-sm text-gray-500 mt-1">{total} posts total</p>
+          <h1 className="text-2xl font-bold text-gray-900 dark:text-gray-100">Blog Posts</h1>
+          <p className="text-sm text-gray-500 mt-1 dark:text-gray-400">{total} posts total</p>
         </div>
         <Link href="/dashboard/blog/posts/new" className="inline-flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors font-medium text-sm">
           <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">

@@ -37,12 +37,12 @@ export function PortfolioSection() {
 
   if (loading) {
     return (
-      <SectionWrapper id="portfolio" className="bg-white">
+      <SectionWrapper id="portfolio" className="bg-gray-100 dark:bg-dark-900">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
           <div className="animate-pulse">
-            <div className="h-8 w-32 bg-gray-200 rounded mb-4"></div>
-            <div className="h-12 w-96 bg-gray-200 rounded mb-2"></div>
-            <div className="h-6 w-64 bg-gray-200 rounded"></div>
+            <div className="h-8 w-32 bg-gray-200 dark:bg-dark-700 rounded mb-4"></div>
+            <div className="h-12 w-96 bg-gray-200 dark:bg-dark-700 rounded mb-2"></div>
+            <div className="h-6 w-64 bg-gray-200 dark:bg-dark-700 rounded"></div>
           </div>
         </div>
       </SectionWrapper>
@@ -54,7 +54,7 @@ export function PortfolioSection() {
   }
 
   return (
-    <SectionWrapper id="portfolio" className="bg-white">
+    <SectionWrapper id="portfolio" className="bg-gray-100 dark:bg-gray-900">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div 
           initial={{ opacity: 0, y: 20 }}
@@ -68,8 +68,8 @@ export function PortfolioSection() {
           </div>
           <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-4">
             <div>
-              <h2 className="text-4xl font-bold text-gray-900 mb-4">Featured Projects</h2>
-              <p className="text-xl text-gray-600 max-w-2xl">A showcase of our recent work and successful client collaborations.</p>
+              <h2 className="text-4xl font-bold text-gray-900 dark:text-gray-100 mb-4">Featured Projects</h2>
+              <p className="text-xl text-gray-600 dark:text-gray-400 max-w-2xl">A showcase of our recent work and successful client collaborations.</p>
             </div>
             <Link 
               href="/work" 
@@ -99,7 +99,7 @@ export function PortfolioSection() {
                       className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                     />
                   ) : (
-                    <div className="w-full h-full bg-gray-200 flex items-center justify-center">
+                    <div className="w-full h-full bg-gray-200 dark:bg-dark-800 flex items-center justify-center">
                       <span className="text-gray-400">No image</span>
                     </div>
                   )}
@@ -119,17 +119,17 @@ export function PortfolioSection() {
                   )}
                 </div>
                 
-                <h3 className="text-xl font-bold text-gray-900 mb-2 group-hover:text-primary-700 transition-colors">
+                <h3 className="text-xl font-bold text-gray-900 dark:text-gray-100 mb-2 group-hover:text-primary-700 transition-colors">
                   {project.title}
                 </h3>
-                <p className="text-gray-600 mb-4 line-clamp-2">{project.description}</p>
+                <p className="text-gray-600 dark:text-gray-400 mb-4 line-clamp-2">{project.description}</p>
                 
                 {project.technologies && project.technologies.length > 0 && (
                   <div className="flex flex-wrap gap-2">
                     {project.technologies.slice(0, 3).map((tag) => (
                       <span 
                         key={tag}
-                        className="px-2 py-1 bg-gray-100 text-gray-600 text-xs font-medium rounded"
+                        className="px-2 py-1 bg-gray-100 dark:bg-dark-800 text-gray-600 dark:text-gray-400 text-xs font-medium rounded"
                       >
                         {tag}
                       </span>

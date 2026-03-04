@@ -157,7 +157,7 @@ export default function NewJobPage() {
   };
 
   const Toolbar = ({ editor }: { editor: any }) => (
-    <div className="bg-gray-50 border-b border-gray-200 p-2 flex gap-1 flex-wrap">
+    <div className="bg-gray-50 dark:bg-gray-800 border-b border-gray-200 p-2 flex gap-1 flex-wrap">
       {[
         { action: () => editor?.chain().focus().toggleBold().run(), label: <strong>B</strong>, title: 'Bold' },
         { action: () => editor?.chain().focus().toggleItalic().run(), label: <em>I</em>, title: 'Italic' },
@@ -232,7 +232,7 @@ export default function NewJobPage() {
         <div className="card">
           <div className="space-y-4">
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">
+              <label className="block text-sm font-medium text-gray-700 dark:text-gray-100 mb-1">
                 Job Title *
               </label>
               <input
@@ -247,7 +247,7 @@ export default function NewJobPage() {
 
             <div className="grid grid-cols-2 gap-4">
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">
+                <label className="block text-sm font-medium text-gray-700 dark:text-gray-100 mb-1">
                   Department *
                 </label>
                 <select
@@ -264,7 +264,7 @@ export default function NewJobPage() {
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">
+                <label className="block text-sm font-medium text-gray-700 dark:text-gray-100 mb-1">
                   Location *
                 </label>
                 <select
@@ -285,7 +285,7 @@ export default function NewJobPage() {
 
             <div className="grid grid-cols-3 gap-4">
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">
+                <label className="block text-sm font-medium text-gray-700 dark:text-gray-100 mb-1">
                   Employment Type *
                 </label>
                 <select
@@ -301,7 +301,7 @@ export default function NewJobPage() {
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">
+                <label className="block text-sm font-medium text-gray-700 dark:text-gray-100 mb-1">
                   Level
                 </label>
                 <select
@@ -317,7 +317,7 @@ export default function NewJobPage() {
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">
+                <label className="block text-sm font-medium text-gray-700 dark:text-gray-100 mb-1">
                   Status
                 </label>
                 <select
@@ -334,7 +334,7 @@ export default function NewJobPage() {
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">
+              <label className="block text-sm font-medium text-gray-700 dark:text-gray-100 mb-1">
                 Apply URL *
               </label>
               <input
@@ -351,7 +351,7 @@ export default function NewJobPage() {
 
         {['description', 'responsibilities', 'requirements', 'benefits'].map((field) => (
           <div key={field} className="card">
-            <label className="block text-sm font-medium text-gray-700 mb-2 capitalize">
+            <label className="block text-sm font-medium text-gray-700 mb-2 capitalize dark:text-gray-100">
               {field.replace('_', ' ')} *
             </label>
             <div className="border border-gray-200 rounded-lg overflow-hidden">
@@ -367,7 +367,7 @@ export default function NewJobPage() {
           <h3 className="text-lg font-semibold text-gray-900 mb-4">SEO Settings</h3>
           <div className="space-y-4">
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">
+              <label className="block text-sm font-medium text-gray-700 dark:text-gray-100 mb-1">
                 Meta Title
               </label>
               <input
@@ -381,7 +381,7 @@ export default function NewJobPage() {
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">
+              <label className="block text-sm font-medium text-gray-700 dark:text-gray-100 mb-1">
                 Meta Description
               </label>
               <textarea
@@ -401,7 +401,7 @@ export default function NewJobPage() {
                 onChange={(e) => setFormData(prev => ({ ...prev, seo_index: e.target.checked }))}
                 className="rounded border-gray-300 text-blue-600 focus:ring-blue-500"
               />
-              <label htmlFor="seo_index" className="text-sm text-gray-700">
+              <label htmlFor="seo_index" className="text-sm text-gray-700 dark:text-gray-100">
                 Allow search engines to index this job posting
               </label>
             </div>

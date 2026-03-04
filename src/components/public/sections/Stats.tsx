@@ -12,9 +12,9 @@ const stats = [
 
 export function Stats() {
   return (
-    <div className="bg-white py-20 border-b border-gray-200">
+    <div className="bg-white dark:bg-dark-900 py-20 border-b border-gray-200 dark:border-dark-700">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-0 divide-x divide-gray-200">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-0 divide-x divide-gray-200 dark:divide-dark-700">
           {stats.map((stat, index) => (
             <motion.div 
               key={stat.label} 
@@ -27,7 +27,7 @@ export function Stats() {
               <div className="text-4xl sm:text-5xl font-bold text-primary-800 mb-2">
                 <Counter value={stat.value} suffix={stat.suffix} />
               </div>
-              <div className="text-gray-500 text-sm uppercase tracking-wider">{stat.label}</div>
+              <div className="text-gray-500 dark:text-gray-400 text-sm uppercase tracking-wider">{stat.label}</div>
             </motion.div>
           ))}
         </div>

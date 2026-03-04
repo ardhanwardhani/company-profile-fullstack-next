@@ -99,7 +99,7 @@ export default function AboutPage() {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
+      <div className="min-h-screen bg-gray-50 dark:bg-dark-950 flex items-center justify-center">
         <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary-600"></div>
       </div>
     );
@@ -115,7 +115,7 @@ export default function AboutPage() {
   const facebookUrl = settings.company?.facebook_url || '';
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-gray-50 dark:bg-dark-950">
       <PublicNavigation companyName={companyName} activePage="/about" />
 
       <main>
@@ -128,7 +128,7 @@ export default function AboutPage() {
         </section>
 
         {/* Company History */}
-        <section className="py-16 bg-white">
+        <section className="py-16 bg-white dark:bg-dark-900">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <motion.div 
               initial={{ opacity: 0, y: 20 }} 
@@ -136,12 +136,12 @@ export default function AboutPage() {
               viewport={{ once: true }}
               className="text-center mb-12"
             >
-              <h2 className="text-4xl font-bold text-gray-900 mb-4">Our History</h2>
-              <p className="text-xl text-gray-600 max-w-2xl mx-auto">The journey of how we became who we are today.</p>
+              <h2 className="text-4xl font-bold text-gray-900 dark:text-gray-100 mb-4">Our History</h2>
+              <p className="text-xl text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">The journey of how we became who we are today.</p>
             </motion.div>
 
             <div className="relative">
-              <div className="absolute left-1/2 transform -translate-x-1/2 h-full w-1 bg-primary-200 hidden md:block"></div>
+              <div className="absolute left-1/2 transform -translate-x-1/2 h-full w-1 bg-primary-200 dark:bg-primary-900/30 hidden md:block"></div>
               <div className="space-y-12">
                 {historyMilestones.map((milestone, index) => (
                   <motion.div
@@ -153,10 +153,10 @@ export default function AboutPage() {
                     className={`flex items-center ${index % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'}`}
                   >
                     <div className={`flex-1 ${index % 2 === 0 ? 'md:text-right md:pr-12' : 'md:text-left md:pl-12'}`}>
-                      <div className="bg-gray-50 rounded-lg p-6 inline-block">
+                      <div className="bg-gray-50 dark:bg-dark-800 rounded-lg p-6 inline-block">
                         <span className="text-primary-600 font-bold text-lg">{milestone.year}</span>
-                        <h3 className="text-xl font-semibold text-gray-900 mt-2">{milestone.title}</h3>
-                        <p className="text-gray-600 mt-1">{milestone.description}</p>
+                        <h3 className="text-xl font-semibold text-gray-900 dark:text-gray-100 mt-2">{milestone.title}</h3>
+                        <p className="text-gray-600 dark:text-gray-400 mt-1">{milestone.description}</p>
                       </div>
                     </div>
                     <div className="hidden md:flex w-4 h-4 bg-primary-600 rounded-full absolute left-1/2 transform -translate-x-1/2 items-center justify-center">
@@ -171,7 +171,7 @@ export default function AboutPage() {
         </section>
 
         {/* Our Culture */}
-        <section className="py-16 bg-gray-50">
+        <section className="py-16 bg-gray-50 dark:bg-dark-950">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <motion.div 
               initial={{ opacity: 0, y: 20 }} 
@@ -179,8 +179,8 @@ export default function AboutPage() {
               viewport={{ once: true }}
               className="text-center mb-12"
             >
-              <h2 className="text-4xl font-bold text-gray-900 mb-4">Our Culture</h2>
-              <p className="text-xl text-gray-600 max-w-2xl mx-auto">The values and beliefs that define who we are.</p>
+              <h2 className="text-4xl font-bold text-gray-900 dark:text-gray-100 mb-4">Our Culture</h2>
+              <p className="text-xl text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">The values and beliefs that define who we are.</p>
             </motion.div>
 
             <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
@@ -191,13 +191,13 @@ export default function AboutPage() {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ delay: index * 0.1 }}
-                  className="bg-white rounded-xl p-6 shadow-sm hover:shadow-md transition-shadow"
+                  className="bg-white dark:bg-dark-900 rounded-xl p-6 shadow-sm hover:shadow-md transition-shadow"
                 >
-                  <div className="w-14 h-14 bg-primary-50 rounded-xl flex items-center justify-center mb-4">
+                  <div className="w-14 h-14 bg-primary-50 dark:bg-primary-900/20 rounded-xl flex items-center justify-center mb-4">
                     <value.icon className="w-7 h-7 text-primary-600" />
                   </div>
-                  <h3 className="text-xl font-semibold text-gray-900 mb-2">{value.title}</h3>
-                  <p className="text-gray-600">{value.description}</p>
+                  <h3 className="text-xl font-semibold text-gray-900 dark:text-gray-100 mb-2">{value.title}</h3>
+                  <p className="text-gray-600 dark:text-gray-400">{value.description}</p>
                 </motion.div>
               ))}
             </div>
@@ -205,7 +205,7 @@ export default function AboutPage() {
         </section>
 
         {/* Our Principles */}
-        <section className="py-16 bg-white">
+        <section className="py-16 bg-white dark:bg-dark-900">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <motion.div 
               initial={{ opacity: 0, y: 20 }} 
@@ -213,8 +213,8 @@ export default function AboutPage() {
               viewport={{ once: true }}
               className="text-center mb-12"
             >
-              <h2 className="text-4xl font-bold text-gray-900 mb-4">Our Principles</h2>
-              <p className="text-xl text-gray-600 max-w-2xl mx-auto">The guiding principles that drive our decisions and actions.</p>
+              <h2 className="text-4xl font-bold text-gray-900 dark:text-gray-100 mb-4">Our Principles</h2>
+              <p className="text-xl text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">The guiding principles that drive our decisions and actions.</p>
             </motion.div>
 
             <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
@@ -230,8 +230,8 @@ export default function AboutPage() {
                   <div className="w-16 h-16 bg-primary-600 rounded-full flex items-center justify-center mx-auto mb-4">
                     <principle.icon className="w-8 h-8 text-white" />
                   </div>
-                  <h3 className="text-xl font-semibold text-gray-900 mb-2">{principle.title}</h3>
-                  <p className="text-gray-600">{principle.description}</p>
+                  <h3 className="text-xl font-semibold text-gray-900 dark:text-gray-100 mb-2">{principle.title}</h3>
+                  <p className="text-gray-600 dark:text-gray-400">{principle.description}</p>
                 </motion.div>
               ))}
             </div>
@@ -239,7 +239,7 @@ export default function AboutPage() {
         </section>
 
         {/* Our Team */}
-        <section className="py-16 bg-gray-50">
+        <section className="py-16 bg-gray-50 dark:bg-dark-950">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <motion.div 
               initial={{ opacity: 0, y: 20 }} 
@@ -247,8 +247,8 @@ export default function AboutPage() {
               viewport={{ once: true }}
               className="text-center mb-12"
             >
-              <h2 className="text-4xl font-bold text-gray-900 mb-4">Our Team</h2>
-              <p className="text-xl text-gray-600 max-w-2xl mx-auto">Meet the talented people behind our success.</p>
+              <h2 className="text-4xl font-bold text-gray-900 dark:text-gray-100 mb-4">Our Team</h2>
+              <p className="text-xl text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">Meet the talented people behind our success.</p>
             </motion.div>
 
             <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-8">
@@ -259,9 +259,9 @@ export default function AboutPage() {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ delay: index * 0.1 }}
-                  className="bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-shadow"
+                  className="bg-white dark:bg-dark-900 rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-shadow"
                 >
-                  <div className="aspect-square bg-gray-200">
+                  <div className="aspect-square bg-gray-200 dark:bg-dark-800">
                     <img 
                       src={member.image} 
                       alt={member.name}
@@ -269,7 +269,7 @@ export default function AboutPage() {
                     />
                   </div>
                   <div className="p-4 text-center">
-                    <h3 className="text-lg font-semibold text-gray-900">{member.name}</h3>
+                    <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100">{member.name}</h3>
                     <p className="text-primary-600">{member.role}</p>
                   </div>
                 </motion.div>

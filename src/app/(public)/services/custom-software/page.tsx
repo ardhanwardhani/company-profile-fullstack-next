@@ -126,7 +126,7 @@ export default function CustomSoftwarePage() {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-white flex items-center justify-center">
+      <div className="min-h-screen bg-white dark:bg-dark-900 flex items-center justify-center">
         <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary-700"></div>
       </div>
     );
@@ -137,7 +137,7 @@ export default function CustomSoftwarePage() {
   const address = settings.company?.address || '';
 
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen bg-white dark:bg-dark-900">
       <PublicNavigation companyName={companyName} variant="white" />
 
       <main>
@@ -175,7 +175,7 @@ export default function CustomSoftwarePage() {
         </section>
 
         {/* Overview Section */}
-        <section className="py-20 bg-white">
+        <section className="py-20 bg-white dark:bg-dark-900">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="grid lg:grid-cols-2 gap-16 items-center">
               <motion.div
@@ -187,20 +187,20 @@ export default function CustomSoftwarePage() {
                   <div className="w-12 h-1 bg-primary-700"></div>
                   <span className="text-primary-700 uppercase tracking-widest text-sm font-medium">Overview</span>
                 </div>
-                <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-6">
+                <h2 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-gray-100 mb-6">
                   Software Built for Your Business
                 </h2>
-                <p className="text-lg text-gray-600 mb-6">
+                <p className="text-lg text-gray-600 dark:text-gray-400 mb-6">
                   Every business has unique needs. Off-the-shelf software often fails to address specific requirements, leaving you with workarounds and inefficiencies.
                 </p>
-                <p className="text-gray-600 mb-8">
+                <p className="text-gray-600 dark:text-gray-400 mb-8">
                   Our custom software development services deliver solutions designed from the ground up to fit your exact processes, workflows, and goals. Whether you need a web application, mobile app, or enterprise system, we build software that solves your real business problems.
                 </p>
                 <ul className="space-y-3">
                   {benefits.slice(0, 4).map((benefit, index) => (
                     <li key={index} className="flex items-start gap-3">
                       <CheckCircle className="w-5 h-5 text-primary-700 flex-shrink-0 mt-0.5" />
-                      <span className="text-gray-700">{benefit}</span>
+                      <span className="text-gray-700 dark:text-gray-300">{benefit}</span>
                     </li>
                   ))}
                 </ul>
@@ -211,7 +211,7 @@ export default function CustomSoftwarePage() {
                 viewport={{ once: true }}
                 className="relative"
               >
-                <div className="aspect-square bg-gray-100 rounded-2xl p-8 flex items-center justify-center">
+                <div className="aspect-square bg-gray-100 dark:bg-dark-800 rounded-2xl p-8 flex items-center justify-center">
                   <div className="w-full h-full bg-dark-900 rounded-xl p-6 flex items-center justify-center">
                     <div className="text-center">
                       <Code2 className="w-24 h-24 text-primary-500 mx-auto mb-4" />
@@ -226,7 +226,7 @@ export default function CustomSoftwarePage() {
         </section>
 
         {/* Process Section */}
-        <section className="py-20 bg-gray-50">
+        <section className="py-20 bg-gray-50 dark:bg-dark-950">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -238,8 +238,8 @@ export default function CustomSoftwarePage() {
                 <div className="w-12 h-1 bg-primary-700"></div>
                 <span className="text-primary-700 uppercase tracking-widest text-sm font-medium">Our Process</span>
               </div>
-              <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">How We Work</h2>
-              <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+              <h2 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-gray-100 mb-4">How We Work</h2>
+              <p className="text-xl text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
                 A proven methodology that delivers results.
               </p>
             </motion.div>
@@ -257,8 +257,8 @@ export default function CustomSoftwarePage() {
                   <div className="w-16 h-16 bg-primary-700 text-white rounded-full flex items-center justify-center text-xl font-bold mx-auto mb-4">
                     {item.step}
                   </div>
-                  <h3 className="text-lg font-semibold text-gray-900 mb-2">{item.title}</h3>
-                  <p className="text-gray-600 text-sm">{item.description}</p>
+                  <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-2">{item.title}</h3>
+                  <p className="text-gray-600 dark:text-gray-400 text-sm">{item.description}</p>
                 </motion.div>
               ))}
             </div>
@@ -266,7 +266,7 @@ export default function CustomSoftwarePage() {
         </section>
 
         {/* Features Section */}
-        <section id="features" className="py-20 bg-white">
+        <section id="features" className="py-20 bg-white dark:bg-dark-900">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -278,8 +278,8 @@ export default function CustomSoftwarePage() {
                 <div className="w-12 h-1 bg-primary-700"></div>
                 <span className="text-primary-700 uppercase tracking-widest text-sm font-medium">Capabilities</span>
               </div>
-              <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">What We Build</h2>
-              <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+              <h2 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-gray-100 mb-4">What We Build</h2>
+              <p className="text-xl text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
                 Comprehensive software development services for every need.
               </p>
             </motion.div>
@@ -292,13 +292,13 @@ export default function CustomSoftwarePage() {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ delay: index * 0.1 }}
-                  className="bg-gray-50 p-6 rounded-xl hover:bg-primary-50 transition-colors"
+                  className="bg-gray-50 dark:bg-dark-800 p-6 rounded-xl hover:bg-primary-50 dark:hover:bg-primary-900/20 transition-colors"
                 >
-                  <div className="w-12 h-12 bg-primary-100 rounded-lg flex items-center justify-center mb-4">
+                  <div className="w-12 h-12 bg-primary-100 dark:bg-primary-900/30 rounded-lg flex items-center justify-center mb-4">
                     <feature.icon className="w-6 h-6 text-primary-700" />
                   </div>
-                  <h3 className="text-lg font-semibold text-gray-900 mb-2">{feature.title}</h3>
-                  <p className="text-gray-600 text-sm">{feature.description}</p>
+                  <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-2">{feature.title}</h3>
+                  <p className="text-gray-600 dark:text-gray-400 text-sm">{feature.description}</p>
                 </motion.div>
               ))}
             </div>

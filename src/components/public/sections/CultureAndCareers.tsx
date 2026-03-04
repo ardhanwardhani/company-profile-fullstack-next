@@ -53,13 +53,13 @@ export function CultureAndCareers() {
             viewport={{ once: true }} 
             className="relative"
           >
-            <div className="aspect-square bg-gray-100 border border-gray-200 rounded-lg flex items-center justify-center relative overflow-hidden">
+            <div className="aspect-square bg-gray-100 dark:bg-dark-800 border border-gray-200 dark:border-dark-700 rounded-lg flex items-center justify-center relative overflow-hidden">
               <div className="text-center relative z-10">
                 <div className="w-20 h-20 mx-auto mb-4 bg-primary-700 flex items-center justify-center">
                   <Users className="w-10 h-10 text-white" />
                 </div>
-                <p className="text-gray-900 font-medium text-lg">Ready to make an impact?</p>
-                <p className="text-gray-500 mt-2">Check out our current openings</p>
+                <p className="text-gray-900 dark:text-gray-100 font-medium text-lg">Ready to make an impact?</p>
+                <p className="text-gray-500 dark:text-gray-400 mt-2">Check out our current openings</p>
               </div>
             </div>
           </motion.div>

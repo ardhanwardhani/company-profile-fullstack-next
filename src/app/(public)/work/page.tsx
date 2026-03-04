@@ -45,14 +45,14 @@ export default function WorkPage() {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
+      <div className="min-h-screen bg-gray-50 dark:bg-dark-950 flex items-center justify-center">
         <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary-600"></div>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-gray-50 dark:bg-dark-950">
       <PublicNavigation companyName={companyName} activePage="/work" />
 
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24">
@@ -65,8 +65,8 @@ export default function WorkPage() {
             <div className="w-12 h-1 bg-primary-700"></div>
             <span className="text-primary-700 uppercase tracking-widest text-sm font-medium">Our Work</span>
           </div>
-          <h1 className="text-4xl font-bold text-gray-900 mb-4">Featured Projects</h1>
-          <p className="text-xl text-gray-600 max-w-2xl">
+          <h1 className="text-4xl font-bold text-gray-900 dark:text-gray-100 mb-4">Featured Projects</h1>
+          <p className="text-xl text-gray-600 dark:text-gray-400 max-w-2xl">
             A showcase of our recent work and successful client collaborations.
           </p>
         </motion.div>
@@ -90,7 +90,7 @@ export default function WorkPage() {
                         className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                       />
                     ) : (
-                      <div className="w-full h-full bg-gray-200 flex items-center justify-center">
+                      <div className="w-full h-full bg-gray-200 dark:bg-dark-800 flex items-center justify-center">
                         <span className="text-gray-400">No image</span>
                       </div>
                     )}
@@ -110,17 +110,17 @@ export default function WorkPage() {
                     )}
                   </div>
                   
-                  <h3 className="text-xl font-bold text-gray-900 mb-2 group-hover:text-primary-700 transition-colors">
+                  <h3 className="text-xl font-bold text-gray-900 dark:text-gray-100 mb-2 group-hover:text-primary-700 transition-colors">
                     {project.title}
                   </h3>
-                  <p className="text-gray-600 mb-4 line-clamp-2">{project.description}</p>
+                  <p className="text-gray-600 dark:text-gray-400 mb-4 line-clamp-2">{project.description}</p>
                   
                   {project.technologies && project.technologies.length > 0 && (
                     <div className="flex flex-wrap gap-2">
                       {project.technologies.slice(0, 3).map((tech) => (
                         <span 
                           key={tech}
-                          className="px-2 py-1 bg-gray-100 text-gray-600 text-xs font-medium rounded"
+                          className="px-2 py-1 bg-gray-100 dark:bg-dark-800 text-gray-600 dark:text-gray-400 text-xs font-medium rounded"
                         >
                           {tech}
                         </span>

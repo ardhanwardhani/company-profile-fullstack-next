@@ -38,7 +38,7 @@ export default function JobPage({ params }: JobPageProps) {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-white flex items-center justify-center">
+      <div className="min-h-screen bg-white dark:bg-dark-900 flex items-center justify-center">
         <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary-600"></div>
       </div>
     );
@@ -57,7 +57,7 @@ export default function JobPage({ params }: JobPageProps) {
   const facebookUrl = settings.company?.facebook_url || '';
 
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen bg-white dark:bg-dark-900">
       <PublicNavigation companyName={companyName} activePage="/careers" />
 
       <main className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-24">
@@ -66,7 +66,7 @@ export default function JobPage({ params }: JobPageProps) {
         </Link>
 
         <header className="mb-8">
-          <div className="flex flex-wrap gap-4 text-sm text-gray-500 mb-4">
+          <div className="flex flex-wrap gap-4 text-sm text-gray-500 dark:text-gray-400 mb-4">
             <span>{job.department?.name}</span>
             <span>•</span>
             <span>{job.location?.name}</span>
@@ -85,8 +85,8 @@ export default function JobPage({ params }: JobPageProps) {
               </>
             )}
           </div>
-          <h1 className="text-4xl font-bold mb-4">{job.title}</h1>
-          <p className="text-gray-600">
+          <h1 className="text-4xl font-bold mb-4 dark:text-gray-100">{job.title}</h1>
+          <p className="text-gray-600 dark:text-gray-400">
             Posted {new Date(job.created_at).toLocaleDateString()}
           </p>
         </header>
@@ -94,34 +94,34 @@ export default function JobPage({ params }: JobPageProps) {
         <div className="grid md:grid-cols-3 gap-8">
           <div className="md:col-span-2 space-y-8">
             <section>
-              <h2 className="text-xl font-semibold mb-4">About the Role</h2>
+              <h2 className="text-xl font-semibold mb-4 dark:text-gray-100">About the Role</h2>
               <div
-                className="prose"
+                className="prose dark:prose-invert"
                 dangerouslySetInnerHTML={{ __html: job.description || '<p>Role description</p>' }}
               />
             </section>
 
             <section>
-              <h2 className="text-xl font-semibold mb-4">Responsibilities</h2>
+              <h2 className="text-xl font-semibold mb-4 dark:text-gray-100">Responsibilities</h2>
               <div
-                className="prose"
+                className="prose dark:prose-invert"
                 dangerouslySetInnerHTML={{ __html: job.responsibilities || '<p>Responsibility details will appear here</p>' }}
               />
             </section>
 
             <section>
-              <h2 className="text-xl font-semibold mb-4">Requirements</h2>
+              <h2 className="text-xl font-semibold mb-4 dark:text-gray-100">Requirements</h2>
               <div
-                className="prose"
+                className="prose dark:prose-invert"
                 dangerouslySetInnerHTML={{ __html: job.requirements || '<p>Requirements will appear here</p>' }}
               />
             </section>
 
             {job.benefits && (
               <section>
-                <h2 className="text-xl font-semibold mb-4">Benefits</h2>
+                <h2 className="text-xl font-semibold mb-4 dark:text-gray-100">Benefits</h2>
                 <div
-                  className="prose"
+                  className="prose dark:prose-invert"
                   dangerouslySetInnerHTML={{ __html: job.benefits }}
                 />
               </section>
@@ -129,8 +129,8 @@ export default function JobPage({ params }: JobPageProps) {
           </div>
 
           <aside>
-            <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6 sticky top-24">
-              <h3 className="font-semibold mb-4">Apply for this position</h3>
+            <div className="bg-white dark:bg-dark-800 rounded-lg shadow-sm border border-gray-200 dark:border-dark-700 p-6 sticky top-24">
+              <h3 className="font-semibold mb-4 dark:text-gray-100">Apply for this position</h3>
               <a
                 href={job.apply_url}
                 target={job.apply_url.startsWith('mailto:') ? undefined : '_blank'}
@@ -139,7 +139,7 @@ export default function JobPage({ params }: JobPageProps) {
               >
                 Apply Now
               </a>
-              <p className="text-sm text-gray-500 text-center">
+              <p className="text-sm text-gray-500 dark:text-gray-400 text-center">
                 {job.apply_url.startsWith('mailto:') 
                   ? 'Send your application via email'
                   : 'You will be redirected to apply'}

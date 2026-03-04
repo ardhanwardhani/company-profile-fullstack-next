@@ -46,8 +46,8 @@ async function getJobs(params: SearchParams) {
 
     return {
       jobs: response.data || [],
-      total: parseInt(res.headers.get('X-Total-Count') || '0'),
-      totalPages: parseInt(res.headers.get('X-Total-Pages') || '1'),
+      total: response.pagination?.total || 0,
+      totalPages: response.pagination?.totalPages || 1,
     };
   } catch (error) {
     console.error('Error fetching jobs:', error);
@@ -124,8 +124,8 @@ export default async function JobsPage({ searchParams }: { searchParams: Promise
     <div className="p-4">
       <div className="flex items-center justify-between mb-8">
         <div>
-          <h1 className="text-2xl font-bold text-gray-900">Job Listings</h1>
-          <p className="text-sm text-gray-500">{total} jobs listed</p>
+          <h1 className="text-2xl font-bold text-gray-900 dark:text-gray-100">Job Listings</h1>
+          <p className="text-sm text-gray-500 dark:text-gray-400">{total} jobs listed</p>
         </div>
         <Link href="/dashboard/careers/jobs/new" className="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 transition-colors">
           Add New Job

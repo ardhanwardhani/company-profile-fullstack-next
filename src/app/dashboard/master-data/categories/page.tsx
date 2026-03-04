@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import { getApiUrl } from '@/lib/fetch-utils';
 import CategoryStatusButton from './CategoryStatusButton';
 
 interface SearchParams {
@@ -14,14 +15,15 @@ async function getCategories(params: SearchParams) {
   searchParams.set('page', params.page || '1');
   searchParams.set('limit', '20');
 
-  const res = await fetch(`/api/master-data/categories?${searchParams.toString()}`, { cache: 'no-store' });
+  const res = await fetch(getApiUrl(`/api/master-data/categories?${searchParams.toString()}`), { cache: 'no-store' });
 
   if (!res.ok) return { categories: [], total: 0, totalPages: 1 };
 
+  const json = await res.json();
   return {
-    categories: (await res.json()).data || [],
-    total: parseInt(res.headers.get('X-Total-Count') || '0'),
-    totalPages: parseInt(res.headers.get('X-Total-Pages') || '1'),
+    categories: json.data || [],
+    total: json.pagination?.total || 0,
+    totalPages: json.pagination?.totalPages || 1,
   };
 }
 
@@ -41,8 +43,8 @@ export default async function CategoriesPage({ searchParams }: { searchParams: P
     <div className="p-4">
       <div className="flex items-center justify-between mb-8">
         <div>
-          <h1 className="text-2xl font-bold text-gray-900">Categories</h1>
-          <p className="text-sm text-gray-500 mt-1">{total} categories total</p>
+          <h1 className="text-2xl font-bold text-gray-900 dark:text-gray-100">Categories</h1>
+          <p className="text-sm text-gray-500 mt-1 dark:text-gray-400">{total} categories total</p>
         </div>
         <Link href="/dashboard/master-data/categories/new" className="inline-flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors font-medium text-sm">
           <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">

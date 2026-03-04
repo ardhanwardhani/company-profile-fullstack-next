@@ -60,7 +60,7 @@ export default function NewDepartmentPage() {
         <div className="card">
           <div className="space-y-4">
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">
+              <label className="block text-sm font-medium text-gray-700 dark:text-gray-100 mb-1">
                 Name *
               </label>
               <input

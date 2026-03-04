@@ -63,7 +63,7 @@ export default function NewAuthorPage() {
         <div className="card">
           <div className="space-y-4">
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">
+              <label className="block text-sm font-medium text-gray-700 dark:text-gray-100 mb-1">
                 Name *
               </label>
               <input
@@ -77,7 +77,7 @@ export default function NewAuthorPage() {
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">
+              <label className="block text-sm font-medium text-gray-700 dark:text-gray-100 mb-1">
                 Role
               </label>
               <input
@@ -90,7 +90,7 @@ export default function NewAuthorPage() {
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">
+              <label className="block text-sm font-medium text-gray-700 dark:text-gray-100 mb-1">
                 Bio
               </label>
               <textarea
@@ -103,7 +103,7 @@ export default function NewAuthorPage() {
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">
+              <label className="block text-sm font-medium text-gray-700 dark:text-gray-100 mb-1">
                 Avatar Image ID
               </label>
               <input

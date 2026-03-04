@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import { getApiUrl } from '@/lib/fetch-utils';
 import TagStatusButton from './TagStatusButton';
 
 interface SearchParams {
@@ -14,14 +15,15 @@ async function getTags(params: SearchParams) {
   searchParams.set('page', params.page || '1');
   searchParams.set('limit', '20');
 
-  const res = await fetch(`/api/master-data/tags?${searchParams.toString()}`, { cache: 'no-store' });
+  const res = await fetch(getApiUrl(`/api/master-data/tags?${searchParams.toString()}`), { cache: 'no-store' });
 
   if (!res.ok) return { tags: [], total: 0, totalPages: 1 };
 
+  const json = await res.json();
   return {
-    tags: (await res.json()).data || [],
-    total: parseInt(res.headers.get('X-Total-Count') || '0'),
-    totalPages: parseInt(res.headers.get('X-Total-Pages') || '1'),
+    tags: json.data || [],
+    total: json.pagination?.total || 0,
+    totalPages: json.pagination?.totalPages || 1,
   };
 }
 

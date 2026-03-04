@@ -17,7 +17,7 @@ export function ClientLogos() {
   const duplicatedClients = [...clients, ...clients, ...clients];
 
   return (
-    <section className="py-16 bg-gray-50 border-y border-gray-200 overflow-hidden">
+    <section className="py-16 bg-gray-50 dark:bg-dark-950 border-y border-gray-200 dark:border-dark-700 overflow-hidden">
       <motion.div 
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
@@ -25,12 +25,12 @@ export function ClientLogos() {
         className="text-center mb-12 px-4"
       >
         <p className="text-primary-700 uppercase tracking-widest text-sm font-medium mb-2">Trusted By</p>
-        <h2 className="text-2xl font-bold text-gray-900">Leading Companies Choose Us</h2>
+        <h2 className="text-2xl font-bold text-gray-900 dark:text-gray-100">Leading Companies Choose Us</h2>
       </motion.div>
 
       <div className="relative">
-        <div className="absolute left-0 top-0 bottom-0 w-32 bg-gradient-to-r from-gray-50 to-transparent z-10 pointer-events-none" />
-        <div className="absolute right-0 top-0 bottom-0 w-32 bg-gradient-to-l from-gray-50 to-transparent z-10 pointer-events-none" />
+        <div className="absolute left-0 top-0 bottom-0 w-32 bg-gradient-to-r from-gray-50 dark:from-dark-950 to-transparent z-10 pointer-events-none" />
+        <div className="absolute right-0 top-0 bottom-0 w-32 bg-gradient-to-l from-gray-50 dark:from-dark-950 to-transparent z-10 pointer-events-none" />
         
         <div className="flex">
           <motion.div
@@ -52,12 +52,12 @@ export function ClientLogos() {
                 key={`${client.name}-${index}`}
                 className="flex-shrink-0 flex flex-col items-center"
               >
-                <div className="w-24 h-24 rounded-lg bg-white border border-gray-200 flex items-center justify-center hover:border-primary-700 hover:shadow-lg transition-all group">
-                  <span className="text-2xl font-bold text-gray-400 group-hover:text-primary-700 transition-colors">
+                <div className="w-24 h-24 rounded-lg bg-white dark:bg-dark-800 border border-gray-200 dark:border-dark-700 flex items-center justify-center hover:border-primary-700 hover:shadow-lg transition-all group">
+                  <span className="text-2xl font-bold text-gray-400 dark:text-gray-500 group-hover:text-primary-700 transition-colors">
                     {client.logo}
                   </span>
                 </div>
-                <span className="text-sm text-gray-500 font-medium mt-2 whitespace-nowrap">{client.name}</span>
+                <span className="text-sm text-gray-500 dark:text-gray-400 font-medium mt-2 whitespace-nowrap">{client.name}</span>
               </div>
             ))}
           </motion.div>

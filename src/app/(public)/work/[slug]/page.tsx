@@ -60,7 +60,7 @@ export default function ProjectPage({ params }: ProjectPageProps) {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-white flex items-center justify-center">
+      <div className="min-h-screen bg-white dark:bg-dark-900 flex items-center justify-center">
         <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary-600"></div>
       </div>
     );
@@ -71,7 +71,7 @@ export default function ProjectPage({ params }: ProjectPageProps) {
   }
 
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen bg-white dark:bg-dark-900">
       <PublicNavigation companyName={companyName} activePage="/work" />
 
       <main className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-24">
@@ -86,12 +86,12 @@ export default function ProjectPage({ params }: ProjectPageProps) {
                 {project.category}
               </span>
             )}
-            <h1 className="text-4xl font-bold mb-4">{project.title}</h1>
+            <h1 className="text-4xl font-bold mb-4 dark:text-gray-100">{project.title}</h1>
             
-            <div className="flex flex-wrap items-center gap-6 text-sm text-gray-500">
+            <div className="flex flex-wrap items-center gap-6 text-sm text-gray-500 dark:text-gray-400">
               {project.client_name && (
                 <div className="flex items-center gap-2">
-                  <span className="font-medium text-gray-900">Client:</span>
+                  <span className="font-medium text-gray-900 dark:text-gray-100">Client:</span>
                   <span>{project.client_name}</span>
                 </div>
               )}
@@ -103,7 +103,7 @@ export default function ProjectPage({ params }: ProjectPageProps) {
           </header>
 
           {project.featured_image && (
-            <div className="aspect-video bg-gray-200 rounded-xl mb-8 overflow-hidden">
+            <div className="aspect-video bg-gray-200 dark:bg-dark-800 rounded-xl mb-8 overflow-hidden">
               <img
                 src={project.featured_image}
                 alt={project.title}
@@ -114,12 +114,12 @@ export default function ProjectPage({ params }: ProjectPageProps) {
 
           {project.technologies && project.technologies.length > 0 && (
             <div className="mb-8">
-              <h3 className="text-sm font-medium text-gray-500 mb-3">Technologies</h3>
+              <h3 className="text-sm font-medium text-gray-500 dark:text-gray-400 mb-3">Technologies</h3>
               <div className="flex flex-wrap gap-2">
                 {project.technologies.map((tech) => (
                   <span 
                     key={tech}
-                    className="px-3 py-1 bg-gray-100 text-gray-700 text-sm font-medium rounded-full"
+                    className="px-3 py-1 bg-gray-100 dark:bg-dark-800 text-gray-700 dark:text-gray-300 text-sm font-medium rounded-full"
                   >
                     {tech}
                   </span>
@@ -130,13 +130,13 @@ export default function ProjectPage({ params }: ProjectPageProps) {
 
           {project.description && (
             <div className="mb-8">
-              <h3 className="text-lg font-semibold mb-3">Overview</h3>
-              <p className="text-gray-600">{project.description}</p>
+              <h3 className="text-lg font-semibold mb-3 dark:text-gray-100">Overview</h3>
+              <p className="text-gray-600 dark:text-gray-400">{project.description}</p>
             </div>
           )}
 
           {project.content && (
-            <div className="prose prose-lg max-w-none mb-8" dangerouslySetInnerHTML={{ __html: project.content }} />
+            <div className="prose prose-lg dark:prose-invert max-w-none mb-8" dangerouslySetInnerHTML={{ __html: project.content }} />
           )}
 
           {(project.live_url || project.case_study_url) && (
@@ -156,7 +156,7 @@ export default function ProjectPage({ params }: ProjectPageProps) {
                   href={project.case_study_url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 px-6 py-3 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors font-medium"
+                  className="inline-flex items-center gap-2 px-6 py-3 border border-gray-300 dark:border-dark-600 text-gray-700 dark:text-gray-300 rounded-lg hover:bg-gray-50 dark:hover:bg-dark-800 transition-colors font-medium"
                 >
                   Read Case Study <ExternalLink size={16} />
                 </a>

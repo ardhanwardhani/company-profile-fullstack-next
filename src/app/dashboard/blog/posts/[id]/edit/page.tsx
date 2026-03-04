@@ -251,7 +251,7 @@ export default function EditBlogPostPage({
         <div className="card">
           <div className="space-y-4">
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">
+              <label className="block text-sm font-medium text-gray-700 dark:text-gray-100 mb-1">
                 Title *
               </label>
               <input
@@ -265,7 +265,7 @@ export default function EditBlogPostPage({
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">
+              <label className="block text-sm font-medium text-gray-700 dark:text-gray-100 mb-1">
                 Slug *
               </label>
               <input
@@ -280,7 +280,7 @@ export default function EditBlogPostPage({
 
             <div className="grid grid-cols-2 gap-4">
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">
+                <label className="block text-sm font-medium text-gray-700 dark:text-gray-100 mb-1">
                   Category
                 </label>
                 <select
@@ -296,7 +296,7 @@ export default function EditBlogPostPage({
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">
+                <label className="block text-sm font-medium text-gray-700 dark:text-gray-100 mb-1">
                   Status
                 </label>
                 <select
@@ -313,7 +313,7 @@ export default function EditBlogPostPage({
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">
+              <label className="block text-sm font-medium text-gray-700 dark:text-gray-100 mb-1">
                 Featured Image
               </label>
               <input
@@ -330,7 +330,7 @@ export default function EditBlogPostPage({
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">
+              <label className="block text-sm font-medium text-gray-700 dark:text-gray-100 mb-1">
                 Excerpt
               </label>
               <textarea

@@ -165,18 +165,18 @@ export default function NewBlogPostPage() {
         <div className="card">
           <div className="space-y-4">
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Title *</label>
+              <label className="block text-sm font-medium text-gray-700 dark:text-gray-100 mb-1">Title *</label>
               <input type="text" value={formData.title} onChange={handleTitleChange} className="input" placeholder="Enter post title" required />
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Slug *</label>
+              <label className="block text-sm font-medium text-gray-700 dark:text-gray-100 mb-1">Slug *</label>
               <input type="text" value={formData.slug} onChange={(e) => setFormData((prev) => ({ ...prev, slug: e.target.value }))} className="input" placeholder="post-url-slug" required />
             </div>
 
             <div className="grid grid-cols-2 gap-4">
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">Category</label>
+                <label className="block text-sm font-medium text-gray-700 dark:text-gray-100 mb-1">Category</label>
                 <select value={formData.category_id} onChange={(e) => setFormData((prev) => ({ ...prev, category_id: e.target.value }))} className="input">
                   <option value="">Select category</option>
                   {categories.map((cat) => (
@@ -188,7 +188,7 @@ export default function NewBlogPostPage() {
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">Status</label>
+                <label className="block text-sm font-medium text-gray-700 dark:text-gray-100 mb-1">Status</label>
                 <select value={formData.status} onChange={(e) => setFormData((prev) => ({ ...prev, status: e.target.value }))} className="input">
                   <option value="draft">Draft</option>
                   <option value="review">Review</option>
@@ -199,7 +199,7 @@ export default function NewBlogPostPage() {
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Featured Image</label>
+              <label className="block text-sm font-medium text-gray-700 dark:text-gray-100 mb-1">Featured Image</label>
               <input type="file" accept="image/*" onChange={handleImageUpload} className="input" />
               {formData.featured_image && (
                 <div className="mt-2">
@@ -209,7 +209,7 @@ export default function NewBlogPostPage() {
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Excerpt</label>
+              <label className="block text-sm font-medium text-gray-700 dark:text-gray-100 mb-1">Excerpt</label>
               <textarea value={formData.excerpt} onChange={(e) => setFormData((prev) => ({ ...prev, excerpt: e.target.value }))} className="input min-h-[80px]" placeholder="Brief description of the post" />
             </div>
           </div>
@@ -219,7 +219,7 @@ export default function NewBlogPostPage() {
           <label className="block text-sm font-medium text-gray-700 mb-2">Content *</label>
 
           <div className="border border-gray-200 rounded-lg overflow-hidden h-[500px]">
-            <div className="bg-gray-50 border-b border-gray-200 p-2 flex gap-1 flex-wrap">
+            <div className="bg-gray-50 dark:bg-gray-800 border-b border-gray-200 p-2 flex gap-1 flex-wrap">
               <button type="button" onClick={() => editor?.chain().focus().toggleBold().run()} className="p-2 hover:bg-gray-200 rounded editor-btn" title="Bold">
                 <strong>B</strong>
               </button>

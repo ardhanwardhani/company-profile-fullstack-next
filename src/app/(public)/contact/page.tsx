@@ -120,7 +120,7 @@ export default function ContactPage() {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-white flex items-center justify-center">
+      <div className="min-h-screen bg-white dark:bg-dark-900 flex items-center justify-center">
         <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary-700"></div>
       </div>
     );
@@ -136,7 +136,7 @@ export default function ContactPage() {
   const instagramUrl = settings.company?.instagram_url || '';
 
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen bg-white dark:bg-dark-900">
       <PublicNavigation companyName={companyName} variant="transparent" />
 
       <main>
@@ -155,7 +155,7 @@ export default function ContactPage() {
           </div>
         </section>
 
-        <SectionWrapper className="bg-white">
+        <SectionWrapper className="bg-white dark:bg-dark-900">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="grid lg:grid-cols-3 gap-12 lg:gap-16">
               <motion.div
@@ -165,67 +165,67 @@ export default function ContactPage() {
                 className="lg:col-span-1"
               >
                 <div className="mb-8">
-                  <h2 className="text-2xl font-bold text-gray-900 mb-4">Contact Information</h2>
-                  <p className="text-gray-600">
+                  <h2 className="text-2xl font-bold text-gray-900 dark:text-gray-100 mb-4">Contact Information</h2>
+                  <p className="text-gray-600 dark:text-gray-400">
                     Reach out to us through any of these channels. We're here to help!
                   </p>
                 </div>
 
                 <div className="space-y-6">
                   <div className="flex items-start gap-4">
-                    <div className="w-12 h-12 bg-primary-50 rounded-lg flex items-center justify-center flex-shrink-0">
+                    <div className="w-12 h-12 bg-primary-50 dark:bg-primary-900/20 rounded-lg flex items-center justify-center flex-shrink-0">
                       <Mail className="w-5 h-5 text-primary-700" />
                     </div>
                     <div>
-                      <p className="font-medium text-gray-900">Email</p>
-                      <a href={`mailto:${email}`} className="text-gray-600 hover:text-primary-700">
+                      <p className="font-medium text-gray-900 dark:text-gray-100">Email</p>
+                      <a href={`mailto:${email}`} className="text-gray-600 dark:text-gray-400 hover:text-primary-700">
                         {email}
                       </a>
                     </div>
                   </div>
 
                   <div className="flex items-start gap-4">
-                    <div className="w-12 h-12 bg-primary-50 rounded-lg flex items-center justify-center flex-shrink-0">
+                    <div className="w-12 h-12 bg-primary-50 dark:bg-primary-900/20 rounded-lg flex items-center justify-center flex-shrink-0">
                       <Phone className="w-5 h-5 text-primary-700" />
                     </div>
                     <div>
-                      <p className="font-medium text-gray-900">Phone</p>
-                      <a href={`tel:${phone}`} className="text-gray-600 hover:text-primary-700">
+                      <p className="font-medium text-gray-900 dark:text-gray-100">Phone</p>
+                      <a href={`tel:${phone}`} className="text-gray-600 dark:text-gray-400 hover:text-primary-700">
                         {phone}
                       </a>
                     </div>
                   </div>
 
                   <div className="flex items-start gap-4">
-                    <div className="w-12 h-12 bg-primary-50 rounded-lg flex items-center justify-center flex-shrink-0">
+                    <div className="w-12 h-12 bg-primary-50 dark:bg-primary-900/20 rounded-lg flex items-center justify-center flex-shrink-0">
                       <MapPin className="w-5 h-5 text-primary-700" />
                     </div>
                     <div>
-                      <p className="font-medium text-gray-900">Address</p>
-                      <p className="text-gray-600 whitespace-pre-line">{address}</p>
+                      <p className="font-medium text-gray-900 dark:text-gray-100">Address</p>
+                      <p className="text-gray-600 dark:text-gray-400 whitespace-pre-line">{address}</p>
                     </div>
                   </div>
 
                   <div className="flex items-start gap-4">
-                    <div className="w-12 h-12 bg-primary-50 rounded-lg flex items-center justify-center flex-shrink-0">
+                    <div className="w-12 h-12 bg-primary-50 dark:bg-primary-900/20 rounded-lg flex items-center justify-center flex-shrink-0">
                       <Clock className="w-5 h-5 text-primary-700" />
                     </div>
                     <div>
-                      <p className="font-medium text-gray-900">Office Hours</p>
-                      <p className="text-gray-600">Mon - Fri: 9:00 AM - 6:00 PM</p>
+                      <p className="font-medium text-gray-900 dark:text-gray-100">Office Hours</p>
+                      <p className="text-gray-600 dark:text-gray-400">Mon - Fri: 9:00 AM - 6:00 PM</p>
                     </div>
                   </div>
                 </div>
 
-                <div className="mt-8 pt-8 border-t border-gray-200">
-                  <p className="font-medium text-gray-900 mb-4">Follow Us</p>
+                <div className="mt-8 pt-8 border-t border-gray-200 dark:border-dark-700">
+                  <p className="font-medium text-gray-900 dark:text-gray-100 mb-4">Follow Us</p>
                   <div className="flex gap-3">
                     {linkedinUrl && (
                       <a
                         href={linkedinUrl}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="w-10 h-10 bg-gray-100 flex items-center justify-center rounded-lg hover:bg-primary-700 hover:text-white transition-colors"
+                        className="w-10 h-10 bg-gray-100 dark:bg-dark-800 flex items-center justify-center rounded-lg hover:bg-primary-700 hover:text-white transition-colors"
                       >
                         <Linkedin className="w-5 h-5" />
                       </a>
@@ -235,7 +235,7 @@ export default function ContactPage() {
                         href={twitterUrl}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="w-10 h-10 bg-gray-100 flex items-center justify-center rounded-lg hover:bg-primary-700 hover:text-white transition-colors"
+                        className="w-10 h-10 bg-gray-100 dark:bg-dark-800 flex items-center justify-center rounded-lg hover:bg-primary-700 hover:text-white transition-colors"
                       >
                         <Twitter className="w-5 h-5" />
                       </a>
@@ -245,7 +245,7 @@ export default function ContactPage() {
                         href={facebookUrl}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="w-10 h-10 bg-gray-100 flex items-center justify-center rounded-lg hover:bg-primary-700 hover:text-white transition-colors"
+                        className="w-10 h-10 bg-gray-100 dark:bg-dark-800 flex items-center justify-center rounded-lg hover:bg-primary-700 hover:text-white transition-colors"
                       >
                         <Facebook className="w-5 h-5" />
                       </a>
@@ -255,7 +255,7 @@ export default function ContactPage() {
                         href={instagramUrl}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="w-10 h-10 bg-gray-100 flex items-center justify-center rounded-lg hover:bg-primary-700 hover:text-white transition-colors"
+                        className="w-10 h-10 bg-gray-100 dark:bg-dark-800 flex items-center justify-center rounded-lg hover:bg-primary-700 hover:text-white transition-colors"
                       >
                         <Instagram className="w-5 h-5" />
                       </a>
@@ -270,8 +270,8 @@ export default function ContactPage() {
                 viewport={{ once: true }}
                 className="lg:col-span-2"
               >
-                <div className="bg-gray-50 rounded-2xl p-8 lg:p-10">
-                  <h2 className="text-2xl font-bold text-gray-900 mb-6">Send Us a Message</h2>
+                <div className="bg-gray-50 dark:bg-dark-800 rounded-2xl p-8 lg:p-10">
+                  <h2 className="text-2xl font-bold text-gray-900 dark:text-gray-100 mb-6">Send Us a Message</h2>
 
                   {isSubmitted ? (
                     <motion.div
@@ -282,8 +282,8 @@ export default function ContactPage() {
                       <div className="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-6">
                         <CheckCircle className="w-10 h-10 text-green-600" />
                       </div>
-                      <h3 className="text-2xl font-bold text-gray-900 mb-2">Message Sent!</h3>
-                      <p className="text-gray-600 mb-6">
+                      <h3 className="text-2xl font-bold text-gray-900 dark:text-gray-100 mb-2">Message Sent!</h3>
+                      <p className="text-gray-600 dark:text-gray-400 mb-6">
                         Thank you for reaching out. We'll get back to you within 24 hours.
                       </p>
                       <Button onClick={() => setIsSubmitted(false)} variant="outline">
@@ -300,7 +300,7 @@ export default function ContactPage() {
 
                       <div className="grid md:grid-cols-2 gap-6">
                         <div>
-                          <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-2">
+                          <label htmlFor="name" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                             Full Name *
                           </label>
                           <input
@@ -310,13 +310,13 @@ export default function ContactPage() {
                             value={formData.name}
                             onChange={handleChange}
                             required
-                            className="w-full px-4 py-3 bg-white border border-gray-300 rounded-lg text-gray-900 focus:outline-none focus:border-primary-700 focus:ring-1 focus:ring-primary-700 transition-colors"
+                            className="w-full px-4 py-3 bg-white dark:bg-dark-700 border border-gray-300 dark:border-dark-600 rounded-lg text-gray-900 dark:text-gray-100 focus:outline-none focus:border-primary-700 focus:ring-1 focus:ring-primary-700 transition-colors"
                             placeholder="John Doe"
                           />
                         </div>
 
                         <div>
-                          <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-2">
+                          <label htmlFor="email" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                             Email Address *
                           </label>
                           <input
@@ -326,7 +326,7 @@ export default function ContactPage() {
                             value={formData.email}
                             onChange={handleChange}
                             required
-                            className="w-full px-4 py-3 bg-white border border-gray-300 rounded-lg text-gray-900 focus:outline-none focus:border-primary-700 focus:ring-1 focus:ring-primary-700 transition-colors"
+                            className="w-full px-4 py-3 bg-white dark:bg-dark-700 border border-gray-300 dark:border-dark-600 rounded-lg text-gray-900 dark:text-gray-100 focus:outline-none focus:border-primary-700 focus:ring-1 focus:ring-primary-700 transition-colors"
                             placeholder="john@company.com"
                           />
                         </div>
@@ -334,7 +334,7 @@ export default function ContactPage() {
 
                       <div className="grid md:grid-cols-2 gap-6">
                         <div>
-                          <label htmlFor="phone" className="block text-sm font-medium text-gray-700 mb-2">
+                          <label htmlFor="phone" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                             Phone Number
                           </label>
                           <input
@@ -343,13 +343,13 @@ export default function ContactPage() {
                             name="phone"
                             value={formData.phone}
                             onChange={handleChange}
-                            className="w-full px-4 py-3 bg-white border border-gray-300 rounded-lg text-gray-900 focus:outline-none focus:border-primary-700 focus:ring-1 focus:ring-primary-700 transition-colors"
+                            className="w-full px-4 py-3 bg-white dark:bg-dark-700 border border-gray-300 dark:border-dark-600 rounded-lg text-gray-900 dark:text-gray-100 focus:outline-none focus:border-primary-700 focus:ring-1 focus:ring-primary-700 transition-colors"
                             placeholder="+1 (555) 000-0000"
                           />
                         </div>
 
                         <div>
-                          <label htmlFor="company" className="block text-sm font-medium text-gray-700 mb-2">
+                          <label htmlFor="company" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                             Company
                           </label>
                           <input
@@ -358,7 +358,7 @@ export default function ContactPage() {
                             name="company"
                             value={formData.company}
                             onChange={handleChange}
-                            className="w-full px-4 py-3 bg-white border border-gray-300 rounded-lg text-gray-900 focus:outline-none focus:border-primary-700 focus:ring-1 focus:ring-primary-700 transition-colors"
+                            className="w-full px-4 py-3 bg-white dark:bg-dark-700 border border-gray-300 dark:border-dark-600 rounded-lg text-gray-900 dark:text-gray-100 focus:outline-none focus:border-primary-700 focus:ring-1 focus:ring-primary-700 transition-colors"
                             placeholder="Your Company"
                           />
                         </div>
@@ -366,7 +366,7 @@ export default function ContactPage() {
 
                       <div className="grid md:grid-cols-2 gap-6">
                         <div>
-                          <label htmlFor="project_type" className="block text-sm font-medium text-gray-700 mb-2">
+                          <label htmlFor="project_type" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                             Project Type
                           </label>
                           <select
@@ -374,7 +374,7 @@ export default function ContactPage() {
                             name="project_type"
                             value={formData.project_type}
                             onChange={handleChange}
-                            className="w-full px-4 py-3 bg-white border border-gray-300 rounded-lg text-gray-900 focus:outline-none focus:border-primary-700 focus:ring-1 focus:ring-primary-700 transition-colors"
+                            className="w-full px-4 py-3 bg-white dark:bg-dark-700 border border-gray-300 dark:border-dark-600 rounded-lg text-gray-900 dark:text-gray-100 focus:outline-none focus:border-primary-700 focus:ring-1 focus:ring-primary-700 transition-colors"
                           >
                             <option value="">Select project type</option>
                             <option value="website">Website Development</option>
@@ -387,7 +387,7 @@ export default function ContactPage() {
                         </div>
 
                         <div>
-                          <label htmlFor="subject" className="block text-sm font-medium text-gray-700 mb-2">
+                          <label htmlFor="subject" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                             Subject *
                           </label>
                           <input
@@ -397,14 +397,14 @@ export default function ContactPage() {
                             value={formData.subject}
                             onChange={handleChange}
                             required
-                            className="w-full px-4 py-3 bg-white border border-gray-300 rounded-lg text-gray-900 focus:outline-none focus:border-primary-700 focus:ring-1 focus:ring-primary-700 transition-colors"
+                            className="w-full px-4 py-3 bg-white dark:bg-dark-700 border border-gray-300 dark:border-dark-600 rounded-lg text-gray-900 dark:text-gray-100 focus:outline-none focus:border-primary-700 focus:ring-1 focus:ring-primary-700 transition-colors"
                             placeholder="Project Inquiry"
                           />
                         </div>
                       </div>
 
                       <div>
-                        <label htmlFor="message" className="block text-sm font-medium text-gray-700 mb-2">
+                        <label htmlFor="message" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                           Message *
                         </label>
                         <textarea
@@ -414,7 +414,7 @@ export default function ContactPage() {
                           onChange={handleChange}
                           required
                           rows={5}
-                          className="w-full px-4 py-3 bg-white border border-gray-300 rounded-lg text-gray-900 focus:outline-none focus:border-primary-700 focus:ring-1 focus:ring-primary-700 transition-colors resize-none"
+                          className="w-full px-4 py-3 bg-white dark:bg-dark-700 border border-gray-300 dark:border-dark-600 rounded-lg text-gray-900 dark:text-gray-100 focus:outline-none focus:border-primary-700 focus:ring-1 focus:ring-primary-700 transition-colors resize-none"
                           placeholder="Tell us about your project..."
                         />
                       </div>

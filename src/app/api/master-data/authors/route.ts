@@ -47,15 +47,16 @@ export async function GET(req: NextRequest) {
     const query = `SELECT * FROM blog_authors WHERE ${whereClause} ORDER BY name ASC LIMIT $${paramIndex++} OFFSET $${paramIndex}`;
     const result = await pool.query(query, [...params, limit, offset]);
 
-    return NextResponse.json(
-      { success: true, data: result.rows },
-      {
-        headers: {
-          'X-Total-Count': total.toString(),
-          'X-Total-Pages': Math.ceil(total / limit).toString(),
-        },
+    return NextResponse.json({
+      success: true,
+      data: result.rows,
+      pagination: {
+        page,
+        limit,
+        total,
+        totalPages: Math.ceil(total / limit),
       },
-    );
+    });
   } catch (error) {
     console.error('Error fetching authors:', error);
     return NextResponse.json({ success: false, error: 'Failed to fetch authors' }, { status: 500 });

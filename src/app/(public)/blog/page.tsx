@@ -32,7 +32,7 @@ export default function BlogPage() {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
+      <div className="min-h-screen bg-gray-50 dark:bg-dark-950 flex items-center justify-center">
         <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary-600"></div>
       </div>
     );
@@ -47,12 +47,12 @@ export default function BlogPage() {
   const facebookUrl = settings.company?.facebook_url || '';
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-gray-50 dark:bg-dark-950">
       <PublicNavigation companyName={companyName} activePage="/blog" />
 
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24">
-        <h1 className="text-4xl font-bold mb-4">Our Blog</h1>
-        <p className="text-xl text-gray-600 mb-8">Insights, updates, and stories from our team.</p>
+        <h1 className="text-4xl font-bold mb-4 dark:text-gray-100">Our Blog</h1>
+        <p className="text-xl text-gray-600 dark:text-gray-400 mb-8">Insights, updates, and stories from our team.</p>
 
         {categories.length > 0 && (
           <div className="flex flex-wrap gap-2 mb-8">
@@ -61,7 +61,7 @@ export default function BlogPage() {
               className={`px-4 py-2 rounded-full text-sm font-medium transition-colors ${
                 selectedCategory === null
                   ? 'bg-primary-600 text-white'
-                  : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
+                  : 'bg-gray-200 dark:bg-dark-700 text-gray-700 dark:text-gray-300 hover:bg-gray-300 dark:hover:bg-dark-600'
               }`}
             >
               All
@@ -73,7 +73,7 @@ export default function BlogPage() {
                 className={`px-4 py-2 rounded-full text-sm font-medium transition-colors ${
                   selectedCategory === cat.id
                     ? 'bg-primary-600 text-white'
-                    : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
+                    : 'bg-gray-200 dark:bg-dark-700 text-gray-700 dark:text-gray-300 hover:bg-gray-300 dark:hover:bg-dark-600'
                 }`}
               >
                 {cat.name}
@@ -84,26 +84,26 @@ export default function BlogPage() {
 
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
           {filteredPosts.map((post: any) => (
-            <Link href={`/blog/${post.slug}`} key={post.id} className="bg-white rounded-lg shadow-sm hover:shadow-lg transition-shadow overflow-hidden">
+            <Link href={`/blog/${post.slug}`} key={post.id} className="bg-white dark:bg-dark-900 rounded-lg shadow-sm hover:shadow-lg transition-shadow overflow-hidden">
               {post.featured_image && (
                 <div 
-                  className="aspect-video bg-gray-200 rounded-t-lg bg-cover bg-center" 
+                  className="aspect-video bg-gray-200 dark:bg-dark-800 rounded-t-lg bg-cover bg-center" 
                   style={{ backgroundImage: `url(${post.featured_image})` }}
                 />
               )}
               <div className="p-6">
-                <div className="flex items-center gap-2 text-sm text-gray-500 mb-2">
+                <div className="flex items-center gap-2 text-sm text-gray-500 dark:text-gray-400 mb-2">
                   <span className="text-primary-600">{post.category?.name}</span>
                   <span>•</span>
                   <span>{new Date(post.created_at).toLocaleDateString()}</span>
                 </div>
-                <h2 className="text-xl font-semibold mb-2">{post.title}</h2>
-                <p className="text-gray-600 mb-4 line-clamp-3">{post.excerpt}</p>
+                <h2 className="text-xl font-semibold mb-2 dark:text-gray-100">{post.title}</h2>
+                <p className="text-gray-600 dark:text-gray-400 mb-4 line-clamp-3">{post.excerpt}</p>
                 <div className="flex items-center">
                   <div className="w-8 h-8 bg-primary-100 rounded-full flex items-center justify-center">
                     <span className="text-primary-600 text-sm font-medium">{post.author?.name?.charAt(0) || 'A'}</span>
                   </div>
-                  <span className="ml-2 text-sm text-gray-600">{post.author?.name}</span>
+                  <span className="ml-2 text-sm text-gray-600 dark:text-gray-400">{post.author?.name}</span>
                 </div>
               </div>
             </Link>

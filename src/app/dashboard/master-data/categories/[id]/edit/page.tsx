@@ -133,17 +133,17 @@ export default function EditCategoryPage({ params }: { params: Promise<{ id: str
         <div className="card">
           <div className="space-y-4">
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Name *</label>
+              <label className="block text-sm font-medium text-gray-700 dark:text-gray-100 mb-1">Name *</label>
               <input type="text" value={formData.name} onChange={handleNameChange} className="input" placeholder="Enter category name" required />
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Slug *</label>
+              <label className="block text-sm font-medium text-gray-700 dark:text-gray-100 mb-1">Slug *</label>
               <input type="text" value={formData.slug} onChange={(e) => setFormData(p => ({ ...p, slug: e.target.value }))} className="input font-mono" placeholder="category-url-slug" required />
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Description</label>
+              <label className="block text-sm font-medium text-gray-700 dark:text-gray-100 mb-1">Description</label>
               <textarea value={formData.description} onChange={(e) => setFormData(p => ({ ...p, description: e.target.value }))} className="input min-h-[100px]" placeholder="Brief description (optional)" maxLength={500} />
             </div>
 

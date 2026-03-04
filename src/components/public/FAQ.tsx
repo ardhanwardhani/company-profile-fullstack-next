@@ -37,14 +37,14 @@ function FAQItem({ question, answer, isOpen, onToggle }: { question: string; ans
     <motion.div
       initial={{ opacity: 0, y: 10 }}
       animate={{ opacity: 1, y: 0 }}
-      className="border-b border-gray-200 last:border-0"
+      className="border-b border-gray-200 dark:border-dark-700 last:border-0"
     >
       <button
         onClick={onToggle}
         className="w-full py-6 flex items-center justify-between text-left gap-4"
         aria-expanded={isOpen}
       >
-        <span className="text-lg font-semibold text-gray-900">{question}</span>
+        <span className="text-lg font-semibold text-gray-900 dark:text-gray-100">{question}</span>
         <ChevronDown className={`w-5 h-5 text-primary-700 flex-shrink-0 transition-transform duration-300 ${isOpen ? 'rotate-180' : ''}`} />
       </button>
       <AnimatePresence>
@@ -56,7 +56,7 @@ function FAQItem({ question, answer, isOpen, onToggle }: { question: string; ans
             transition={{ duration: 0.3 }}
             className="overflow-hidden"
           >
-            <p className="pb-6 text-gray-600 leading-relaxed">{answer}</p>
+            <p className="pb-6 text-gray-600 dark:text-gray-400 leading-relaxed">{answer}</p>
           </motion.div>
         )}
       </AnimatePresence>
@@ -68,7 +68,7 @@ export function FAQ() {
   const [openIndex, setOpenIndex] = useState<number | null>(0);
 
   return (
-    <SectionWrapper id="faq" className="bg-gray-50">
+    <SectionWrapper id="faq" className="bg-gray-50 dark:bg-dark-950">
       <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div 
           initial={{ opacity: 0, y: 20 }}
@@ -80,8 +80,8 @@ export function FAQ() {
             <div className="w-12 h-1 bg-primary-700"></div>
             <span className="text-primary-700 uppercase tracking-widest text-sm font-medium">FAQ</span>
           </div>
-          <h2 className="text-4xl font-bold text-gray-900 mb-4">Frequently Asked Questions</h2>
-          <p className="text-xl text-gray-600">
+          <h2 className="text-4xl font-bold text-gray-900 dark:text-gray-100 mb-4">Frequently Asked Questions</h2>
+          <p className="text-xl text-gray-600 dark:text-gray-400">
             Got questions? We've got answers. Can't find what you're looking for? <a href="/contact" className="text-primary-700 hover:underline">Contact us</a>.
           </p>
         </motion.div>
@@ -91,7 +91,7 @@ export function FAQ() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ delay: 0.2 }}
-          className="bg-white rounded-2xl shadow-sm border border-gray-200 px-6"
+          className="bg-white dark:bg-dark-900 rounded-2xl shadow-sm border border-gray-200 dark:border-dark-700 px-6"
         >
           {faqs.map((faq, index) => (
             <FAQItem

@@ -23,7 +23,7 @@ export function Newsletter() {
   };
 
   return (
-    <SectionWrapper className="bg-white">
+    <SectionWrapper className="bg-white dark:bg-dark-900">
       <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
         <motion.div 
           initial={{ opacity: 0, y: 20 }} 
@@ -33,8 +33,8 @@ export function Newsletter() {
           <div className="w-16 h-16 mx-auto mb-6 bg-primary-700 flex items-center justify-center">
             <Mail className="w-8 h-8 text-white" />
           </div>
-          <h2 className="text-4xl font-bold text-gray-900 mb-4">Stay Updated</h2>
-          <p className="text-xl text-gray-600 mb-8">Subscribe to our newsletter for the latest insights, tutorials, and company updates.</p>
+          <h2 className="text-4xl font-bold text-gray-900 dark:text-gray-100 mb-4">Stay Updated</h2>
+          <p className="text-xl text-gray-600 dark:text-gray-400 mb-8">Subscribe to our newsletter for the latest insights, tutorials, and company updates.</p>
 
           {isSubmitted ? (
             <motion.div
@@ -53,7 +53,7 @@ export function Newsletter() {
                 onChange={(e) => setEmail(e.target.value)}
                 placeholder="Enter your email"
                 required
-                className="flex-1 px-4 py-3 bg-white border-2 border-gray-300 text-gray-900 placeholder-gray-500 focus:outline-none focus:border-primary-700 focus:ring-1 focus:ring-primary-700 transition-colors"
+                className="flex-1 px-4 py-3 bg-white dark:bg-dark-800 border-2 border-gray-300 dark:border-dark-600 text-gray-900 dark:text-gray-100 placeholder-gray-500 focus:outline-none focus:border-primary-700 focus:ring-1 focus:ring-primary-700 transition-colors"
               />
               <Button type="submit" variant="primary" disabled={isLoading} className="whitespace-nowrap">
                 {isLoading ? 'Subscribing...' : 'Subscribe'}
@@ -61,7 +61,7 @@ export function Newsletter() {
             </form>
           )}
 
-          <p className="text-sm text-gray-500 mt-4">No spam, unsubscribe at any time.</p>
+          <p className="text-sm text-gray-500 dark:text-gray-400 mt-4">No spam, unsubscribe at any time.</p>
         </motion.div>
       </div>
     </SectionWrapper>

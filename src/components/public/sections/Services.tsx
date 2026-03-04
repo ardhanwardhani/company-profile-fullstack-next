@@ -34,7 +34,7 @@ const services = [
 
 export function Services() {
   return (
-    <SectionWrapper id="services" className="bg-white">
+    <SectionWrapper id="services" className="bg-white dark:bg-dark-900">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div 
           initial={{ opacity: 0, y: 20 }} 
@@ -46,8 +46,8 @@ export function Services() {
             <div className="w-12 h-1 bg-primary-700"></div>
             <span className="text-primary-700 uppercase tracking-widest text-sm font-medium">What We Do</span>
           </div>
-          <h2 className="text-4xl font-bold text-gray-900 mb-4">Our Services</h2>
-          <p className="text-xl text-gray-600 max-w-2xl">Comprehensive digital solutions designed to help your business grow and succeed in the digital landscape.</p>
+          <h2 className="text-4xl font-bold text-gray-900 dark:text-gray-100 mb-4">Our Services</h2>
+          <p className="text-xl text-gray-600 dark:text-gray-400 max-w-2xl">Comprehensive digital solutions designed to help your business grow and succeed in the digital landscape.</p>
         </motion.div>
 
         <div className="space-y-24">
@@ -64,8 +64,8 @@ export function Services() {
                 <div className="w-16 h-16 bg-primary-700 flex items-center justify-center mb-6">
                   <service.icon className="w-8 h-8 text-white" />
                 </div>
-                <h3 className="text-2xl font-semibold text-gray-900 mb-4">{service.title}</h3>
-                <p className="text-gray-600 leading-relaxed text-lg">{service.description}</p>
+                <h3 className="text-2xl font-semibold text-gray-900 dark:text-gray-100 mb-4">{service.title}</h3>
+                <p className="text-gray-600 dark:text-gray-400 leading-relaxed text-lg">{service.description}</p>
                 <Link 
                   href={service.href || '#'} 
                   className="inline-flex items-center gap-2 text-primary-700 hover:text-primary-800 mt-6 font-medium transition-colors"

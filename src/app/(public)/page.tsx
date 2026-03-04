@@ -10,11 +10,9 @@ import { Services } from '@/components/public/sections/Services';
 import { PortfolioSection } from '@/components/public/PortfolioSection';
 import { WhyChooseUs } from '@/components/public/sections/WhyChooseUs';
 import { HowItWorks } from '@/components/public/HowItWorks';
-import { Team } from '@/components/public/sections/Team';
 import { Testimonials } from '@/components/public/sections/Testimonials';
 import { FAQ } from '@/components/public/FAQ';
 import { ContactCTA } from '@/components/public/ContactCTA';
-import { CultureAndCareers } from '@/components/public/sections/CultureAndCareers';
 import { Newsletter } from '@/components/public/sections/Newsletter';
 import { MapPin, MessageSquare, Linkedin, Twitter, Facebook } from 'lucide-react';
 
@@ -197,7 +195,7 @@ export default function HomePage() {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-white flex items-center justify-center">
+      <div className="min-h-screen bg-white dark:bg-dark-900 flex items-center justify-center">
         <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary-700"></div>
       </div>
     );
@@ -213,7 +211,7 @@ export default function HomePage() {
   const facebookUrl = settings.company?.facebook_url || '';
 
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen bg-white dark:bg-dark-900">
       <PublicNavigation companyName={companyName} variant="transparent" />
       <main>
         <PublicHero tagline={tagline} />

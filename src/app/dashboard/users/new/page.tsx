@@ -69,7 +69,7 @@ export default function NewUserPage() {
         <div className="card">
           <div className="space-y-4">
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">
+              <label className="block text-sm font-medium text-gray-700 dark:text-gray-100 mb-1">
                 Full Name *
               </label>
               <input
@@ -83,7 +83,7 @@ export default function NewUserPage() {
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">
+              <label className="block text-sm font-medium text-gray-700 dark:text-gray-100 mb-1">
                 Email Address *
               </label>
               <input
@@ -97,7 +97,7 @@ export default function NewUserPage() {
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">
+              <label className="block text-sm font-medium text-gray-700 dark:text-gray-100 mb-1">
                 Initial Password *
               </label>
               <div className="relative">
@@ -131,7 +131,7 @@ export default function NewUserPage() {
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">
+              <label className="block text-sm font-medium text-gray-700 dark:text-gray-100 mb-1">
                 Role *
               </label>
               <select

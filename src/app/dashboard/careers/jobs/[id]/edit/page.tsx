@@ -158,12 +158,12 @@ export default function EditJobPage({ params }: { params: Promise<{ id: string }
         <div className="card">
           <div className="space-y-4">
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Job Title *</label>
+              <label className="block text-sm font-medium text-gray-700 dark:text-gray-100 mb-1">Job Title *</label>
               <input type="text" value={formData.title} onChange={(e) => setFormData(p => ({ ...p, title: e.target.value }))} className="input" placeholder="Enter job title" required />
             </div>
             <div className="grid grid-cols-3 gap-4">
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">Employment Type *</label>
+                <label className="block text-sm font-medium text-gray-700 dark:text-gray-100 mb-1">Employment Type *</label>
                 <select value={formData.employment_type} onChange={(e) => setFormData(p => ({ ...p, employment_type: e.target.value }))} className="input" required>
                   <option value="full-time">Full-time</option>
                   <option value="contract">Contract</option>
@@ -171,7 +171,7 @@ export default function EditJobPage({ params }: { params: Promise<{ id: string }
                 </select>
               </div>
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">Level</label>
+                <label className="block text-sm font-medium text-gray-700 dark:text-gray-100 mb-1">Level</label>
                 <select value={formData.level} onChange={(e) => setFormData(p => ({ ...p, level: e.target.value }))} className="input">
                   <option value="">Select level</option>
                   <option value="junior">Junior</option>
@@ -180,7 +180,7 @@ export default function EditJobPage({ params }: { params: Promise<{ id: string }
                 </select>
               </div>
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">Status</label>
+                <label className="block text-sm font-medium text-gray-700 dark:text-gray-100 mb-1">Status</label>
                 <select value={formData.status} onChange={(e) => setFormData(p => ({ ...p, status: e.target.value }))} className="input">
                   <option value="draft">Draft</option>
                   <option value="open">Open</option>
@@ -190,7 +190,7 @@ export default function EditJobPage({ params }: { params: Promise<{ id: string }
               </div>
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Apply URL *</label>
+              <label className="block text-sm font-medium text-gray-700 dark:text-gray-100 mb-1">Apply URL *</label>
               <input type="url" value={formData.apply_url} onChange={(e) => setFormData(p => ({ ...p, apply_url: e.target.value }))} className="input" placeholder="https://example.com/apply or mailto:email@example.com" required />
             </div>
           </div>
@@ -207,16 +207,16 @@ export default function EditJobPage({ params }: { params: Promise<{ id: string }
           <h3 className="text-lg font-semibold text-gray-900 mb-4">SEO Settings</h3>
           <div className="space-y-4">
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Meta Title</label>
+              <label className="block text-sm font-medium text-gray-700 dark:text-gray-100 mb-1">Meta Title</label>
               <input type="text" value={formData.seo_title} onChange={(e) => setFormData(p => ({ ...p, seo_title: e.target.value }))} className="input" placeholder="SEO meta title (optional)" maxLength={255} />
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Meta Description</label>
+              <label className="block text-sm font-medium text-gray-700 dark:text-gray-100 mb-1">Meta Description</label>
               <textarea value={formData.seo_description} onChange={(e) => setFormData(p => ({ ...p, seo_description: e.target.value }))} className="input min-h-[80px]" placeholder="SEO meta description (optional)" maxLength={500} />
             </div>
             <div className="flex items-center gap-2">
               <input type="checkbox" id="seo_index" checked={formData.seo_index} onChange={(e) => setFormData(p => ({ ...p, seo_index: e.target.checked }))} />
-              <label htmlFor="seo_index" className="text-sm text-gray-700">Allow search engines to index this job posting</label>
+              <label htmlFor="seo_index" className="text-sm text-gray-700 dark:text-gray-100">Allow search engines to index this job posting</label>
             </div>
           </div>
         </div>

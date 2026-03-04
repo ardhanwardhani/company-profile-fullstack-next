@@ -131,7 +131,7 @@ export default function EditTagPage({ params }: { params: Promise<{ id: string }
         <div className="card">
           <div className="space-y-4">
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">
+              <label className="block text-sm font-medium text-gray-700 dark:text-gray-100 mb-1">
                 Name *
               </label>
               <input
@@ -145,7 +145,7 @@ export default function EditTagPage({ params }: { params: Promise<{ id: string }
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">
+              <label className="block text-sm font-medium text-gray-700 dark:text-gray-100 mb-1">
                 Slug *
               </label>
               <input
@@ -159,7 +159,7 @@ export default function EditTagPage({ params }: { params: Promise<{ id: string }
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">
+              <label className="block text-sm font-medium text-gray-700 dark:text-gray-100 mb-1">
                 Description
               </label>
               <textarea

@@ -98,7 +98,7 @@ export default function NewProjectPage() {
           <h2 className="text-lg font-semibold mb-4">Basic Information</h2>
           <div className="grid gap-4">
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Title *</label>
+              <label className="block text-sm font-medium text-gray-700 dark:text-gray-100 mb-1">Title *</label>
               <input
                 type="text"
                 value={formData.title}
@@ -109,7 +109,7 @@ export default function NewProjectPage() {
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Slug *</label>
+              <label className="block text-sm font-medium text-gray-700 dark:text-gray-100 mb-1">Slug *</label>
               <input
                 type="text"
                 value={formData.slug}
@@ -120,7 +120,7 @@ export default function NewProjectPage() {
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Client Name</label>
+              <label className="block text-sm font-medium text-gray-700 dark:text-gray-100 mb-1">Client Name</label>
               <input
                 type="text"
                 value={formData.client_name}
@@ -130,7 +130,7 @@ export default function NewProjectPage() {
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Category</label>
+              <label className="block text-sm font-medium text-gray-700 dark:text-gray-100 mb-1">Category</label>
               <input
                 type="text"
                 value={formData.category}
@@ -141,7 +141,7 @@ export default function NewProjectPage() {
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Description</label>
+              <label className="block text-sm font-medium text-gray-700 dark:text-gray-100 mb-1">Description</label>
               <textarea
                 value={formData.description}
                 onChange={(e) => setFormData(p => ({ ...p, description: e.target.value }))}
@@ -151,7 +151,7 @@ export default function NewProjectPage() {
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Content</label>
+              <label className="block text-sm font-medium text-gray-700 dark:text-gray-100 mb-1">Content</label>
               <textarea
                 value={formData.content}
                 onChange={(e) => setFormData(p => ({ ...p, content: e.target.value }))}
@@ -166,7 +166,7 @@ export default function NewProjectPage() {
           <h2 className="text-lg font-semibold mb-4">Media</h2>
           <div className="grid gap-4">
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Featured Image URL</label>
+              <label className="block text-sm font-medium text-gray-700 dark:text-gray-100 mb-1">Featured Image URL</label>
               <input
                 type="url"
                 value={formData.featured_image}
@@ -185,7 +185,7 @@ export default function NewProjectPage() {
           <h2 className="text-lg font-semibold mb-4">Links</h2>
           <div className="grid gap-4">
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Live URL</label>
+              <label className="block text-sm font-medium text-gray-700 dark:text-gray-100 mb-1">Live URL</label>
               <input
                 type="url"
                 value={formData.live_url}
@@ -196,7 +196,7 @@ export default function NewProjectPage() {
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Case Study URL</label>
+              <label className="block text-sm font-medium text-gray-700 dark:text-gray-100 mb-1">Case Study URL</label>
               <input
                 type="url"
                 value={formData.case_study_url}
@@ -207,7 +207,7 @@ export default function NewProjectPage() {
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Technologies</label>
+              <label className="block text-sm font-medium text-gray-700 dark:text-gray-100 mb-1">Technologies</label>
               <input
                 type="text"
                 value={formData.technologies}
@@ -223,7 +223,7 @@ export default function NewProjectPage() {
           <h2 className="text-lg font-semibold mb-4">SEO</h2>
           <div className="grid gap-4">
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">SEO Title</label>
+              <label className="block text-sm font-medium text-gray-700 dark:text-gray-100 mb-1">SEO Title</label>
               <input
                 type="text"
                 value={formData.seo_title}
@@ -233,7 +233,7 @@ export default function NewProjectPage() {
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">SEO Description</label>
+              <label className="block text-sm font-medium text-gray-700 dark:text-gray-100 mb-1">SEO Description</label>
               <textarea
                 value={formData.seo_description}
                 onChange={(e) => setFormData(p => ({ ...p, seo_description: e.target.value }))}
@@ -249,7 +249,7 @@ export default function NewProjectPage() {
                 onChange={(e) => setFormData(p => ({ ...p, seo_index: e.target.checked }))}
                 className="w-4 h-4 rounded border-gray-300"
               />
-              <label htmlFor="seo_index" className="text-sm text-gray-700">Allow search engines to index this project</label>
+              <label htmlFor="seo_index" className="text-sm text-gray-700 dark:text-gray-100">Allow search engines to index this project</label>
             </div>
           </div>
         </div>

@@ -102,15 +102,14 @@ export async function GET(req: NextRequest) {
       location: { id: row.location_id, name: row.location_name, is_remote: row.is_remote },
     }));
 
-    const response: ApiResponse<Job[]> = {
+    return NextResponse.json({
       success: true,
       data: jobs,
-    };
-
-    return NextResponse.json(response, {
-      headers: {
-        'X-Total-Count': total.toString(),
-        'X-Total-Pages': Math.ceil(total / limit).toString(),
+      pagination: {
+        page,
+        limit,
+        total,
+        totalPages: Math.ceil(total / limit),
       },
     });
   } catch (error) {

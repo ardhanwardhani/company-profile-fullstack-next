@@ -63,7 +63,7 @@ export function Testimonials() {
   };
 
   return (
-    <SectionWrapper className="bg-gray-50">
+    <SectionWrapper className="bg-gray-50 dark:bg-dark-950">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div 
           initial={{ opacity: 0, y: 20 }} 
@@ -75,8 +75,8 @@ export function Testimonials() {
             <div className="w-12 h-1 bg-primary-700"></div>
             <span className="text-primary-700 uppercase tracking-widest text-sm font-medium">Testimonials</span>
           </div>
-          <h2 className="text-4xl font-bold text-gray-900 mb-4">What Our Clients Say</h2>
-          <p className="text-xl text-gray-600">Real feedback from companies who trusted us with their projects.</p>
+          <h2 className="text-4xl font-bold text-gray-900 dark:text-gray-100 mb-4">What Our Clients Say</h2>
+          <p className="text-xl text-gray-600 dark:text-gray-400">Real feedback from companies who trusted us with their projects.</p>
         </motion.div>
 
         <div className="relative">
@@ -87,15 +87,15 @@ export function Testimonials() {
                 initial={{ opacity: 0, x: 20 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ delay: index * 0.1 }}
-                className="bg-white border border-gray-200 p-8 relative hover:shadow-lg transition-shadow"
+                className="bg-white dark:bg-dark-900 border border-gray-200 dark:border-dark-700 p-8 relative hover:shadow-lg transition-shadow"
               >
                 <span className="text-6xl text-primary-700/20 font-serif absolute top-4 left-4">"</span>
-                <p className="text-gray-700 mb-6 relative z-10">{testimonial.quote}</p>
+                <p className="text-gray-700 dark:text-gray-300 mb-6 relative z-10">{testimonial.quote}</p>
                 <div className="flex items-center gap-3">
                   <div className="w-10 h-10 bg-primary-700 flex items-center justify-center font-semibold text-white">{testimonial.logo}</div>
                   <div>
-                    <div className="font-medium text-gray-900">{testimonial.author}</div>
-                    <div className="text-sm text-gray-500">{testimonial.company}</div>
+                    <div className="font-medium text-gray-900 dark:text-gray-100">{testimonial.author}</div>
+                    <div className="text-sm text-gray-500 dark:text-gray-400">{testimonial.company}</div>
                   </div>
                 </div>
               </motion.div>
@@ -105,7 +105,7 @@ export function Testimonials() {
           <div className="flex items-center justify-center gap-4 mt-12">
             <button
               onClick={prevSlide}
-              className="w-10 h-10 rounded-full bg-gray-200 flex items-center justify-center hover:bg-primary-700 hover:text-white transition-colors"
+              className="w-10 h-10 rounded-full bg-gray-200 dark:bg-dark-700 flex items-center justify-center hover:bg-primary-700 hover:text-white transition-colors"
               aria-label="Previous testimonial"
             >
               <ArrowLeft className="w-5 h-5" />
@@ -124,7 +124,7 @@ export function Testimonials() {
             </div>
             <button
               onClick={nextSlide}
-              className="w-10 h-10 rounded-full bg-gray-200 flex items-center justify-center hover:bg-primary-700 hover:text-white transition-colors"
+              className="w-10 h-10 rounded-full bg-gray-200 dark:bg-dark-700 flex items-center justify-center hover:bg-primary-700 hover:text-white transition-colors"
               aria-label="Next testimonial"
             >
               <ArrowRight className="w-5 h-5" />

@@ -43,8 +43,8 @@ export default async function UsersPage({ searchParams }: { searchParams: Promis
     <div className="p-4">
       <div className="flex items-center justify-between mb-8">
         <div>
-          <h1 className="text-2xl font-bold text-gray-900">Users</h1>
-          <p className="text-sm text-gray-500 mt-1">{total} users total</p>
+          <h1 className="text-2xl font-bold text-gray-900 dark:text-gray-100">Users</h1>
+          <p className="text-sm text-gray-500 mt-1 dark:text-gray-400">{total} users total</p>
         </div>
         <Link href="/dashboard/users/new" className="inline-flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors font-medium text-sm">
           <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">

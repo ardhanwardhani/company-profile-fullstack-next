@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import { getApiUrl } from '@/lib/fetch-utils';
 import DepartmentStatusButton from './DepartmentStatusButton';
 
 interface SearchParams {
@@ -14,14 +15,15 @@ async function getDepartments(params: SearchParams) {
   searchParams.set('page', params.page || '1');
   searchParams.set('limit', '20');
 
-  const res = await fetch(`/api/master-data/departments?${searchParams.toString()}`, { cache: 'no-store' });
+  const res = await fetch(getApiUrl(`/api/master-data/departments?${searchParams.toString()}`), { cache: 'no-store' });
 
   if (!res.ok) return { departments: [], total: 0, totalPages: 1 };
 
+  const json = await res.json();
   return {
-    departments: (await res.json()).data || [],
-    total: parseInt(res.headers.get('X-Total-Count') || '0'),
-    totalPages: parseInt(res.headers.get('X-Total-Pages') || '1'),
+    departments: json.data || [],
+    total: json.pagination?.total || 0,
+    totalPages: json.pagination?.totalPages || 1,
   };
 }
 

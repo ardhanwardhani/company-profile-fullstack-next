@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { motion } from 'framer-motion';
 import { ChevronDown } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import { ThemeToggle } from '@/components/ui/ThemeToggle';
 
 interface PublicNavigationProps {
   companyName: string;
@@ -71,20 +72,20 @@ export function PublicNavigation({ companyName, activePage, variant = 'white' }:
     : isDark 
       ? 'bg-dark-900/90 backdrop-blur-md border-b border-dark-700' 
       : isWhite && !scrolled
-        ? 'bg-white' 
-        : 'bg-white shadow-sm border-b border-gray-200';
+        ? 'bg-white dark:bg-dark-900' 
+        : 'bg-white shadow-sm border-b border-gray-200 dark:bg-dark-900/90 dark:backdrop-blur-md dark:border-dark-700 dark:shadow-none';
 
   const textClass = isTransparent 
     ? 'text-white' 
     : isDark 
       ? 'text-white' 
-      : 'text-neutral-900';
+      : 'text-neutral-900 dark:text-white';
 
   const linkClass = isTransparent 
     ? 'text-white' 
     : isDark 
       ? 'text-gray-300 hover:text-white' 
-      : 'text-neutral-700';
+      : 'text-neutral-700 dark:text-gray-300 dark:hover:text-white';
 
   const ServicesDropdown = ({ isMobile = false }: { isMobile?: boolean }) => (
     <div className={isMobile ? 'space-y-2 pl-4' : ''}>
@@ -96,28 +97,28 @@ export function PublicNavigation({ companyName, activePage, variant = 'white' }:
         <ChevronDown className={`w-4 h-4 ml-1 transition-transform ${servicesOpen ? 'rotate-180' : ''}`} />
       </button>
       {servicesOpen && (
-        <div className={isMobile ? 'space-y-2 mt-2' : 'absolute top-full left-0 mt-2 w-56 bg-white rounded-lg shadow-lg border border-gray-200 py-2'}>
+        <div className={isMobile ? 'space-y-2 mt-2' : 'absolute top-full left-0 mt-2 w-56 bg-white dark:bg-dark-800 rounded-lg shadow-lg border border-gray-200 dark:border-dark-700 py-2'}>
           {isMobile ? (
             <>
-              <Link href="/services/company-profile" className="block py-2 pl-4 text-gray-600 hover:text-primary-700" onClick={() => setMobileMenuOpen(false)}>
+              <Link href="/services/company-profile" className="block py-2 pl-4 text-gray-600 dark:text-gray-400 hover:text-primary-700" onClick={() => setMobileMenuOpen(false)}>
                 Company Profile Package
               </Link>
-              <Link href="/services/custom-software" className="block py-2 pl-4 text-gray-600 hover:text-primary-700" onClick={() => setMobileMenuOpen(false)}>
+              <Link href="/services/custom-software" className="block py-2 pl-4 text-gray-600 dark:text-gray-400 hover:text-primary-700" onClick={() => setMobileMenuOpen(false)}>
                 Custom Software Development
               </Link>
-              <Link href="/services/creative-design" className="block py-2 pl-4 text-gray-600 hover:text-primary-700" onClick={() => setMobileMenuOpen(false)}>
+              <Link href="/services/creative-design" className="block py-2 pl-4 text-gray-600 dark:text-gray-400 hover:text-primary-700" onClick={() => setMobileMenuOpen(false)}>
                 Creative Design
               </Link>
             </>
           ) : (
             <>
-              <Link href="/services/company-profile" className="block px-4 py-3 text-gray-700 hover:bg-gray-50 hover:text-primary-700">
+              <Link href="/services/company-profile" className="block px-4 py-3 text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-dark-700 hover:text-primary-700">
                 Company Profile Package
               </Link>
-              <Link href="/services/custom-software" className="block px-4 py-3 text-gray-700 hover:bg-gray-50 hover:text-primary-700">
+              <Link href="/services/custom-software" className="block px-4 py-3 text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-dark-700 hover:text-primary-700">
                 Custom Software Development
               </Link>
-              <Link href="/services/creative-design" className="block px-4 py-3 text-gray-700 hover:bg-gray-50 hover:text-primary-700">
+              <Link href="/services/creative-design" className="block px-4 py-3 text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-dark-700 hover:text-primary-700">
                 Creative Design
               </Link>
             </>
@@ -151,6 +152,7 @@ export function PublicNavigation({ companyName, activePage, variant = 'white' }:
                 </Link>
               )
             ))}
+            <ThemeToggle variant="nav" />
             <Button href="/contact" variant={isDark && !isScrolled ? 'outline' : 'primary'}>
               Let's Talk
             </Button>
@@ -158,15 +160,15 @@ export function PublicNavigation({ companyName, activePage, variant = 'white' }:
 
           <button className="md:hidden p-2" onClick={() => setMobileMenuOpen(!mobileMenuOpen)}>
             <div className="w-6 h-5 flex flex-col justify-between">
-              <span className={`h-0.5 w-full ${isDark ? 'bg-white' : 'bg-neutral-900'} transition-all ${mobileMenuOpen ? 'rotate-45 y-2' : ''}`} />
-              <span className={`h-0.5 w-full ${isDark ? 'bg-white' : 'bg-neutral-900'} transition-all ${mobileMenuOpen ? 'opacity-0' : ''}`} />
-              <span className={`h-0.5 w-full ${isDark ? 'bg-white' : 'bg-neutral-900'} transition-all ${mobileMenuOpen ? '-rotate-45 -y-2' : ''}`} />
+              <span className={`h-0.5 w-full ${isDark ? 'bg-white' : 'bg-neutral-900 dark:bg-white'} transition-all ${mobileMenuOpen ? 'rotate-45 y-2' : ''}`} />
+              <span className={`h-0.5 w-full ${isDark ? 'bg-white' : 'bg-neutral-900 dark:bg-white'} transition-all ${mobileMenuOpen ? 'opacity-0' : ''}`} />
+              <span className={`h-0.5 w-full ${isDark ? 'bg-white' : 'bg-neutral-900 dark:bg-white'} transition-all ${mobileMenuOpen ? '-rotate-45 -y-2' : ''}`} />
             </div>
           </button>
         </div>
 
         {mobileMenuOpen && (
-          <motion.div initial={{ opacity: 0, height: 0 }} animate={{ opacity: 1, height: 'auto' }} className={`md:hidden border-t ${isDark ? 'bg-dark-900 border-dark-700' : 'bg-white border-gray-200'}`}>
+          <motion.div initial={{ opacity: 0, height: 0 }} animate={{ opacity: 1, height: 'auto' }} className={`md:hidden border-t ${isDark ? 'bg-dark-900 border-dark-700' : 'bg-white dark:bg-dark-900 border-gray-200 dark:border-dark-700'}`}>
             <div className="py-4 space-y-4">
               {navLinks.map((link) => (
                 link.children ? (
